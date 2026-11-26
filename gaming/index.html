@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Studio Kaaya — Turnkey Home Interiors & Architectural Spaces</title>
+
+  <!-- WhatsApp Link Preview Tags -->
+  <meta property="og:title" content="Studio Kaaya — Turnkey Home Interiors Demo" />
+  <meta property="og:description" content="45-day turnkey home interiors with interactive material moodboards, 2BHK/3BHK budget estimator in ₹ Lakhs, and 3D consultation booking." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f8f6f2;
+      --surface: #ffffff;
+      --surface-warm: #f0ece4;
+      --dark: #1c1917;
+      --ink: #1c1917;
+      --ink-secondary: #57534e;
+      --ink-muted: #78716c;
+      --brass: #a16207;
+      --brass-hover: #854d0e;
+      --brass-soft: #fef3c7;
+      --sage: #365347;
+      --sage-soft: #e7efe9;
+      --border: #e7e2d8;
+      --border-strong: #d6cfc2;
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 22px;
+      --radius-pill: 999px;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --shadow-sm: 0 2px 10px rgba(28, 25, 23, 0.05);
+      --shadow-md: 0 14px 36px rgba(28, 25, 23, 0.08);
+      --nav-h: 74px;
+      --ease: 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 16px); }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+    svg { display: block; max-width: 100%; }
+
+    .container { width: min(1160px, 100% - 2.25rem); margin-inline: auto; }
+    .section { padding-block: clamp(3.75rem, 6.5vw, 6rem); }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--brass); margin-bottom: 0.75rem;
+    }
+    .eyebrow::before { content: ""; width: 20px; height: 1.5px; background: currentColor; }
+
+    h1, h2, h3 { font-family: var(--font-serif); font-weight: 500; line-height: 1.12; letter-spacing: -0.015em; }
+    h1 { font-size: clamp(2.5rem, 5vw, 4.1rem); }
+    h1 em { font-style: italic; color: var(--brass); }
+    h2 { font-size: clamp(1.95rem, 3.5vw, 2.95rem); }
+    h3 { font-size: 1.4rem; }
+    .lead { color: var(--ink-secondary); font-size: clamp(0.98rem, 1.3vw, 1.1rem); max-width: 56ch; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.82rem 1.45rem; border-radius: var(--radius-pill);
+      border: 1px solid transparent; font-weight: 600; font-size: 0.9rem;
+      cursor: pointer; transition: all var(--ease); white-space: nowrap;
+    }
+    .btn-dark { background: var(--dark); color: #fff; }
+    .btn-dark:hover { background: var(--brass); transform: translateY(-1px); }
+    .btn-brass { background: var(--brass); color: #fff; }
+    .btn-brass:hover { background: var(--brass-hover); }
+    .btn-outline { background: transparent; border-color: var(--border-strong); color: var(--ink); }
+    .btn-outline:hover { border-color: var(--ink); background: var(--surface); }
+    .btn-sm { padding: 0.55rem 1.05rem; font-size: 0.84rem; }
+
+    /* Sticky Navbar */
+    .navbar {
+      position: sticky; top: 0; z-index: 900; height: var(--nav-h);
+      background: rgba(248, 246, 242, 0.88);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; }
+    .brand { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-serif); font-size: 1.45rem; font-weight: 600; }
+    .brand-mark {
+      width: 34px; height: 34px; border-radius: 8px; background: var(--dark); color: #f8f6f2;
+      display: grid; place-items: center;
+    }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--ink-secondary); transition: color var(--ease); }
+    .nav-links a:hover { color: var(--brass); }
+
+    .menu-toggle {
+      display: none; width: 40px; height: 40px; border-radius: 10px;
+      border: 1px solid var(--border); background: var(--surface); place-items: center; cursor: pointer;
+    }
+    .mobile-drawer {
+      display: none; position: fixed; inset: var(--nav-h) 0 auto 0; z-index: 850;
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 1.25rem 1.5rem 1.65rem; flex-direction: column; gap: 0.9rem; box-shadow: var(--shadow-md);
+    }
+    .mobile-drawer.open { display: flex; }
+    .mobile-drawer a { padding: 0.45rem 0; border-bottom: 1px solid var(--surface-warm); font-weight: 600; }
+
+    /* Hero + Interactive Moodboard */
+    .hero { padding-block: clamp(2.6rem, 5vw, 4.75rem) clamp(3.5rem, 6vw, 5.25rem); }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+    .hero .lead { margin-top: 1.1rem; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 1.9rem; }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.6rem; border-top: 1px solid var(--border);
+    }
+    .hero-stats strong { display: block; font-family: var(--font-serif); font-size: 1.8rem; color: var(--ink); font-weight: 600; }
+    .hero-stats span { font-size: 0.8rem; color: var(--ink-muted); }
+
+    .mood-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1.4rem; box-shadow: var(--shadow-md);
+    }
+    .mood-canvas {
+      border-radius: var(--radius-md); padding: 1.25rem; background: #EFECE6;
+      transition: background 300ms ease;
+    }
+    .swatch-row { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-top: 1rem; }
+    .swatches { display: flex; gap: 0.45rem; }
+    .swatch { width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.12); }
+    .mood-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 1rem; }
+    .mood-tab {
+      padding: 0.6rem 0.5rem; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: transparent; cursor: pointer; text-align: left;
+      transition: all var(--ease);
+    }
+    .mood-tab strong { display: block; font-size: 0.8rem; }
+    .mood-tab span { font-size: 0.72rem; color: var(--ink-muted); }
+    .mood-tab.active { background: var(--dark); border-color: var(--dark); color: #fff; }
+    .mood-tab.active span { color: #d6d3d1; }
+
+    /* Portfolio Projects */
+    .projects-section { background: var(--surface); border-block: 1px solid var(--border); }
+    .section-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1.5rem; margin-bottom: 2.1rem; }
+    .filters { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .filter-btn {
+      padding: 0.52rem 1.05rem; border-radius: var(--radius-pill);
+      border: 1px solid var(--border); background: var(--bg);
+      color: var(--ink-secondary); font-size: 0.85rem; font-weight: 600; cursor: pointer;
+    }
+    .filter-btn.active { background: var(--dark); border-color: var(--dark); color: #fff; }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+    .proj-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md);
+      overflow: hidden; display: flex; flex-direction: column;
+      transition: transform var(--ease), box-shadow var(--ease);
+    }
+    .proj-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .proj-art { height: 175px; display: grid; place-items: center; padding: 1rem; position: relative; }
+    .proj-tag {
+      position: absolute; top: 0.85rem; left: 0.85rem; font-size: 0.71rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em; padding: 0.24rem 0.62rem;
+      border-radius: var(--radius-pill); background: rgba(255,255,255,0.92); border: 1px solid var(--border);
+    }
+    .proj-body { padding: 1.35rem; display: flex; flex-direction: column; flex: 1; }
+    .proj-meta { display: flex; justify-content: space-between; font-size: 0.82rem; color: var(--ink-muted); margin-top: 0.25rem; }
+    .proj-desc { font-size: 0.89rem; color: var(--ink-secondary); margin-block: 0.75rem 1.15rem; flex: 1; }
+    .proj-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-top: auto; }
+
+    /* Interior Budget Estimator */
+    .est-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 2rem; align-items: stretch; }
+    .est-panel {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: clamp(1.5rem, 3vw, 2.2rem); display: flex; flex-direction: column; gap: 1.5rem;
+    }
+    .opt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-top: 0.6rem; }
+    .opt-btn {
+      padding: 0.78rem 0.65rem; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--bg); text-align: left; cursor: pointer;
+    }
+    .opt-btn strong { display: block; font-size: 0.88rem; }
+    .opt-btn span { font-size: 0.75rem; color: var(--ink-muted); }
+    .opt-btn.active { border-color: var(--brass); background: var(--brass-soft); }
+
+    .scope-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem; margin-top: 0.6rem; }
+    .check-pill {
+      display: flex; align-items: center; gap: 0.55rem; padding: 0.7rem 0.85rem;
+      border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--bg);
+      font-size: 0.85rem; font-weight: 500; cursor: pointer;
+    }
+    .check-pill input { accent-color: var(--brass); width: 16px; height: 16px; }
+
+    .est-output {
+      background: var(--dark); color: #fafaf9; border-radius: var(--radius-lg);
+      padding: clamp(1.75rem, 3vw, 2.25rem); display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem;
+    }
+    .est-price { font-family: var(--font-serif); font-size: clamp(2.3rem, 4.2vw, 3.1rem); color: #fcd34d; line-height: 1.05; margin-top: 0.35rem; }
+    .est-rows { display: grid; gap: 0.75rem; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.12); font-size: 0.88rem; }
+    .est-row { display: flex; justify-content: space-between; }
+    .est-row span { color: #a8a29e; }
+
+    /* Testimonials */
+    .reviews-section { background: var(--surface); border-top: 1px solid var(--border); }
+    .quote-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md);
+      padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1.2rem;
+    }
+    .stars { color: var(--brass); margin-bottom: 0.65rem; }
+    .author { display: flex; align-items: center; gap: 0.75rem; padding-top: 0.95rem; border-top: 1px solid var(--border); }
+    .avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--sage-soft); color: var(--sage); font-weight: 700; font-size: 0.82rem; display: grid; place-items: center; }
+    .author span { display: block; font-size: 0.78rem; color: var(--ink-muted); }
+
+    footer { padding-block: 2.5rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--ink-muted); }
+    .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
+
+    /* Modal */
+    .backdrop {
+      position: fixed; inset: 0; z-index: 1000; background: rgba(20, 17, 15, 0.6);
+      backdrop-filter: blur(4px); display: none; place-items: center; padding: 1.25rem;
+    }
+    .backdrop.open { display: grid; }
+    .modal {
+      width: min(520px, 100%); background: var(--surface); border-radius: var(--radius-lg);
+      padding: 1.7rem; box-shadow: 0 24px 60px rgba(0,0,0,0.2);
+    }
+    .modal-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.15rem; }
+    .close-btn { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg); cursor: pointer; display: grid; place-items: center; }
+    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; }
+    .field { display: flex; flex-direction: column; gap: 0.35rem; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { font-size: 0.8rem; font-weight: 600; }
+    .field input, .field select { padding: 0.68rem 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-strong); background: var(--bg); }
+
+    .toast {
+      position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 1100;
+      background: var(--dark); color: #fff; padding: 0.78rem 1.15rem;
+      border-radius: var(--radius-sm); font-size: 0.86rem;
+      transform: translateY(14px); opacity: 0; pointer-events: none; transition: all 220ms ease;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    @media (max-width: 960px) {
+      .hero-grid, .est-grid { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 680px) {
+      .nav-links, .nav-cta-desktop { display: none; }
+      .menu-toggle { display: grid; }
+      .grid-3, .opt-grid, .scope-list, .form-grid, .mood-tabs { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#top" class="brand">
+        <span class="brand-mark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 3v18M3 12h6"/></svg>
+        </span>
+        Studio Kaaya
+      </a>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="#projects">Executed Homes</a></li>
+          <li><a href="#estimator">Budget Estimator</a></li>
+          <li><a href="#reviews">Homeowners</a></li>
+        </ul>
+      </nav>
+
+      <div style="display:flex; gap:0.65rem; align-items:center;">
+        <button class="btn btn-dark btn-sm nav-cta-desktop" id="navConsultBtn" type="button">Book 3D Consultation</button>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle menu">
+          <svg id="menuIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="#projects" class="m-link">Executed Homes</a>
+    <a href="#estimator" class="m-link">Budget Estimator</a>
+    <a href="#reviews" class="m-link">Homeowners</a>
+    <button class="btn btn-dark" id="mobileConsultBtn" type="button">Book 3D Consultation</button>
+  </div>
+
+  <main id="top">
+    <!-- Hero + Interactive Material Moodboard -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Turnkey Residential Interiors</span>
+          <h1>Warm, livable homes delivered in <em>45 days</em>.</h1>
+          <p class="lead">
+            End-to-end modular kitchens, custom wardrobes, lighting, and bespoke furniture across Bengaluru, Kochi, and Hyderabad—backed by factory-finish precision and a 10-year warranty.
+          </p>
+          <div class="hero-cta">
+            <a href="#estimator" class="btn btn-dark">Estimate Home Budget</a>
+            <a href="#projects" class="btn btn-outline">View Executed Homes</a>
+          </div>
+          <div class="hero-stats">
+            <div><strong>320+</strong><span>Homes Handed Over</span></div>
+            <div><strong>45 Days</strong><span>Guaranteed Move-In</span></div>
+            <div><strong>10 Yrs</strong><span>Hardware &amp; Ply Warranty</span></div>
+          </div>
+        </div>
+
+        <div class="mood-card" aria-label="Interactive Room Palette Switcher">
+          <div style="display:flex; justify-content:space-between; font-size:0.78rem; color:var(--ink-muted); margin-bottom:0.75rem;">
+            <span>Interactive Material Board</span>
+            <strong id="moodTag" style="color:var(--brass);">Warm Japandi</strong>
+          </div>
+
+          <div class="mood-canvas" id="moodCanvas">
+            <svg viewBox="0 0 380 180" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Living space architectural elevation">
+              <rect x="18" y="148" width="344" height="3" fill="#78716C" fill-opacity="0.35"/>
+              <rect id="svgWallPanel" x="38" y="26" width="120" height="122" rx="4" fill="#D6C7B2"/>
+              <rect id="svgSofa" x="62" y="98" width="145" height="50" rx="10" fill="#57534E"/>
+              <rect id="svgCushion" x="74" y="86" width="54" height="18" rx="6" fill="#A16207"/>
+              <rect x="136" y="86" width="56" height="18" rx="6" fill="#78716C"/>
+              <rect id="svgConsole" x="230" y="114" width="110" height="34" rx="4" fill="#3F3A36"/>
+              <circle cx="285" cy="64" r="24" stroke="#A16207" stroke-width="2" fill="#FFFDF9"/>
+              <path d="M110 10v28" stroke="#1C1917" stroke-width="1.5"/>
+              <path d="M98 38h24l-4 10h-16l-4-10Z" fill="#A16207"/>
+            </svg>
+          </div>
+
+          <div class="swatch-row">
+            <div>
+              <strong id="moodTitle" style="font-size:0.95rem;">Ash Oak + Linen + Brushed Brass</strong>
+              <div id="moodDesc" style="font-size:0.8rem; color:var(--ink-muted);">Ideal for sunlit 3BHK living &amp; dining spaces</div>
+            </div>
+            <div class="swatches" id="moodSwatches">
+              <span class="swatch" style="background:#D6C7B2;"></span>
+              <span class="swatch" style="background:#57534E;"></span>
+              <span class="swatch" style="background:#A16207;"></span>
+            </div>
+          </div>
+
+          <div class="mood-tabs" role="tablist">
+            <button class="mood-tab active" type="button" data-mood="0"><strong>Warm Japandi</strong><span>Oak &amp; Linen</span></button>
+            <button class="mood-tab" type="button" data-mood="1"><strong>Sage Courtyard</strong><span>Teak &amp; Olive</span></button>
+            <button class="mood-tab" type="button" data-mood="2"><strong>Urban Noir</strong><span>Walnut &amp; Stone</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Executed Homes with Filters -->
+    <section class="section projects-section" id="projects">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Real Client Handovers</span>
+            <h2>Executed Interior Projects</h2>
+          </div>
+          <div class="filters" role="group" aria-label="Filter interior projects">
+            <button class="filter-btn active" type="button" data-filter="all">All Projects</button>
+            <button class="filter-btn" type="button" data-filter="3bhk">Full 3BHK Homes</button>
+            <button class="filter-btn" type="button" data-filter="kitchen">Modular Kitchens</button>
+            <button class="filter-btn" type="button" data-filter="villa">Villas</button>
+          </div>
+        </div>
+
+        <div class="grid-3" id="projectGrid"></div>
+      </div>
+    </section>
+
+    <!-- Interactive Turnkey Interior Cost Estimator -->
+    <section class="section" id="estimator">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Transparent Pricing</span>
+            <h2>Turnkey Home Interior Cost Estimator</h2>
+          </div>
+          <p class="lead">Select your apartment size, finish grade, and rooms required to get an instant ballpark estimate in ₹ Lakhs.</p>
+        </div>
+
+        <div class="est-grid">
+          <div class="est-panel">
+            <div>
+              <strong style="font-size:0.92rem;">1. Home Configuration</strong>
+              <div class="opt-grid" id="bhkGroup">
+                <button class="opt-btn" type="button" data-base="5.2" data-label="2BHK (~1,100 sq.ft)">
+                  <strong>2BHK Home</strong><span>~1,100 sq.ft</span>
+                </button>
+                <button class="opt-btn active" type="button" data-base="7.8" data-label="3BHK (~1,650 sq.ft)">
+                  <strong>3BHK Home</strong><span>~1,650 sq.ft</span>
+                </button>
+                <button class="opt-btn" type="button" data-base="13.5" data-label="4BHK / Villa (~2,800 sq.ft)">
+                  <strong>4BHK / Villa</strong><span>~2,800 sq.ft</span>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <strong style="font-size:0.92rem;">2. Material &amp; Finish Tier</strong>
+              <div class="opt-grid" id="finishGroup">
+                <button class="opt-btn active" type="button" data-mult="1.0" data-finish="Essential Matte Laminate">
+                  <strong>Essential</strong><span>BWP Ply + Matte Laminate</span>
+                </button>
+                <button class="opt-btn" type="button" data-mult="1.28" data-finish="Premium Acrylic & Fluted">
+                  <strong>Premium</strong><span>High-Gloss Acrylic + Fluted</span>
+                </button>
+                <button class="opt-btn" type="button" data-mult="1.6" data-finish="Luxe Veneer & PU Brass">
+                  <strong>Luxe Bespoke</strong><span>Natural Veneer, PU &amp; Brass</span>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <strong style="font-size:0.92rem;">3. Scope of Work</strong>
+              <div class="scope-list" id="scopeChecks">
+                <label class="check-pill"><input type="checkbox" value="1.8" checked /> Modular Kitchen &amp; Tandem</label>
+                <label class="check-pill"><input type="checkbox" value="2.1" checked /> Master &amp; Guest Wardrobes</label>
+                <label class="check-pill"><input type="checkbox" value="1.1" checked /> False Ceiling &amp; Cove Lights</label>
+                <label class="check-pill"><input type="checkbox" value="0.9" /> TV Unit, Foyer &amp; Painting</label>
+              </div>
+            </div>
+          </div>
+
+          <aside class="est-output" aria-live="polite">
+            <div>
+              <span class="eyebrow" style="color:#fcd34d;">Estimated Turnkey Budget</span>
+              <div class="est-price" id="estRange">₹12.8 – 14.1 Lakhs</div>
+              <div style="font-size:0.82rem; color:#a8a29e; margin-top:0.35rem;">Includes factory fabrication, installation &amp; GST</div>
+
+              <div class="est-rows">
+                <div class="est-row"><span>Configuration</span><strong id="outBhk">3BHK (~1,650 sq.ft)</strong></div>
+                <div class="est-row"><span>Finish Specification</span><strong id="outFinish">Essential Matte Laminate</strong></div>
+                <div class="est-row"><span>Delivery Timeline</span><strong style="color:#86efac;">45 Working Days</strong></div>
+              </div>
+            </div>
+
+            <button class="btn btn-brass" id="lockEstBtn" type="button" style="width:100%;">
+              Get Free 3D Floorplan &amp; Quote
+            </button>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section reviews-section" id="reviews">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Homeowner Stories</span>
+            <h2>Designed Around Everyday Indian Living</h2>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="quote-card">
+            <div>
+              <div class="stars">★★★★★</div>
+              <p>“Studio Kaaya handed over our 3BHK in Sarjapur on day 44 with zero cost overruns. The tandem kitchen drawers and hidden utility storage are super practical.”</p>
+            </div>
+            <div class="author">
+              <div class="avatar">NM</div>
+              <div><strong>Nikhil &amp; Kavya Menon</strong><span>Bengaluru · 3BHK Full Home</span></div>
+            </div>
+          </article>
+
+          <article class="quote-card">
+            <div>
+              <div class="stars">★★★★★</div>
+              <p>“Their 3D renders matched the final room down to the exact cane shutter shade and warm profile lighting. Worth every rupee.”</p>
+            </div>
+            <div class="author">
+              <div class="avatar">SP</div>
+              <div><strong>Sneha Pillai</strong><span>Kochi · Waterfront Apartment</span></div>
+            </div>
+          </article>
+
+          <article class="quote-card">
+            <div>
+              <div class="stars">★★★★★</div>
+              <p>“We renovated our 12-year-old kitchen and master bedroom without moving out. Dust-free modular installation finished in three weeks.”</p>
+            </div>
+            <div class="author">
+              <div class="avatar">AR</div>
+              <div><strong>Aditya Reddy</strong><span>Hyderabad · Renovation</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span class="brand" style="font-size:1.2rem;">Studio Kaaya</span>
+      <span>Bengaluru · Kochi · Hyderabad · Experience Centres</span>
+      <span>© 2026 Studio Kaaya Interiors</span>
+    </div>
+  </footer>
+
+  <!-- Consultation Modal -->
+  <div class="backdrop" id="consultModal" role="dialog" aria-modal="true" aria-labelledby="consultTitle">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <span class="eyebrow" style="margin-bottom:0.2rem;">Complimentary Session</span>
+          <h3 id="consultTitle">Book a Senior Designer Call</h3>
+        </div>
+        <button class="close-btn" type="button" id="closeConsultBtn">✕</button>
+      </div>
+
+      <form id="consultForm" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label for="iName">Your Name *</label>
+            <input id="iName" type="text" placeholder="Rhea Nair" required />
+          </div>
+          <div class="field">
+            <label for="iPhone">Phone / WhatsApp *</label>
+            <input id="iPhone" type="tel" placeholder="+91 98450 67890" required />
+          </div>
+          <div class="field full">
+            <label for="iCity">City &amp; Apartment / Project Name *</label>
+            <input id="iCity" type="text" placeholder="e.g., Kochi · Prestige Hillside 3BHK" required />
+          </div>
+          <div class="field full">
+            <label for="iSummary">Selected Estimate Summary</label>
+            <input id="iSummary" type="text" value="3BHK Turnkey Interiors" />
+          </div>
+          <div class="field full">
+            <button class="btn btn-dark" type="submit" style="width:100%;">Request Free 3D Design Call</button>
+          </div>
+        </div>
+      </form>
+
+      <div id="consultSuccess" style="display:none; text-align:center; padding-block:1rem;">
+        <div style="font-size:2rem; color:var(--sage); margin-bottom:0.4rem;">✓</div>
+        <h3>Consultation Scheduled</h3>
+        <p id="consultSuccessText" style="font-size:0.9rem; color:var(--ink-secondary); margin:0.6rem auto 1.3rem;"></p>
+        <button class="btn btn-outline btn-sm" type="button" id="doneConsultBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const MOODS = [
+      { tag: 'Warm Japandi', title: 'Ash Oak + Linen + Brushed Brass', desc: 'Ideal for sunlit 3BHK living & dining spaces', bg: '#EFECE6', wall: '#D6C7B2', sofa: '#57534E', accent: '#A16207', swatches: ['#D6C7B2', '#57534E', '#A16207'] },
+      { tag: 'Sage Courtyard', title: 'Burma Teak + Sage + Terracotta', desc: 'Earthy tropical palette suited for villas & duplexes', bg: '#E7EFE9', wall: '#C7D6CC', sofa: '#365347', accent: '#B45309', swatches: ['#C7D6CC', '#365347', '#B45309'] },
+      { tag: 'Urban Noir', title: 'Smoked Walnut + Fluted Grey + Gold', desc: 'High-contrast modern aesthetic for city penthouses', bg: '#E5E5E5', wall: '#A8A29E', sofa: '#292524', accent: '#CA8A04', swatches: ['#A8A29E', '#292524', '#CA8A04'] }
+    ];
+
+    const PROJECTS = [
+      { title: 'The Cane & Teak 3BHK', loc: 'Indiranagar, Bengaluru', cat: '3bhk', catLabel: '3BHK Full Home', budget: '₹14.5 Lakhs', days: '42 Days', tint: '#EFECE6', desc: 'Rattan-shutter wardrobes, island breakfast counter, and warm cove lighting across 1,720 sq.ft.' },
+      { title: 'Olive & Quartz Island Kitchen', loc: 'Panampilly Nagar, Kochi', cat: 'kitchen', catLabel: 'Modular Kitchen', budget: '₹4.2 Lakhs', days: '21 Days', tint: '#E7EFE9', desc: 'Anti-fingerprint sage acrylic cabinetry, Hettich soft-close tandems, and stain-proof quartz countertop.' },
+      { title: 'Courtyard Glass Villa', loc: 'Jubilee Hills, Hyderabad', cat: 'villa', catLabel: '4BHK Villa', budget: '₹26.0 Lakhs', days: '55 Days', tint: '#F3ECE1', desc: 'Double-height fluted teak paneling, walk-in wardrobe suite, and automated sheer curtains.' },
+      { title: 'Compact Pastel 3BHK', loc: 'Whitefield, Bengaluru', cat: '3bhk', catLabel: '3BHK Full Home', budget: '₹11.8 Lakhs', days: '40 Days', tint: '#ECEFF3', desc: 'Space-saving hydraulic beds, concealed study nook, and seamless floor-to-ceiling loft storage.' },
+      { title: 'Parallel Walnut Kitchen', loc: 'Kakkanad, Kochi', cat: 'kitchen', catLabel: 'Modular Kitchen', budget: '₹3.6 Lakhs', days: '18 Days', tint: '#EFEAE4', desc: 'Ergonomic wet-and-dry parallel kitchen layout with built-in appliance tower and pantry pull-outs.' },
+      { title: 'Palm Grove Duplex Villa', loc: 'Aluva, Kerala', cat: 'villa', catLabel: 'Duplex Villa', budget: '₹22.5 Lakhs', days: '50 Days', tint: '#EAEFE7', desc: 'Natural lime-plaster feature walls, custom teak dining table, and brass pendant fixtures.' }
+    ];
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2600);
+    }
+
+    // Mobile Menu
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    function toggleMenu(closeOnly = false) {
+      const open = closeOnly ? false : !mobileDrawer.classList.contains('open');
+      mobileDrawer.classList.toggle('open', open);
+      document.getElementById('menuIcon').innerHTML = open ? '<path d="M6 6l12 12M18 6L6 18"/>' : '<path d="M4 7h16M4 12h16M4 17h16"/>';
+    }
+    menuToggle.addEventListener('click', () => toggleMenu());
+    document.querySelectorAll('.m-link').forEach((a) => a.addEventListener('click', () => toggleMenu(true)));
+
+    // Moodboard Switcher
+    document.querySelectorAll('.mood-tab').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const m = MOODS[Number(tab.dataset.mood)];
+        document.getElementById('moodTag').textContent = m.tag;
+        document.getElementById('moodTitle').textContent = m.title;
+        document.getElementById('moodDesc').textContent = m.desc;
+        document.getElementById('moodCanvas').style.background = m.bg;
+        document.getElementById('svgWallPanel').setAttribute('fill', m.wall);
+        document.getElementById('svgSofa').setAttribute('fill', m.sofa);
+        document.getElementById('svgCushion').setAttribute('fill', m.accent);
+        document.getElementById('moodSwatches').innerHTML = m.swatches.map((c) => `<span class="swatch" style="background:${c};"></span>`).join('');
+        document.querySelectorAll('.mood-tab').forEach((t) => t.classList.toggle('active', t === tab));
+      });
+    });
+
+    // Render Projects
+    let activeFilter = 'all';
+    const projectGrid = document.getElementById('projectGrid');
+    function renderProjects() {
+      const list = activeFilter === 'all' ? PROJECTS : PROJECTS.filter((p) => p.cat === activeFilter);
+      projectGrid.innerHTML = list.map((p) => `
+        <article class="proj-card">
+          <div class="proj-art" style="background:${p.tint};">
+            <span class="proj-tag">${p.catLabel}</span>
+            <svg width="210" height="105" viewBox="0 0 220 110" fill="none" aria-hidden="true">
+              <rect x="20" y="92" width="180" height="2" fill="#78716C" fill-opacity="0.4"/>
+              <rect x="34" y="24" width="66" height="68" rx="3" fill="#D6C7B2"/>
+              <rect x="46" y="58" width="84" height="34" rx="6" fill="#44403C"/>
+              <rect x="142" y="66" width="48" height="26" rx="3" fill="#A16207" fill-opacity="0.85"/>
+              <circle cx="166" cy="40" r="12" stroke="#78716C" stroke-width="1.5" fill="#FFF"/>
+            </svg>
+          </div>
+          <div class="proj-body">
+            <h3>${p.title}</h3>
+            <div class="proj-meta"><span>${p.loc}</span><strong style="color:var(--brass);">${p.budget} · ${p.days}</strong></div>
+            <p class="proj-desc">${p.desc}</p>
+            <div class="proj-actions">
+              <button class="btn btn-outline btn-sm" type="button" data-quote="${p.title} (${p.budget})">Similar Quote</button>
+              <button class="btn btn-dark btn-sm" type="button" data-quote="3D Walkthrough: ${p.title}">Book Visit</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    document.querySelectorAll('.filter-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        activeFilter = btn.dataset.filter;
+        document.querySelectorAll('.filter-btn').forEach((b) => b.classList.toggle('active', b === btn));
+        renderProjects();
+      });
+    });
+
+    projectGrid.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-quote]');
+      if (btn) openConsult(btn.dataset.quote);
+    });
+
+    // Interior Budget Estimator
+    let baseLakhs = 7.8;
+    let bhkLabel = '3BHK (~1,650 sq.ft)';
+    let finishMult = 1.0;
+    let finishLabel = 'Essential Matte Laminate';
+
+    function updateEstimate() {
+      let scopeAdd = 0;
+      document.querySelectorAll('#scopeChecks input:checked').forEach((cb) => {
+        scopeAdd += Number(cb.value);
+      });
+      const low = ((baseLakhs + scopeAdd) * finishMult).toFixed(1);
+      const high = (Number(low) * 1.1).toFixed(1);
+      document.getElementById('estRange').textContent = `₹${low} – ${high} Lakhs`;
+      document.getElementById('outBhk').textContent = bhkLabel;
+      document.getElementById('outFinish').textContent = finishLabel;
+      return `₹${low}–${high}L · ${bhkLabel} (${finishLabel})`;
+    }
+
+    document.querySelectorAll('#bhkGroup .opt-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#bhkGroup .opt-btn').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        baseLakhs = Number(btn.dataset.base);
+        bhkLabel = btn.dataset.label;
+        updateEstimate();
+      });
+    });
+
+    document.querySelectorAll('#finishGroup .opt-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#finishGroup .opt-btn').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        finishMult = Number(btn.dataset.mult);
+        finishLabel = btn.dataset.finish;
+        updateEstimate();
+      });
+    });
+
+    document.querySelectorAll('#scopeChecks input').forEach((cb) => cb.addEventListener('change', updateEstimate));
+
+    // Consultation Modal
+    const consultModal = document.getElementById('consultModal');
+    function openConsult(summaryText = '3BHK Turnkey Interiors') {
+      document.getElementById('consultForm').style.display = 'block';
+      document.getElementById('consultSuccess').style.display = 'none';
+      document.getElementById('iSummary').value = summaryText;
+      consultModal.classList.add('open');
+    }
+    const closeConsult = () => consultModal.classList.remove('open');
+
+    document.getElementById('navConsultBtn').addEventListener('click', () => openConsult(updateEstimate()));
+    document.getElementById('mobileConsultBtn').addEventListener('click', () => { toggleMenu(true); openConsult(updateEstimate()); });
+    document.getElementById('lockEstBtn').addEventListener('click', () => openConsult(updateEstimate()));
+    document.getElementById('closeConsultBtn').addEventListener('click', closeConsult);
+    document.getElementById('doneConsultBtn').addEventListener('click', closeConsult);
+    consultModal.addEventListener('click', (e) => { if (e.target === consultModal) closeConsult(); });
+
+    document.getElementById('consultForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('iName').value.trim();
+      const phone = document.getElementById('iPhone').value.trim();
+      const city = document.getElementById('iCity').value.trim();
+      if (!name || !phone || !city) {
+        showToast('Please enter your name, phone, and city/project.');
+        return;
+      }
+      document.getElementById('consultSuccessText').innerHTML =
+        `Thank you, <strong>${name}</strong>! Our senior interior architect for <strong>${city}</strong> will call you on <strong>${phone}</strong> with your 3D floorplan slot.`;
+      document.getElementById('consultForm').style.display = 'none';
+      document.getElementById('consultSuccess').style.display = 'block';
+      e.target.reset();
+    });
+
+    renderProjects();
+    updateEstimate();
+  </script>
+</body>
+</html>
