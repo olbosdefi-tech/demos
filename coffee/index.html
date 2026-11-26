@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vana Roast Co. — Small-Batch Indian Specialty Coffee</title>
+
+  <!-- WhatsApp Link Preview Tags -->
+  <meta property="og:title" content="Vana Roast Co. — Specialty Coffee Roastery Demo" />
+  <meta property="og:description" content="Small-batch Indian specialty coffee storefront with roast filters, live cost-per-cup estimator, and order bag." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-page: #faf6f0;
+      --bg-surface: #fffdf9;
+      --bg-subtle: #f2ebe1;
+      --bg-dark: #1d1612;
+      --ink-primary: #1e1612;
+      --ink-secondary: #5c4e44;
+      --ink-muted: #8a7b70;
+      --accent: #b85d3b;
+      --accent-hover: #9c4a2b;
+      --accent-soft: #f5e5dd;
+      --forest: #2e4539;
+      --forest-soft: #e6eee9;
+      --border: #e5dacd;
+      --border-strong: #d3c3b1;
+      --shadow-sm: 0 2px 8px rgba(30, 22, 18, 0.05);
+      --shadow-md: 0 12px 32px rgba(30, 22, 18, 0.08);
+      --shadow-lg: 0 24px 60px rgba(30, 22, 18, 0.14);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --radius-pill: 999px;
+      --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --nav-height: 74px;
+      --transition: 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--nav-height) + 16px);
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-page);
+      color: var(--ink-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img, svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+      color: inherit;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1160px, 100% - 2.5rem);
+      margin-inline: auto;
+    }
+
+    .section {
+      padding-block: clamp(4rem, 7vw, 6.5rem);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.85rem;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 18px;
+      height: 1.5px;
+      background: currentColor;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-serif);
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    h1 { font-size: clamp(2.4rem, 5vw, 4rem); }
+    h2 { font-size: clamp(1.9rem, 3.4vw, 2.85rem); }
+    h3 { font-size: 1.35rem; }
+
+    .lead {
+      font-size: clamp(1rem, 1.4vw, 1.15rem);
+      color: var(--ink-secondary);
+      max-width: 58ch;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.82rem 1.45rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      font-weight: 600;
+      font-size: 0.94rem;
+      cursor: pointer;
+      transition: transform var(--transition), background var(--transition), border-color var(--transition), color var(--transition), box-shadow var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn:active { transform: translateY(1px); }
+    .btn-primary { background: var(--ink-primary); color: #fffdf9; }
+    .btn-primary:hover { background: var(--accent); box-shadow: 0 8px 20px rgba(184, 93, 59, 0.24); }
+    .btn-accent { background: var(--accent); color: #fffdf9; }
+    .btn-accent:hover { background: var(--accent-hover); box-shadow: 0 8px 20px rgba(184, 93, 59, 0.25); }
+    .btn-outline { background: transparent; border-color: var(--border-strong); color: var(--ink-primary); }
+    .btn-outline:hover { border-color: var(--ink-primary); background: var(--bg-surface); }
+    .btn-sm { padding: 0.56rem 1.05rem; font-size: 0.85rem; }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      height: var(--nav-height);
+      background: rgba(250, 246, 240, 0.86);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .navbar.scrolled { border-bottom-color: var(--border); box-shadow: var(--shadow-sm); }
+    .nav-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-family: var(--font-serif);
+      font-size: 1.32rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--ink-primary);
+      color: #faf6f0;
+      display: grid;
+      place-items: center;
+    }
+
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.93rem; font-weight: 500; color: var(--ink-secondary); position: relative; padding-block: 0.3rem; transition: color var(--transition); }
+    .nav-links a::after { content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 2px; background: var(--accent); transition: width var(--transition); }
+    .nav-links a:hover, .nav-links a.active { color: var(--ink-primary); }
+    .nav-links a.active::after, .nav-links a:hover::after { width: 100%; }
+
+    .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
+
+    .bag-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.55rem 0.95rem;
+      border-radius: var(--radius-pill);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color var(--transition), background var(--transition);
+    }
+
+    .bag-btn:hover { border-color: var(--ink-primary); }
+
+    .bag-count {
+      min-width: 20px;
+      height: 20px;
+      padding-inline: 5px;
+      border-radius: var(--radius-pill);
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.74rem;
+      display: grid;
+      place-items: center;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      place-items: center;
+      cursor: pointer;
+    }
+
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      inset: var(--nav-height) 0 auto 0;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+      padding: 1.25rem 1.5rem 1.75rem;
+      z-index: 850;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .mobile-drawer.open { display: flex; }
+    .mobile-drawer a { font-size: 1.05rem; font-weight: 600; padding: 0.5rem 0; border-bottom: 1px solid var(--bg-subtle); }
+
+    .hero { padding-block: clamp(2.5rem, 5vw, 4.75rem) clamp(3.5rem, 6vw, 5.5rem); }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+    .hero-copy h1 em { font-style: italic; color: var(--accent); }
+    .hero-copy .lead { margin-top: 1.2rem; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 2rem; }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+      margin-top: 2.75rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-num { font-family: var(--font-serif); font-size: 1.65rem; font-weight: 600; color: var(--ink-primary); }
+    .stat-label { font-size: 0.82rem; color: var(--ink-muted); margin-top: 0.15rem; }
+
+    .showcase-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+
+    .showcase-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; font-size: 0.8rem; color: var(--ink-muted); }
+
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-pill);
+      background: var(--forest-soft);
+      color: var(--forest);
+      font-weight: 600;
+      font-size: 0.75rem;
+    }
+
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--forest); }
+
+    .showcase-visual {
+      background: var(--bg-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 1.35rem;
+      align-items: center;
+    }
+
+    .showcase-meta h3 { font-size: 1.3rem; margin-bottom: 0.25rem; }
+    .showcase-origin { font-size: 0.84rem; color: var(--ink-secondary); margin-bottom: 0.85rem; }
+    .note-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+
+    .note-pill {
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 0.26rem 0.62rem;
+      border-radius: var(--radius-pill);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--ink-primary);
+    }
+
+    .roast-meter { display: flex; flex-direction: column; gap: 0.3rem; }
+    .roast-meter-label { display: flex; justify-content: space-between; font-size: 0.76rem; color: var(--ink-secondary); font-weight: 600; }
+    .meter-track { height: 6px; border-radius: 99px; background: #dfd3c4; overflow: hidden; }
+    .meter-fill { height: 100%; border-radius: 99px; background: var(--accent); transition: width 350ms ease, background 350ms ease; }
+
+    .showcase-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 1rem; }
+
+    .showcase-tab {
+      padding: 0.65rem 0.6rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .showcase-tab strong { display: block; font-size: 0.82rem; color: var(--ink-primary); }
+    .showcase-tab span { font-size: 0.73rem; color: var(--ink-muted); }
+    .showcase-tab.active { background: var(--ink-primary); border-color: var(--ink-primary); }
+    .showcase-tab.active strong { color: #fffdf9; }
+    .showcase-tab.active span { color: #d6c8bc; }
+
+    .catalog-section { background: var(--bg-surface); border-block: 1px solid var(--border); }
+    .section-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1.5rem; margin-bottom: 2.25rem; }
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .filter-btn {
+      padding: 0.55rem 1.1rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      background: var(--bg-page);
+      color: var(--ink-secondary);
+      font-size: 0.87rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .filter-btn:hover { border-color: var(--ink-primary); color: var(--ink-primary); }
+    .filter-btn.active { background: var(--ink-primary); border-color: var(--ink-primary); color: #fffdf9; }
+
+    .catalog-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+
+    .product-card {
+      background: var(--bg-page);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--border-strong); }
+
+    .product-art { height: 185px; padding: 1.25rem; display: flex; align-items: center; justify-content: center; position: relative; }
+
+    .product-tag {
+      position: absolute;
+      top: 0.9rem;
+      left: 0.9rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.62rem;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 253, 249, 0.92);
+      color: var(--ink-primary);
+      border: 1px solid rgba(30, 22, 18, 0.08);
+    }
+
+    .product-body { padding: 1.35rem; display: flex; flex-direction: column; flex: 1; }
+    .product-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; }
+    .product-price { font-weight: 700; font-size: 1.05rem; color: var(--ink-primary); white-space: nowrap; }
+    .product-price small { display: block; font-size: 0.72rem; font-weight: 500; color: var(--ink-muted); text-align: right; }
+    .product-origin { font-size: 0.83rem; color: var(--ink-muted); margin-top: 0.25rem; }
+    .product-desc { font-size: 0.9rem; color: var(--ink-secondary); margin-top: 0.75rem; margin-bottom: 1rem; flex: 1; }
+
+    .product-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+      margin-top: auto;
+      padding-top: 0.9rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .estimator-wrap { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 2rem; align-items: stretch; }
+
+    .estimator-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.5rem, 3vw, 2.25rem);
+      display: flex;
+      flex-direction: column;
+      gap: 1.65rem;
+    }
+
+    .control-group label.group-label { display: flex; justify-content: space-between; align-items: baseline; font-weight: 600; font-size: 0.94rem; margin-bottom: 0.75rem; }
+    .group-value { font-family: var(--font-serif); font-size: 1.15rem; color: var(--accent); }
+    input[type="range"] { width: 100%; accent-color: var(--accent); cursor: pointer; height: 6px; }
+    .range-ticks { display: flex; justify-content: space-between; font-size: 0.76rem; color: var(--ink-muted); margin-top: 0.35rem; }
+    .pill-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.65rem; }
+
+    .choice-pill {
+      padding: 0.78rem 0.95rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-page);
+      text-align: left;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .choice-pill strong { display: block; font-size: 0.9rem; }
+    .choice-pill span { font-size: 0.78rem; color: var(--ink-muted); }
+    .choice-pill.active { border-color: var(--accent); background: var(--accent-soft); }
+
+    .billing-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.95rem 1.1rem;
+      border-radius: var(--radius-md);
+      background: var(--forest-soft);
+      border: 1px solid #c9dcd0;
+    }
+
+    .switch { position: relative; width: 48px; height: 26px; flex-shrink: 0; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; inset: 0; background: #9fb5a8; border-radius: 99px; cursor: pointer; transition: background var(--transition); }
+    .slider::before { content: ""; position: absolute; width: 20px; height: 20px; left: 3px; top: 3px; border-radius: 50%; background: #fff; transition: transform var(--transition); }
+    .switch input:checked + .slider { background: var(--forest); }
+    .switch input:checked + .slider::before { transform: translateX(22px); }
+
+    .estimator-summary {
+      background: var(--bg-dark);
+      color: #faf6f0;
+      border-radius: var(--radius-lg);
+      padding: clamp(1.75rem, 3vw, 2.35rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .summary-price-row { display: flex; align-items: baseline; gap: 0.75rem; margin-top: 0.45rem; }
+    .summary-total { font-family: var(--font-serif); font-size: clamp(2.2rem, 4vw, 3rem); line-height: 1; }
+    .summary-strike { color: #9e8f84; text-decoration: line-through; font-size: 1rem; }
+
+    .summary-savings {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-pill);
+      background: rgba(184, 93, 59, 0.24);
+      color: #f6b297;
+      font-size: 0.79rem;
+      font-weight: 600;
+    }
+
+    .summary-metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; margin-top: 1.5rem; }
+    .metric-box { background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-sm); padding: 0.85rem; }
+    .metric-box span { display: block; font-size: 0.75rem; color: #bfb1a5; }
+    .metric-box strong { display: block; font-size: 1.05rem; margin-top: 0.2rem; }
+
+    .recipe-tip {
+      font-size: 0.86rem;
+      color: #d6c8bc;
+      padding: 0.9rem 1rem;
+      border-left: 2px solid var(--accent);
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+
+    .testimonials-section { background: var(--bg-surface); border-top: 1px solid var(--border); }
+    .testimonial-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin-top: 2.25rem; }
+
+    .quote-card {
+      background: var(--bg-page);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.25rem;
+    }
+
+    .stars { display: inline-flex; gap: 2px; color: var(--accent); margin-bottom: 0.8rem; }
+    .quote-text { font-size: 0.96rem; color: var(--ink-primary); }
+    .quote-author { display: flex; align-items: center; gap: 0.75rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.88rem;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .quote-author strong { display: block; font-size: 0.9rem; }
+    .quote-author span { font-size: 0.79rem; color: var(--ink-muted); }
+
+    .contact-grid { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 2.5rem; align-items: start; }
+    .contact-cards { display: grid; gap: 1rem; margin-top: 1.75rem; }
+
+    .info-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.15rem 1.3rem;
+      display: flex;
+      gap: 0.95rem;
+      align-items: flex-start;
+    }
+
+    .info-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; flex-shrink: 0; }
+    .info-card strong { display: block; font-size: 0.94rem; }
+    .info-card p { font-size: 0.87rem; color: var(--ink-secondary); margin-top: 0.15rem; }
+
+    .form-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.5rem, 3vw, 2.25rem);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { font-size: 0.84rem; font-weight: 600; color: var(--ink-primary); }
+
+    .field input, .field select, .field textarea {
+      width: 100%;
+      padding: 0.72rem 0.9rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-strong);
+      background: var(--bg-page);
+      font-size: 0.93rem;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .field input:focus, .field select:focus, .field textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(184, 93, 59, 0.15);
+      background: #fff;
+    }
+
+    .form-feedback {
+      display: none;
+      margin-top: 1rem;
+      padding: 1.15rem;
+      border-radius: var(--radius-md);
+      background: var(--forest-soft);
+      border: 1px solid #bcd4c5;
+      color: var(--forest);
+    }
+
+    .form-feedback.show { display: block; }
+
+    footer { background: var(--bg-dark); color: #d6c8bc; padding-block: 3.25rem 2.25rem; font-size: 0.88rem; }
+    .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; padding-bottom: 1.75rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding-top: 1.5rem; font-size: 0.8rem; color: #9b8c80; }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 14, 11, 0.58);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none;
+      place-items: center;
+      padding: 1.25rem;
+    }
+
+    .modal-backdrop.open { display: grid; }
+
+    .modal {
+      width: min(580px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      padding: 1.75rem;
+      position: relative;
+      animation: modalIn 220ms ease;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 1.25rem; }
+
+    .close-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-page);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .close-btn:hover { border-color: var(--ink-primary); }
+    .profile-bars { display: grid; gap: 0.7rem; margin-block: 1.25rem; }
+    .bar-row { display: grid; grid-template-columns: 95px 1fr 34px; align-items: center; gap: 0.75rem; font-size: 0.84rem; }
+    .bag-list { display: grid; gap: 0.7rem; margin-bottom: 1.25rem; }
+
+    .bag-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 0.9rem;
+      background: var(--bg-page);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+    }
+
+    .remove-item { border: none; background: none; color: var(--accent); font-weight: 600; font-size: 0.8rem; cursor: pointer; }
+
+    .toast {
+      position: fixed;
+      right: 1.25rem;
+      bottom: 1.25rem;
+      z-index: 1100;
+      background: var(--ink-primary);
+      color: #fffdf9;
+      padding: 0.8rem 1.2rem;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      font-size: 0.88rem;
+      font-weight: 500;
+      transform: translateY(16px);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 240ms ease;
+    }
+
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    @media (max-width: 980px) {
+      .hero-grid, .estimator-wrap, .contact-grid { grid-template-columns: 1fr; }
+      .catalog-grid, .testimonial-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links, .nav-cta-desktop { display: none; }
+      .menu-toggle { display: grid; }
+      .showcase-visual { grid-template-columns: 1fr; text-align: left; }
+      .showcase-visual svg { margin-inline: auto; }
+      .showcase-tabs { grid-template-columns: 1fr; }
+      .catalog-grid, .testimonial-grid, .form-grid, .pill-grid { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#top" class="brand" aria-label="Vana Roast Co. Home">
+        <span class="brand-mark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3c-4.5 2.4-7 6.3-7 10.5A7 7 0 0 0 12 21a7 7 0 0 0 7-7.5C19 9.3 16.5 5.4 12 3Z"/>
+            <path d="M12 3c-1.8 4.6-1.8 11.4 0 18"/>
+          </svg>
+        </span>
+        Vana Roast Co.
+      </a>
+
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#roasts">Roasts</a></li>
+          <li><a href="#estimator">Plan Estimator</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#visit">Visit &amp; Wholesale</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="bag-btn" id="openOrderModalBtn" type="button" aria-label="Open order bag">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+            <path d="M3 6h18"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span>Bag</span>
+          <span class="bag-count" id="bagCount">0</span>
+        </button>
+
+        <button class="btn btn-primary btn-sm nav-cta-desktop" id="navQuickOrder" type="button">
+          Order Fresh Batch
+        </button>
+
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <svg id="menuIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <a href="#roasts" class="mobile-link">Roasts</a>
+    <a href="#estimator" class="mobile-link">Plan Estimator</a>
+    <a href="#reviews" class="mobile-link">Reviews</a>
+    <a href="#visit" class="mobile-link">Visit &amp; Wholesale</a>
+    <button class="btn btn-primary" id="mobileOrderBtn" type="button">Order Fresh Batch</button>
+  </div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Single-Estate Indian Specialty</span>
+          <h1>Small-batch harvests, <em>roasted to order</em> every week.</h1>
+          <p class="lead">
+            Traceable shade-grown arabica from family farms across Chikmagalur, Wayanad, and Araku Valley. Roasted in 12 kg micro-batches in Bengaluru and dispatched within 24 hours.
+          </p>
+
+          <div class="hero-cta">
+            <a href="#roasts" class="btn btn-primary">Explore Current Lots</a>
+            <a href="#estimator" class="btn btn-outline">Estimate Monthly Plan</a>
+          </div>
+
+          <div class="hero-stats">
+            <div>
+              <div class="stat-num">14</div>
+              <div class="stat-label">Partner Estates</div>
+            </div>
+            <div>
+              <div class="stat-num">24 hrs</div>
+              <div class="stat-label">Roast to Dispatch</div>
+            </div>
+            <div>
+              <div class="stat-num">86.5+</div>
+              <div class="stat-label">Avg. Cupping Score</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-card" aria-label="Interactive weekly roast preview">
+          <div class="showcase-header">
+            <span class="live-badge"><span class="live-dot"></span> Roasting This Friday</span>
+            <span id="showcaseBatch">Batch #VN-104</span>
+          </div>
+
+          <div class="showcase-visual">
+            <svg id="heroBagSvg" width="142" height="178" viewBox="0 0 150 190" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Coffee bag illustration">
+              <rect x="20" y="18" width="110" height="156" rx="14" fill="#231B17"/>
+              <path d="M26 18h98l-6-10H32l-6 10Z" fill="#3A2D26"/>
+              <rect id="bagStripe" x="20" y="54" width="110" height="82" fill="#B85D3B"/>
+              <rect x="33" y="64" width="84" height="62" rx="6" fill="#FAF6F0"/>
+              <circle cx="75" cy="40" r="5" fill="#5C4E44"/>
+              <text x="75" y="82" text-anchor="middle" font-family="Georgia, serif" font-size="11" font-weight="600" fill="#1E1612">VANA ROAST</text>
+              <text id="bagLabelTitle" x="75" y="99" text-anchor="middle" font-family="sans-serif" font-size="8.5" font-weight="700" fill="#B85D3B">MULLAYANAGIRI</text>
+              <text id="bagLabelSub" x="75" y="113" text-anchor="middle" font-family="sans-serif" font-size="7.2" fill="#5C4E44">WASHED · 1,550M</text>
+              <text x="75" y="156" text-anchor="middle" font-family="sans-serif" font-size="7.5" fill="#D6C8BC">250G WHOLE BEAN</text>
+            </svg>
+
+            <div class="showcase-meta">
+              <h3 id="showcaseTitle">Mullayanagiri Washed</h3>
+              <p class="showcase-origin" id="showcaseOrigin">Chikmagalur, Karnataka · 1,550m</p>
+              <div class="note-pills" id="showcaseNotes">
+                <span class="note-pill">Roasted Almond</span>
+                <span class="note-pill">Jaggery</span>
+                <span class="note-pill">Sweet Orange</span>
+              </div>
+              <div class="roast-meter">
+                <div class="roast-meter-label">
+                  <span>Roast Profile</span>
+                  <span id="showcaseRoastText">Light–Medium</span>
+                </div>
+                <div class="meter-track">
+                  <div class="meter-fill" id="showcaseRoastBar" style="width: 42%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="showcase-tabs" role="tablist" aria-label="Select featured roast">
+            <button class="showcase-tab active" type="button" data-hero-index="0" role="tab" aria-selected="true">
+              <strong>Mullayanagiri</strong>
+              <span>Washed · ₹580</span>
+            </button>
+            <button class="showcase-tab" type="button" data-hero-index="1" role="tab" aria-selected="false">
+              <strong>Wayanad Honey</strong>
+              <span>Red Honey · ₹640</span>
+            </button>
+            <button class="showcase-tab" type="button" data-hero-index="2" role="tab" aria-selected="false">
+              <strong>Araku Natural</strong>
+              <span>Naturals · ₹690</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section catalog-section" id="roasts">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Fresh Harvest Menu</span>
+            <h2>Current Single-Origin Roasts</h2>
+          </div>
+
+          <div class="filter-bar" role="group" aria-label="Filter roasts by brew category">
+            <button class="filter-btn active" type="button" data-filter="all">All Roasts</button>
+            <button class="filter-btn" type="button" data-filter="filter">Pour-Over &amp; Filter</button>
+            <button class="filter-btn" type="button" data-filter="espresso">Espresso</button>
+            <button class="filter-btn" type="button" data-filter="coldbrew">Cold Brew</button>
+            <button class="filter-btn" type="button" data-filter="gift">Tasting Sets</button>
+          </div>
+        </div>
+
+        <div class="catalog-grid" id="catalogGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="estimator">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Interactive Brew Planner</span>
+            <h2>Subscription &amp; Cost-Per-Cup Estimator</h2>
+          </div>
+          <p class="lead">Dial in your daily cups and preferred brew method to calculate exact monthly weight, cost per cup, and subscriber savings.</p>
+        </div>
+
+        <div class="estimator-wrap">
+          <div class="estimator-panel">
+            <div class="control-group">
+              <label class="group-label" for="cupsRange">
+                <span>Daily cups brewed (home or office)</span>
+                <span class="group-value" id="cupsValue">2 cups / day</span>
+              </label>
+              <input type="range" id="cupsRange" min="1" max="10" step="1" value="2" />
+              <div class="range-ticks">
+                <span>1 cup</span>
+                <span>4 cups</span>
+                <span>7 cups</span>
+                <span>10 cups</span>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="group-label">
+                <span>Primary Brew Method</span>
+                <span class="group-value" id="brewGramLabel">15g / cup</span>
+              </label>
+              <div class="pill-grid" id="brewMethodGroup">
+                <button class="choice-pill active" type="button" data-brew="pourover" data-grams="15" data-grind="Medium-Fine" data-ratio="1:16">
+                  <strong>Pour-Over / V60</strong>
+                  <span>Clean, aromatic · 15g dose</span>
+                </button>
+                <button class="choice-pill" type="button" data-brew="sif" data-grams="16" data-grind="Fine (Filter)" data-ratio="1:6 decoction">
+                  <strong>South Indian Filter</strong>
+                  <span>Rich, syrupy · 16g dose</span>
+                </button>
+                <button class="choice-pill" type="button" data-brew="espresso" data-grams="18" data-grind="Espresso Fine" data-ratio="1:2 yield">
+                  <strong>Espresso / Moka Pot</strong>
+                  <span>Bold crema · 18g dose</span>
+                </button>
+                <button class="choice-pill" type="button" data-brew="frenchpress" data-grams="17" data-grind="Coarse" data-ratio="1:15">
+                  <strong>French Press / Cold Brew</strong>
+                  <span>Full-bodied · 17g dose</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="group-label">
+                <span>Roast Selection Tier</span>
+                <span class="group-value" id="tierPriceLabel">₹580 / 250g</span>
+              </label>
+              <div class="pill-grid" id="tierGroup">
+                <button class="choice-pill active" type="button" data-tier="Single Estate" data-price="580">
+                  <strong>Single Estate Rotation</strong>
+                  <span>Washed &amp; honey classics · ₹580</span>
+                </button>
+                <button class="choice-pill" type="button" data-tier="Micro-Lot Reserve" data-price="720">
+                  <strong>Micro-Lot Reserve</strong>
+                  <span>Experimental naturals · ₹720</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="billing-toggle">
+              <div>
+                <strong>Auto-dispatch every 30 days (Save 15%)</strong>
+                <div style="font-size: 0.82rem; color: var(--forest);">Free shipping across India · Pause or skip anytime</div>
+              </div>
+              <label class="switch" aria-label="Toggle 15 percent subscription discount">
+                <input type="checkbox" id="subToggle" checked />
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <aside class="estimator-summary" aria-live="polite">
+            <div>
+              <span class="eyebrow" style="color: #e89c7f;">Recommended Plan</span>
+              <div class="summary-price-row">
+                <div class="summary-total" id="estMonthlyTotal">₹1,972</div>
+                <span class="summary-strike" id="estOriginalTotal">₹2,320</span>
+                <span style="color: #bfb1a5; font-size: 0.9rem;">/ month</span>
+              </div>
+              <div class="summary-savings" id="estSavingsBadge">You save ₹348 every month</div>
+
+              <div class="summary-metrics">
+                <div class="metric-box">
+                  <span>Monthly Volume</span>
+                  <strong id="estWeight">900g (4 × 250g)</strong>
+                </div>
+                <div class="metric-box">
+                  <span>Effective Cost</span>
+                  <strong id="estCostPerCup">₹33 / cup</strong>
+                </div>
+                <div class="metric-box">
+                  <span>Recommended Grind</span>
+                  <strong id="estGrind">Medium-Fine</strong>
+                </div>
+                <div class="metric-box">
+                  <span>Target Ratio</span>
+                  <strong id="estRatio">1:16</strong>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="recipe-tip" id="estTip">
+                Brew 15g of Single Estate coffee with 240 ml water at 93°C for a balanced 2:45 pour-over extraction.
+              </div>
+              <button class="btn btn-accent" id="lockPlanBtn" type="button" style="width: 100%; margin-top: 1.15rem;">
+                Lock In This Plan &amp; Order
+              </button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section testimonials-section" id="reviews">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Community Notes</span>
+            <h2>Brewed in 3,400+ Indian Kitchens &amp; Cafés</h2>
+          </div>
+          <p class="lead">Rated 4.9/5 across home baristas, filter-coffee purists, and independent specialty cafés.</p>
+        </div>
+
+        <div class="testimonial-grid">
+          <article class="quote-card">
+            <div>
+              <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+              <p class="quote-text">
+                “The Mullayanagiri Washed hits my doorstep in Indiranagar two days off-roast every single time. Bright citrus on V60 without any harsh bitterness.”
+              </p>
+            </div>
+            <div class="quote-author">
+              <div class="avatar">AN</div>
+              <div>
+                <strong>Ananya Nair</strong>
+                <span>Bengaluru · Monthly Subscriber</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="quote-card">
+            <div>
+              <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+              <p class="quote-text">
+                “We switched our studio pantry from instant pods to Vana’s Coorg Espresso Blend. Better coffee, half the café bill, and zero stale bags.”
+              </p>
+            </div>
+            <div class="quote-author">
+              <div class="avatar">RK</div>
+              <div>
+                <strong>Rohan Kulkarni</strong>
+                <span>Pune · Design Studio Lead</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="quote-card">
+            <div>
+              <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+              <p class="quote-text">
+                “Finally a roaster that respects South Indian filter brewing with 100% specialty arabica. The Wayanad Honey decoction tastes naturally sweet.”
+              </p>
+            </div>
+            <div class="quote-author">
+              <div class="avatar">MD</div>
+              <div>
+                <strong>Meera Deshmukh</strong>
+                <span>Kochi · Home Barista</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="visit">
+      <div class="container contact-grid">
+        <div>
+          <span class="eyebrow">Tasting Room &amp; Wholesale</span>
+          <h2>Cup with us or stock Vana at your café.</h2>
+          <p class="lead" style="margin-top: 0.9rem;">
+            Drop by our Saturday public cupping sessions or send a note for office pantries, boutique hotels, and café wholesale partnerships.
+          </p>
+
+          <div class="contact-cards">
+            <div class="info-card">
+              <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <strong>Roastery &amp; Tasting Bar</strong>
+                <p>12th Main, HAL 2nd Stage, Indiranagar, Bengaluru 560038</p>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div>
+                <strong>Roast Schedule &amp; Hours</strong>
+                <p>Roasting Tue &amp; Fri · Tasting Bar Open Wed–Sun, 8:30 AM – 6:30 PM</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3 style="margin-bottom: 0.35rem;">Send an Inquiry or Book a Cupping</h3>
+          <p style="font-size: 0.88rem; color: var(--ink-muted); margin-bottom: 1.35rem;">
+            We reply within one business day with fresh sample packs or wholesale rate cards.
+          </p>
+
+          <form id="contactForm" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label for="contactName">Full Name *</label>
+                <input id="contactName" name="name" type="text" placeholder="Priya Menon" required />
+              </div>
+              <div class="field">
+                <label for="contactEmail">Email Address *</label>
+                <input id="contactEmail" name="email" type="email" placeholder="priya@example.com" required />
+              </div>
+              <div class="field full">
+                <label for="contactTopic">Inquiry Type</label>
+                <select id="contactTopic" name="topic">
+                  <option value="Saturday Public Cupping">Book Saturday Public Cupping (Free)</option>
+                  <option value="Café / Restaurant Wholesale">Café or Restaurant Wholesale</option>
+                  <option value="Office Coffee Program">Office Coffee Program</option>
+                  <option value="Custom Gifting">Corporate / Event Gift Boxes</option>
+                </select>
+              </div>
+              <div class="field full">
+                <label for="contactMessage">Notes or Preferred Date *</label>
+                <textarea id="contactMessage" name="message" rows="3" placeholder="Tell us your estimated monthly kg or preferred tasting slot..." required></textarea>
+              </div>
+              <div class="field full">
+                <button class="btn btn-primary" type="submit" style="width: 100%;">Send Inquiry</button>
+              </div>
+            </div>
+          </form>
+
+          <div class="form-feedback" id="contactFeedback" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <a href="#top" class="brand" style="color: #faf6f0;">
+          <span class="brand-mark" style="background: var(--accent);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3c-4.5 2.4-7 6.3-7 10.5A7 7 0 0 0 12 21a7 7 0 0 0 7-7.5C19 9.3 16.5 5.4 12 3Z"/><path d="M12 3c-1.8 4.6-1.8 11.4 0 18"/></svg>
+          </span>
+          Vana Roast Co.
+        </a>
+        <div class="footer-links">
+          <a href="#roasts">Current Lots</a>
+          <a href="#estimator">Plan Estimator</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#visit">Wholesale</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Vana Roast Co. Roasted in Bengaluru, India.</span>
+        <span>100% Traceable Single-Estate Indian Arabica</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="detailModal" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <span class="eyebrow" id="detailTag" style="margin-bottom: 0.3rem;">Single Origin</span>
+          <h3 id="detailTitle">Roast Name</h3>
+          <p id="detailOrigin" style="font-size: 0.86rem; color: var(--ink-muted); margin-top: 0.2rem;"></p>
+        </div>
+        <button class="close-btn" type="button" data-close-modal aria-label="Close modal">✕</button>
+      </div>
+
+      <p id="detailDesc" style="font-size: 0.94rem; color: var(--ink-secondary);"></p>
+      <div class="note-pills" id="detailNotes" style="margin-top: 0.9rem;"></div>
+      <div class="profile-bars" id="detailBars"></div>
+
+      <div class="field" style="margin-bottom: 1.15rem;">
+        <label for="detailGrind">Select Grind Size</label>
+        <select id="detailGrind">
+          <option value="Whole Bean">Whole Bean (Recommended)</option>
+          <option value="Pour-Over / V60">Pour-Over / V60 (Medium-Fine)</option>
+          <option value="South Indian Filter">South Indian Filter (Fine)</option>
+          <option value="Espresso">Home Espresso</option>
+          <option value="French Press / Cold Brew">French Press / Cold Brew (Coarse)</option>
+        </select>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+        <div>
+          <strong id="detailPrice" style="font-size: 1.25rem;">₹580</strong>
+          <span style="display: block; font-size: 0.78rem; color: var(--ink-muted);">250g nitrogen-flushed pack</span>
+        </div>
+        <button class="btn btn-primary" id="detailAddBtn" type="button">Add to Order Bag</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="orderModal" role="dialog" aria-modal="true" aria-labelledby="orderModalTitle">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <span class="eyebrow" style="margin-bottom: 0.3rem;">Direct From Roastery</span>
+          <h3 id="orderModalTitle">Complete Your Batch Request</h3>
+        </div>
+        <button class="close-btn" type="button" data-close-modal aria-label="Close modal">✕</button>
+      </div>
+
+      <div id="orderFormWrap">
+        <div id="bagSummaryWrap" style="margin-bottom: 1.25rem;"></div>
+
+        <form id="orderForm" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="orderName">Your Name *</label>
+              <input id="orderName" type="text" placeholder="Siddharth Rao" required />
+            </div>
+            <div class="field">
+              <label for="orderPhone">Phone / WhatsApp *</label>
+              <input id="orderPhone" type="tel" placeholder="+91 98765 43210" required />
+            </div>
+            <div class="field full">
+              <label for="orderEmail">Email for Roast Dispatch Updates *</label>
+              <input id="orderEmail" type="email" placeholder="siddharth@example.com" required />
+            </div>
+            <div class="field full">
+              <label for="orderNotes">Delivery City &amp; Notes</label>
+              <input id="orderNotes" type="text" placeholder="e.g., Kochi · Please grind for South Indian Filter" />
+            </div>
+            <div class="field full">
+              <button class="btn btn-accent" type="submit" style="width: 100%;">Confirm Fresh Batch Order</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div id="orderSuccessWrap" style="display: none; text-align: center; padding-block: 1rem;">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--forest-soft); color: var(--forest); display: grid; place-items: center; margin: 0 auto 1rem;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>Batch Reserved!</h3>
+        <p id="orderSuccessMsg" style="font-size: 0.93rem; color: var(--ink-secondary); margin: 0.65rem auto 1.4rem; max-width: 44ch;"></p>
+        <button class="btn btn-outline" id="resetOrderBtn" type="button">Back to Roasts</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const ROASTS = [
+      {
+        id: 'mullayanagiri',
+        name: 'Mullayanagiri Washed',
+        origin: 'Chikmagalur, Karnataka · 1,550m',
+        category: 'filter',
+        categoryLabel: 'Pour-Over & Filter',
+        price: 580,
+        weight: '250g',
+        roastLevel: 'Light–Medium',
+        roastPct: 42,
+        accent: '#B85D3B',
+        bgTint: '#F4E8DF',
+        batch: 'Batch #VN-104',
+        shortLabel: 'MULLAYANAGIRI',
+        subLabel: 'WASHED · 1,550M',
+        notes: ['Roasted Almond', 'Jaggery', 'Sweet Orange'],
+        description: 'Classic high-elevation Chikmagalur arabica washed in mountain spring water. Crisp citrus entry with a velvety jaggery finish.',
+        profile: { Acidity: 78, Sweetness: 84, Body: 68, Roast: 42 }
+      },
+      {
+        id: 'wayanad-honey',
+        name: 'Wayanad Red Honey',
+        origin: 'Kalpetta, Kerala · 1,180m',
+        category: 'filter',
+        categoryLabel: 'Pour-Over & Filter',
+        price: 640,
+        weight: '250g',
+        roastLevel: 'Medium',
+        roastPct: 56,
+        accent: '#9E4735',
+        bgTint: '#F2E3DD',
+        batch: 'Batch #VN-105',
+        shortLabel: 'WAYANAD HONEY',
+        subLabel: 'RED HONEY · 1,180M',
+        notes: ['Ripe Fig', 'Palm Sugar', 'Warm Spice'],
+        description: 'Slow-dried on raised beds with mucilage intact. Naturally syrupy sweetness that shines equally on V60 and South Indian filter.',
+        profile: { Acidity: 62, Sweetness: 92, Body: 80, Roast: 56 }
+      },
+      {
+        id: 'araku-natural',
+        name: 'Araku Valley Natural',
+        origin: 'Eastern Ghats, Andhra · 1,300m',
+        category: 'espresso',
+        categoryLabel: 'Espresso',
+        price: 690,
+        weight: '250g',
+        roastLevel: 'Medium',
+        roastPct: 60,
+        accent: '#2E4539',
+        bgTint: '#E6EEE9',
+        batch: 'Batch #VN-106',
+        shortLabel: 'ARAKU NATURAL',
+        subLabel: 'NATURAL · 1,300M',
+        notes: ['Blackberry Jam', 'Dark Cocoa', 'Hazelnut'],
+        description: 'Organic tribal smallholder harvest dried whole under the Eastern Ghats sun. Lush berry aromatics with a silky chocolate espresso crema.',
+        profile: { Acidity: 70, Sweetness: 88, Body: 86, Roast: 60 }
+      },
+      {
+        id: 'coorg-espresso',
+        name: 'Kodagu Velvet Espresso',
+        origin: 'Madikeri, Coorg · 1,240m',
+        category: 'espresso',
+        categoryLabel: 'Espresso',
+        price: 540,
+        weight: '250g',
+        roastLevel: 'Medium–Dark',
+        roastPct: 76,
+        accent: '#4A3428',
+        bgTint: '#ECE4DC',
+        batch: 'Batch #VN-107',
+        shortLabel: 'KODAGU VELVET',
+        subLabel: 'ESPRESSO · 1,240M',
+        notes: ['70% Dark Chocolate', 'Toasted Pecan', 'Molasses'],
+        description: 'Crafted to punch cleanly through steamed milk or oat milk. Low acidity, heavy crema, and rich bittersweet cocoa balance.',
+        profile: { Acidity: 38, Sweetness: 74, Body: 94, Roast: 76 }
+      },
+      {
+        id: 'nilgiri-coldbrew',
+        name: 'Nilgiri Mist Cold Brew',
+        origin: 'Kotagiri, Tamil Nadu · 1,420m',
+        category: 'coldbrew',
+        categoryLabel: 'Cold Brew',
+        price: 560,
+        weight: '250g',
+        roastLevel: 'Medium',
+        roastPct: 58,
+        accent: '#3B6478',
+        bgTint: '#E5EEF2',
+        batch: 'Batch #VN-108',
+        shortLabel: 'NILGIRI MIST',
+        subLabel: 'COLD BREW · 1,420M',
+        notes: ['Caramel', 'Stone Fruit', 'Sweet Cacao'],
+        description: 'Specifically roasted for 14–16 hour cold immersion. Zero chalkiness, crisp over ice, and naturally sweet without syrups.',
+        profile: { Acidity: 52, Sweetness: 86, Body: 82, Roast: 58 }
+      },
+      {
+        id: 'estate-flight',
+        name: 'Indian Estates Tasting Flight',
+        origin: '3 × 100g Sampler Box',
+        category: 'gift',
+        categoryLabel: 'Tasting Sets',
+        price: 920,
+        weight: '300g Box',
+        roastLevel: 'Assorted',
+        roastPct: 55,
+        accent: '#8A5A2B',
+        bgTint: '#F4ECDD',
+        batch: 'Gift Edition',
+        shortLabel: 'ESTATE FLIGHT',
+        subLabel: '3 × 100G SAMPLER',
+        notes: ['Chikmagalur', 'Wayanad', 'Araku Valley'],
+        description: 'Explore three contrasting Indian terroirs side-by-side. Includes printed brew guide cards and tasting wheel.',
+        profile: { Acidity: 72, Sweetness: 85, Body: 78, Roast: 55 }
+      }
+    ];
+
+    const state = {
+      activeFilter: 'all',
+      bag: [],
+      selectedProduct: null,
+      estimator: {
+        cups: 2,
+        brewKey: 'pourover',
+        brewLabel: 'Pour-Over / V60',
+        gramsPerCup: 15,
+        grind: 'Medium-Fine',
+        ratio: '1:16',
+        tierName: 'Single Estate',
+        tierPrice: 580,
+        subscribe: true
+      }
+    };
+
+    const formatINR = (num) => '₹' + Math.round(num).toLocaleString('en-IN');
+
+    let toastTimer;
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
+    }
+
+    function createMiniBagSvg(roast) {
+      return `
+        <svg width="112" height="140" viewBox="0 0 150 190" fill="none" aria-hidden="true">
+          <rect x="20" y="18" width="110" height="156" rx="14" fill="#231B17"/>
+          <path d="M26 18h98l-6-10H32l-6 10Z" fill="#3A2D26"/>
+          <rect x="20" y="54" width="110" height="82" fill="${roast.accent}"/>
+          <rect x="33" y="64" width="84" height="62" rx="6" fill="#FAF6F0"/>
+          <circle cx="75" cy="40" r="5" fill="#5C4E44"/>
+          <text x="75" y="82" text-anchor="middle" font-family="Georgia, serif" font-size="11" font-weight="600" fill="#1E1612">VANA ROAST</text>
+          <text x="75" y="99" text-anchor="middle" font-family="sans-serif" font-size="8.2" font-weight="700" fill="${roast.accent}">${roast.shortLabel}</text>
+          <text x="75" y="113" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#5C4E44">${roast.subLabel}</text>
+          <text x="75" y="156" text-anchor="middle" font-family="sans-serif" font-size="7.5" fill="#D6C8BC">${roast.weight.toUpperCase()}</text>
+        </svg>
+      `;
+    }
+
+    const navbar = document.getElementById('navbar');
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const navAnchors = document.querySelectorAll('.nav-links a');
+    const sections = document.querySelectorAll('main section[id]');
+
+    function toggleMobileMenu(forceClose = false) {
+      const isOpen = forceClose ? false : !mobileDrawer.classList.contains('open');
+      mobileDrawer.classList.toggle('open', isOpen);
+      mobileDrawer.setAttribute('aria-hidden', String(!isOpen));
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      document.getElementById('menuIcon').innerHTML = isOpen
+        ? '<path d="M6 6l12 12M18 6L6 18"/>'
+        : '<path d="M4 7h16M4 12h16M4 17h16"/>';
+    }
+
+    menuToggle.addEventListener('click', () => toggleMobileMenu());
+    document.querySelectorAll('.mobile-link').forEach((link) => {
+      link.addEventListener('click', () => toggleMobileMenu(true));
+    });
+
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 12);
+      let currentId = '';
+      sections.forEach((sec) => {
+        if (window.scrollY >= sec.offsetTop - 140) currentId = sec.id;
+      });
+      navAnchors.forEach((a) => {
+        a.classList.toggle('active', a.getAttribute('href') === `#${currentId}`);
+      });
+    }, { passive: true });
+
+    const heroTabs = document.querySelectorAll('.showcase-tab');
+    function updateHeroShowcase(index) {
+      const roast = ROASTS[index];
+      if (!roast) return;
+      document.getElementById('showcaseBatch').textContent = roast.batch;
+      document.getElementById('showcaseTitle').textContent = roast.name;
+      document.getElementById('showcaseOrigin').textContent = roast.origin;
+      document.getElementById('showcaseRoastText').textContent = roast.roastLevel;
+      const bar = document.getElementById('showcaseRoastBar');
+      bar.style.width = `${roast.roastPct}%`;
+      bar.style.background = roast.accent;
+
+      document.getElementById('bagStripe').setAttribute('fill', roast.accent);
+      document.getElementById('bagLabelTitle').setAttribute('fill', roast.accent);
+      document.getElementById('bagLabelTitle').textContent = roast.shortLabel;
+      document.getElementById('bagLabelSub').textContent = roast.subLabel;
+
+      document.getElementById('showcaseNotes').innerHTML = roast.notes
+        .map((n) => `<span class="note-pill">${n}</span>`).join('');
+
+      heroTabs.forEach((tab, i) => {
+        const active = i === index;
+        tab.classList.toggle('active', active);
+        tab.setAttribute('aria-selected', String(active));
+      });
+    }
+
+    heroTabs.forEach((tab) => {
+      tab.addEventListener('click', () => updateHeroShowcase(Number(tab.dataset.heroIndex)));
+    });
+
+    const catalogGrid = document.getElementById('catalogGrid');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+
+    function renderCatalog() {
+      const items = state.activeFilter === 'all'
+        ? ROASTS
+        : ROASTS.filter((r) => r.category === state.activeFilter);
+
+      catalogGrid.innerHTML = items.map((roast) => `
+        <article class="product-card">
+          <div class="product-art" style="background: ${roast.bgTint};">
+            <span class="product-tag">${roast.categoryLabel}</span>
+            ${createMiniBagSvg(roast)}
+          </div>
+          <div class="product-body">
+            <div class="product-top">
+              <div>
+                <h3>${roast.name}</h3>
+                <div class="product-origin">${roast.origin}</div>
+              </div>
+              <div class="product-price">
+                ${formatINR(roast.price)}
+                <small>${roast.weight}</small>
+              </div>
+            </div>
+            <p class="product-desc">${roast.description}</p>
+            <div class="note-pills" style="margin-bottom: 0.9rem;">
+              ${roast.notes.map((n) => `<span class="note-pill">${n}</span>`).join('')}
+            </div>
+            <div class="product-actions">
+              <button class="btn btn-outline btn-sm" type="button" data-view-id="${roast.id}">Tasting Profile</button>
+              <button class="btn btn-primary btn-sm" type="button" data-add-id="${roast.id}">+ Add to Bag</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        state.activeFilter = btn.dataset.filter;
+        filterButtons.forEach((b) => b.classList.toggle('active', b === btn));
+        renderCatalog();
+      });
+    });
+
+    catalogGrid.addEventListener('click', (e) => {
+      const viewBtn = e.target.closest('[data-view-id]');
+      const addBtn = e.target.closest('[data-add-id]');
+      if (viewBtn) {
+        openDetailModal(viewBtn.dataset.viewId);
+      } else if (addBtn) {
+        const roast = ROASTS.find((r) => r.id === addBtn.dataset.addId);
+        if (roast) addToBag({ name: roast.name, meta: `Whole Bean · ${roast.weight}`, price: roast.price });
+      }
+    });
+
+    const cupsRange = document.getElementById('cupsRange');
+    const subToggle = document.getElementById('subToggle');
+
+    function updateEstimator() {
+      const e = state.estimator;
+      const monthlyCups = e.cups * 30;
+      const monthlyGrams = monthlyCups * e.gramsPerCup;
+      const bagsNeeded = Math.max(1, Math.ceil(monthlyGrams / 250));
+      const originalTotal = bagsNeeded * e.tierPrice;
+      const discount = e.subscribe ? Math.round(originalTotal * 0.15) : 0;
+      const finalTotal = originalTotal - discount;
+      const costPerCup = Math.round(finalTotal / monthlyCups);
+
+      document.getElementById('cupsValue').textContent = `${e.cups} ${e.cups === 1 ? 'cup' : 'cups'} / day`;
+      document.getElementById('brewGramLabel').textContent = `${e.gramsPerCup}g / cup`;
+      document.getElementById('tierPriceLabel').textContent = `${formatINR(e.tierPrice)} / 250g`;
+
+      document.getElementById('estMonthlyTotal').textContent = formatINR(finalTotal);
+      const strikeEl = document.getElementById('estOriginalTotal');
+      const savingsEl = document.getElementById('estSavingsBadge');
+
+      if (e.subscribe) {
+        strikeEl.style.display = 'inline';
+        strikeEl.textContent = formatINR(originalTotal);
+        savingsEl.textContent = `You save ${formatINR(discount)} every month (15% off)`;
+      } else {
+        strikeEl.style.display = 'none';
+        savingsEl.textContent = 'One-time dispatch · Switch on subscribe to save 15%';
+      }
+
+      document.getElementById('estWeight').textContent = `${bagsNeeded * 250}g (${bagsNeeded} × 250g)`;
+      document.getElementById('estCostPerCup').textContent = `${formatINR(costPerCup)} / cup`;
+      document.getElementById('estGrind').textContent = e.grind;
+      document.getElementById('estRatio').textContent = e.ratio;
+
+      const waterMl = e.brewKey === 'espresso' ? 36 : e.brewKey === 'sif' ? 95 : e.gramsPerCup * 16;
+      document.getElementById('estTip').textContent =
+        `Brew ${e.gramsPerCup}g of ${e.tierName} coffee (${e.grind.toLowerCase()} grind) with ~${waterMl} ml water for your ${e.brewLabel} setup.`;
+
+      return { bagsNeeded, finalTotal, e };
+    }
+
+    cupsRange.addEventListener('input', () => {
+      state.estimator.cups = Number(cupsRange.value);
+      updateEstimator();
+    });
+
+    document.querySelectorAll('#brewMethodGroup .choice-pill').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#brewMethodGroup .choice-pill').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.estimator.brewKey = btn.dataset.brew;
+        state.estimator.brewLabel = btn.querySelector('strong').textContent;
+        state.estimator.gramsPerCup = Number(btn.dataset.grams);
+        state.estimator.grind = btn.dataset.grind;
+        state.estimator.ratio = btn.dataset.ratio;
+        updateEstimator();
+      });
+    });
+
+    document.querySelectorAll('#tierGroup .choice-pill').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#tierGroup .choice-pill').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.estimator.tierName = btn.dataset.tier;
+        state.estimator.tierPrice = Number(btn.dataset.price);
+        updateEstimator();
+      });
+    });
+
+    subToggle.addEventListener('change', () => {
+      state.estimator.subscribe = subToggle.checked;
+      updateEstimator();
+    });
+
+    document.getElementById('lockPlanBtn').addEventListener('click', () => {
+      const { bagsNeeded, finalTotal, e } = updateEstimator();
+      const cadence = e.subscribe ? 'Monthly Subscription (-15%)' : 'One-Time Bundle';
+      addToBag({
+        name: `${e.tierName} Plan (${bagsNeeded} × 250g)`,
+        meta: `${cadence} · ${e.grind}`,
+        price: finalTotal
+      }, false);
+      openOrderModal();
+    });
+
+    const detailModal = document.getElementById('detailModal');
+    const orderModal = document.getElementById('orderModal');
+
+    function openDetailModal(id) {
+      const roast = ROASTS.find((r) => r.id === id);
+      if (!roast) return;
+      state.selectedProduct = roast;
+      document.getElementById('detailTag').textContent = `${roast.categoryLabel} · ${roast.roastLevel}`;
+      document.getElementById('detailTitle').textContent = roast.name;
+      document.getElementById('detailOrigin').textContent = roast.origin;
+      document.getElementById('detailDesc').textContent = roast.description;
+      document.getElementById('detailPrice').textContent = formatINR(roast.price);
+      document.getElementById('detailNotes').innerHTML = roast.notes
+        .map((n) => `<span class="note-pill">${n}</span>`).join('');
+
+      document.getElementById('detailBars').innerHTML = Object.entries(roast.profile).map(([label, val]) => `
+        <div class="bar-row">
+          <span>${label}</span>
+          <div class="meter-track"><div class="meter-fill" style="width:${val}%; background:${roast.accent};"></div></div>
+          <strong style="text-align:right;">${val}</strong>
+        </div>
+      `).join('');
+
+      detailModal.classList.add('open');
+    }
+
+    document.getElementById('detailAddBtn').addEventListener('click', () => {
+      if (!state.selectedProduct) return;
+      const grind = document.getElementById('detailGrind').value;
+      addToBag({
+        name: state.selectedProduct.name,
+        meta: `${grind} · ${state.selectedProduct.weight}`,
+        price: state.selectedProduct.price
+      });
+      closeModals();
+    });
+
+    function addToBag(item, notify = true) {
+      state.bag.push({ ...item, uid: Date.now() + Math.random() });
+      updateBagBadge();
+      if (notify) showToast(`Added ${item.name} to your bag`);
+    }
+
+    function updateBagBadge() {
+      document.getElementById('bagCount').textContent = state.bag.length;
+    }
+
+    function renderOrderBagSummary() {
+      const wrap = document.getElementById('bagSummaryWrap');
+      if (state.bag.length === 0) {
+        wrap.innerHTML = `
+          <div class="bag-item">
+            <span>Your bag is empty — submit the form below for a custom roaster recommendation, or add a roast from our menu.</span>
+          </div>
+        `;
+        return;
+      }
+      const total = state.bag.reduce((sum, i) => sum + i.price, 0);
+      wrap.innerHTML = `
+        <div class="bag-list">
+          ${state.bag.map((item) => `
+            <div class="bag-item">
+              <div>
+                <strong>${item.name}</strong>
+                <div style="font-size: 0.78rem; color: var(--ink-muted);">${item.meta}</div>
+              </div>
+              <div style="text-align:right;">
+                <strong>${formatINR(item.price)}</strong><br/>
+                <button class="remove-item" type="button" data-remove-uid="${item.uid}">Remove</button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+        <div style="display:flex; justify-content:space-between; font-weight:700; padding-top:0.5rem; border-top:1px solid var(--border);">
+          <span>Estimated Total (Free Shipping)</span>
+          <span>${formatINR(total)}</span>
+        </div>
+      `;
+    }
+
+    document.getElementById('bagSummaryWrap').addEventListener('click', (e) => {
+      const rmBtn = e.target.closest('[data-remove-uid]');
+      if (!rmBtn) return;
+      const uid = Number(rmBtn.dataset.removeUid);
+      state.bag = state.bag.filter((i) => i.uid !== uid);
+      updateBagBadge();
+      renderOrderBagSummary();
+    });
+
+    function openOrderModal() {
+      document.getElementById('orderFormWrap').style.display = 'block';
+      document.getElementById('orderSuccessWrap').style.display = 'none';
+      renderOrderBagSummary();
+      orderModal.classList.add('open');
+    }
+
+    function closeModals() {
+      detailModal.classList.remove('open');
+      orderModal.classList.remove('open');
+    }
+
+    document.getElementById('openOrderModalBtn').addEventListener('click', openOrderModal);
+    document.getElementById('navQuickOrder').addEventListener('click', openOrderModal);
+    document.getElementById('mobileOrderBtn').addEventListener('click', () => {
+      toggleMobileMenu(true);
+      openOrderModal();
+    });
+
+    document.querySelectorAll('[data-close-modal]').forEach((btn) => {
+      btn.addEventListener('click', closeModals);
+    });
+
+    [detailModal, orderModal].forEach((backdrop) => {
+      backdrop.addEventListener('click', (e) => {
+        if (e.target === backdrop) closeModals();
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModals();
+        toggleMobileMenu(true);
+      }
+    });
+
+    document.getElementById('orderForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('orderName').value.trim();
+      const phone = document.getElementById('orderPhone').value.trim();
+      const email = document.getElementById('orderEmail').value.trim();
+
+      if (!name || !phone || !email.includes('@')) {
+        showToast('Please enter your name, phone, and a valid email.');
+        return;
+      }
+
+      const refId = 'VRC-' + Math.floor(100000 + Math.random() * 900000);
+      const countText = state.bag.length
+        ? `${state.bag.length} item${state.bag.length > 1 ? 's' : ''} (${formatINR(state.bag.reduce((s, i) => s + i.price, 0))})`
+        : 'your custom roast request';
+
+      document.getElementById('orderSuccessMsg').innerHTML =
+        `Thank you, <strong>${name}</strong>. Reference <strong>${refId}</strong> is confirmed for ${countText}. Your beans will enter Friday’s roast queue and a payment &amp; tracking link has been sent to <strong>${email}</strong>.`;
+
+      document.getElementById('orderFormWrap').style.display = 'none';
+      document.getElementById('orderSuccessWrap').style.display = 'block';
+      state.bag = [];
+      updateBagBadge();
+      e.target.reset();
+    });
+
+    document.getElementById('resetOrderBtn').addEventListener('click', closeModals);
+
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('contactName').value.trim();
+      const email = document.getElementById('contactEmail').value.trim();
+      const topic = document.getElementById('contactTopic').value;
+      const message = document.getElementById('contactMessage').value.trim();
+      const feedback = document.getElementById('contactFeedback');
+
+      if (!name || !email.includes('@') || !message) {
+        showToast('Please fill in all required fields before sending.');
+        return;
+      }
+
+      const ticket = 'INQ-' + Math.floor(1000 + Math.random() * 9000);
+      feedback.innerHTML = `
+        <strong>Message received (${ticket})</strong><br/>
+        Thanks, ${name}! Our roastery team has logged your <em>${topic}</em> inquiry and will respond to <strong>${email}</strong> within 24 hours.
+      `;
+      feedback.classList.add('show');
+      e.target.reset();
+    });
+
+    renderCatalog();
+    updateHeroShowcase(0);
+    updateEstimator();
+  </script>
+</body>
+</html>
