@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aurelia Estates — Luxury Residences & Private Villas</title>
+
+  <!-- WhatsApp Link Preview Tags -->
+  <meta property="og:title" content="Aurelia Estates — Luxury Real Estate Demo" />
+  <meta property="og:description" content="Architectural villas and penthouses with property filters, live EMI calculator in ₹ Lakhs & Cr, and site-visit booking." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0c0e12;
+      --surface: #14171e;
+      --surface-2: #1c202a;
+      --ink: #f4f1ea;
+      --ink-muted: #9ca3af;
+      --gold: #d4af7a;
+      --gold-hover: #e2c292;
+      --gold-soft: rgba(212, 175, 122, 0.12);
+      --border: rgba(255, 255, 255, 0.09);
+      --border-strong: rgba(212, 175, 122, 0.35);
+      --success: #4ade80;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --nav-h: 74px;
+      --ease: 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 16px); }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+    svg { display: block; max-width: 100%; }
+
+    .container { width: min(1160px, 100% - 2.5rem); margin-inline: auto; }
+    .section { padding-block: clamp(4rem, 7vw, 6.25rem); }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+    .eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--gold); }
+
+    h1, h2, h3 { font-family: var(--font-serif); font-weight: 500; line-height: 1.1; letter-spacing: -0.01em; }
+    h1 { font-size: clamp(2.6rem, 5.4vw, 4.4rem); }
+    h2 { font-size: clamp(2rem, 3.6vw, 3.1rem); }
+    h3 { font-size: 1.5rem; }
+    .lead { color: var(--ink-muted); font-size: clamp(0.98rem, 1.3vw, 1.1rem); max-width: 56ch; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.82rem 1.45rem; border-radius: var(--radius-sm);
+      border: 1px solid transparent; font-weight: 600; font-size: 0.9rem;
+      cursor: pointer; transition: all var(--ease); white-space: nowrap;
+    }
+    .btn-gold { background: var(--gold); color: #111317; }
+    .btn-gold:hover { background: var(--gold-hover); transform: translateY(-1px); }
+    .btn-outline { background: transparent; border-color: var(--border-strong); color: var(--ink); }
+    .btn-outline:hover { background: var(--gold-soft); border-color: var(--gold); }
+    .btn-ghost { background: var(--surface-2); border-color: var(--border); color: var(--ink); }
+    .btn-ghost:hover { border-color: var(--gold); }
+    .btn-sm { padding: 0.56rem 1rem; font-size: 0.84rem; }
+
+    .navbar {
+      position: sticky; top: 0; z-index: 900; height: var(--nav-h);
+      background: rgba(12, 14, 18, 0.84);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+    .brand {
+      display: inline-flex; align-items: center; gap: 0.65rem;
+      font-family: var(--font-serif); font-size: 1.45rem; font-weight: 600; letter-spacing: 0.04em;
+    }
+    .brand-icon {
+      width: 34px; height: 34px; border: 1px solid var(--gold);
+      border-radius: 6px; display: grid; place-items: center; color: var(--gold);
+    }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.88rem; color: var(--ink-muted); transition: color var(--ease); }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+    .menu-toggle {
+      display: none; width: 42px; height: 42px; border-radius: 8px;
+      border: 1px solid var(--border); background: var(--surface); place-items: center; cursor: pointer;
+    }
+    .mobile-drawer {
+      display: none; position: fixed; inset: var(--nav-h) 0 auto 0; z-index: 850;
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 1.25rem 1.5rem 1.75rem; flex-direction: column; gap: 1rem;
+    }
+    .mobile-drawer.open { display: flex; }
+    .mobile-drawer a { padding: 0.5rem 0; border-bottom: 1px solid var(--border); font-weight: 500; }
+
+    .hero {
+      padding-block: clamp(2.8rem, 5vw, 4.8rem) clamp(3.5rem, 6vw, 5.5rem);
+      background: radial-gradient(circle at 85% 20%, rgba(212, 175, 122, 0.11), transparent 48%);
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero .lead { margin-top: 1.15rem; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 2rem; }
+    .hero-metrics {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+      margin-top: 2.75rem; padding-top: 1.75rem; border-top: 1px solid var(--border);
+    }
+    .hero-metrics strong { display: block; font-family: var(--font-serif); font-size: 1.9rem; color: var(--gold); font-weight: 600; }
+    .hero-metrics span { font-size: 0.8rem; color: var(--ink-muted); }
+
+    .preview-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    }
+    .preview-visual {
+      background: linear-gradient(160deg, #1b202b 0%, #101319 100%);
+      padding: 1.5rem; position: relative; border-bottom: 1px solid var(--border);
+    }
+    .preview-badge {
+      position: absolute; top: 1rem; left: 1rem;
+      background: rgba(12, 14, 18, 0.8); border: 1px solid var(--border-strong);
+      color: var(--gold); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 99px;
+    }
+    .preview-body { padding: 1.4rem; }
+    .preview-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+    .preview-price { font-family: var(--font-serif); font-size: 1.6rem; color: var(--gold); white-space: nowrap; }
+    .spec-strip {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem;
+      margin-block: 1.1rem; padding: 0.8rem; border-radius: var(--radius-sm);
+      background: var(--surface-2); border: 1px solid var(--border);
+      font-size: 0.78rem;
+    }
+    .spec-strip strong { display: block; font-size: 0.9rem; color: var(--ink); }
+    .spec-strip span { color: var(--ink-muted); }
+    .preview-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+    .preview-tab {
+      padding: 0.6rem 0.5rem; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: transparent; cursor: pointer;
+      text-align: left; transition: all var(--ease);
+    }
+    .preview-tab strong { display: block; font-size: 0.8rem; }
+    .preview-tab span { font-size: 0.72rem; color: var(--ink-muted); }
+    .preview-tab.active { background: var(--gold-soft); border-color: var(--gold); }
+    .preview-tab.active strong { color: var(--gold); }
+
+    .listings-section { background: var(--surface); border-block: 1px solid var(--border); }
+    .section-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1.5rem; margin-bottom: 2.25rem; }
+    .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .filter-btn {
+      padding: 0.55rem 1.05rem; border-radius: 99px; border: 1px solid var(--border);
+      background: var(--bg); color: var(--ink-muted); font-size: 0.85rem; font-weight: 500;
+      cursor: pointer; transition: all var(--ease);
+    }
+    .filter-btn:hover { border-color: var(--gold); color: var(--ink); }
+    .filter-btn.active { background: var(--gold); border-color: var(--gold); color: #111317; font-weight: 600; }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+    .prop-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md);
+      overflow: hidden; display: flex; flex-direction: column;
+      transition: transform var(--ease), border-color var(--ease);
+    }
+    .prop-card:hover { transform: translateY(-4px); border-color: var(--border-strong); }
+    .prop-art { height: 175px; padding: 1rem; background: linear-gradient(155deg, #1a1f29, #101319); position: relative; display: grid; place-items: center; }
+    .prop-tag {
+      position: absolute; top: 0.85rem; left: 0.85rem; font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.6rem;
+      border-radius: 99px; background: rgba(12, 14, 18, 0.85); color: var(--gold); border: 1px solid var(--border-strong);
+    }
+    .prop-body { padding: 1.35rem; display: flex; flex-direction: column; flex: 1; }
+    .prop-loc { font-size: 0.82rem; color: var(--ink-muted); margin-top: 0.2rem; }
+    .prop-price { font-family: var(--font-serif); font-size: 1.5rem; color: var(--gold); margin-top: 0.65rem; }
+    .prop-meta {
+      display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.8rem; color: var(--ink-muted);
+      margin-block: 0.85rem 1.15rem; padding-top: 0.85rem; border-top: 1px solid var(--border);
+    }
+    .prop-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-top: auto; }
+
+    .calc-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 2rem; align-items: stretch; }
+    .calc-panel {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: clamp(1.5rem, 3vw, 2.25rem); display: flex; flex-direction: column; gap: 1.5rem;
+    }
+    .range-group label { display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 500; margin-bottom: 0.6rem; }
+    .range-val { color: var(--gold); font-weight: 700; }
+    input[type="range"] { width: 100%; accent-color: var(--gold); cursor: pointer; }
+    .range-bounds { display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--ink-muted); margin-top: 0.3rem; }
+
+    .calc-output {
+      background: linear-gradient(160deg, #1b1e27, #11131a);
+      border: 1px solid var(--border-strong); border-radius: var(--radius-lg);
+      padding: clamp(1.75rem, 3vw, 2.25rem); display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem;
+    }
+    .emi-big { font-family: var(--font-serif); font-size: clamp(2.4rem, 4.2vw, 3.2rem); color: var(--gold); line-height: 1; margin-top: 0.4rem; }
+    .split-bar { height: 10px; border-radius: 99px; background: var(--surface-2); overflow: hidden; display: flex; margin-top: 1.25rem; }
+    .split-principal { background: var(--gold); transition: width 300ms ease; }
+    .split-interest { background: #525d73; flex: 1; }
+    .legend { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--ink-muted); margin-top: 0.5rem; }
+    .summary-rows { display: grid; gap: 0.75rem; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+    .summary-row { display: flex; justify-content: space-between; font-size: 0.88rem; }
+    .summary-row span { color: var(--ink-muted); }
+
+    .reviews-section { background: var(--surface); border-top: 1px solid var(--border); }
+    .quote-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md);
+      padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1.25rem;
+    }
+    .stars { color: var(--gold); letter-spacing: 2px; font-size: 0.88rem; margin-bottom: 0.7rem; }
+    .quote-card p { font-size: 0.93rem; color: #dcd9d0; }
+    .author { display: flex; align-items: center; gap: 0.75rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+    .avatar {
+      width: 38px; height: 38px; border-radius: 50%; background: var(--gold-soft);
+      border: 1px solid var(--border-strong); color: var(--gold); font-weight: 700; font-size: 0.82rem;
+      display: grid; place-items: center; flex-shrink: 0;
+    }
+    .author span { display: block; font-size: 0.78rem; color: var(--ink-muted); }
+
+    footer { padding-block: 2.75rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--ink-muted); }
+    .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
+
+    .backdrop {
+      position: fixed; inset: 0; z-index: 1000; background: rgba(6, 7, 10, 0.76);
+      backdrop-filter: blur(5px); display: none; place-items: center; padding: 1.25rem;
+    }
+    .backdrop.open { display: grid; }
+    .modal {
+      width: min(560px, 100%); max-height: 90vh; overflow-y: auto;
+      background: var(--surface); border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg); padding: 1.75rem;
+    }
+    .modal-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 1.25rem; }
+    .close-btn {
+      width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border);
+      background: var(--bg); cursor: pointer; display: grid; place-items: center;
+    }
+    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem; }
+    .field { display: flex; flex-direction: column; gap: 0.35rem; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { font-size: 0.8rem; color: var(--ink-muted); font-weight: 500; }
+    .field input, .field select, .field textarea {
+      padding: 0.7rem 0.85rem; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--bg); font-size: 0.9rem;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--gold); }
+
+    .toast {
+      position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 1100;
+      background: var(--surface-2); border: 1px solid var(--gold); color: var(--ink);
+      padding: 0.8rem 1.2rem; border-radius: var(--radius-sm); font-size: 0.88rem;
+      transform: translateY(14px); opacity: 0; pointer-events: none; transition: all 220ms ease;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    @media (max-width: 960px) {
+      .hero-grid, .calc-grid { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 700px) {
+      .nav-links, .nav-cta-desktop { display: none; }
+      .menu-toggle { display: grid; }
+      .grid-3, .form-grid, .preview-tabs { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#top" class="brand">
+        <span class="brand-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/>
+          </svg>
+        </span>
+        AURELIA
+      </a>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="#residences">Residences</a></li>
+          <li><a href="#calculator">EMI Calculator</a></li>
+          <li><a href="#clients">Client Stories</a></li>
+        </ul>
+      </nav>
+
+      <div style="display:flex; gap:0.75rem; align-items:center;">
+        <button class="btn btn-gold btn-sm nav-cta-desktop" id="navBookBtn" type="button">Book Private Tour</button>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle menu">
+          <svg id="menuSvg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="#residences" class="m-link">Residences</a>
+    <a href="#calculator" class="m-link">EMI Calculator</a>
+    <a href="#clients" class="m-link">Client Stories</a>
+    <button class="btn btn-gold" id="mobileBookBtn" type="button">Book Private Tour</button>
+  </div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">RERA-Verified Luxury Advisory</span>
+          <h1>Architectural homes crafted for <em>quiet permanence</em>.</h1>
+          <p class="lead">
+            Curated waterfront villas, sky penthouses, and private estate plots across Bengaluru, Kochi, and North Goa—backed by direct developer pricing and end-to-end legal due diligence.
+          </p>
+          <div class="hero-cta">
+            <a href="#residences" class="btn btn-gold">Explore Portfolio</a>
+            <a href="#calculator" class="btn btn-outline">Calculate Monthly EMI</a>
+          </div>
+          <div class="hero-metrics">
+            <div><strong>₹420 Cr+</strong><span>Closed Transactions</span></div>
+            <div><strong>38</strong><span>Exclusive Mandates</span></div>
+            <div><strong>100%</strong><span>Title-Verified Assets</span></div>
+          </div>
+        </div>
+
+        <div class="preview-card">
+          <div class="preview-visual">
+            <span class="preview-badge" id="heroBadge">Ready To Move</span>
+            <svg viewBox="0 0 420 190" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Architectural residence elevation">
+              <rect x="20" y="156" width="380" height="2" fill="#D4AF7A" fill-opacity="0.35"/>
+              <rect id="svgMainBlock" x="62" y="64" width="185" height="92" fill="#232936" stroke="#D4AF7A" stroke-width="1.2"/>
+              <rect x="247" y="96" width="110" height="60" fill="#181C26" stroke="#D4AF7A" stroke-opacity="0.6" stroke-width="1.2"/>
+              <rect x="82" y="84" width="54" height="44" fill="#D4AF7A" fill-opacity="0.22" stroke="#D4AF7A" stroke-width="1"/>
+              <rect x="150" y="84" width="76" height="44" fill="#D4AF7A" fill-opacity="0.16" stroke="#D4AF7A" stroke-width="1"/>
+              <rect x="268" y="112" width="68" height="44" fill="#D4AF7A" fill-opacity="0.2" stroke="#D4AF7A" stroke-width="1"/>
+              <path d="M50 64h212" stroke="#D4AF7A" stroke-width="2"/>
+              <circle cx="348" cy="44" r="16" fill="#D4AF7A" fill-opacity="0.16" stroke="#D4AF7A" stroke-opacity="0.5"/>
+              <text id="svgBlueprintLabel" x="30" y="176" font-family="Inter, sans-serif" font-size="9" fill="#9CA3AF" letter-spacing="1.5">ELEVATION 01 · WATERFRONT VILLA</text>
+            </svg>
+          </div>
+          <div class="preview-body">
+            <div class="preview-top">
+              <div>
+                <h3 id="heroTitle">The Backwater Pavilion</h3>
+                <div style="font-size:0.84rem; color:var(--ink-muted);" id="heroLoc">Panampilly Nagar, Kochi</div>
+              </div>
+              <div class="preview-price" id="heroPrice">₹4.85 Cr</div>
+            </div>
+            <div class="spec-strip">
+              <div><strong id="heroArea">4,650 sq.ft</strong><span>Built-Up</span></div>
+              <div><strong id="heroConfig">4 BHK Villa</strong><span>Configuration</span></div>
+              <div><strong id="heroYield">6.4% Est.</strong><span>Rental Yield</span></div>
+            </div>
+            <div class="preview-tabs" role="tablist">
+              <button class="preview-tab active" type="button" data-hero-idx="0"><strong>Kochi Villa</strong><span>₹4.85 Cr</span></button>
+              <button class="preview-tab" type="button" data-hero-idx="1"><strong>Bengaluru Sky</strong><span>₹6.40 Cr</span></button>
+              <button class="preview-tab" type="button" data-hero-idx="2"><strong>Assagao Estate</strong><span>₹3.90 Cr</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section listings-section" id="residences">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Curated Inventory</span>
+            <h2>Featured Residences</h2>
+          </div>
+          <div class="filters" role="group" aria-label="Filter residences">
+            <button class="filter-btn active" type="button" data-filter="all">All Properties</button>
+            <button class="filter-btn" type="button" data-filter="villa">Private Villas</button>
+            <button class="filter-btn" type="button" data-filter="penthouse">Penthouses</button>
+            <button class="filter-btn" type="button" data-filter="holiday">Holiday Estates</button>
+          </div>
+        </div>
+
+        <div class="grid-3" id="propertyGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="calculator">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Financial Planning</span>
+            <h2>Home Loan &amp; EMI Estimator</h2>
+          </div>
+          <p class="lead">Adjust property value, down payment, and interest rate to preview monthly repayments in real time.</p>
+        </div>
+
+        <div class="calc-grid">
+          <div class="calc-panel">
+            <div class="range-group">
+              <label for="priceSlider"><span>Property Value</span><span class="range-val" id="valPrice">₹3.50 Cr</span></label>
+              <input type="range" id="priceSlider" min="75" max="1000" step="5" value="350" />
+              <div class="range-bounds"><span>₹75 Lakhs</span><span>₹5 Cr</span><span>₹10 Cr</span></div>
+            </div>
+
+            <div class="range-group">
+              <label for="downSlider"><span>Down Payment</span><span class="range-val" id="valDown">20% (₹70 Lakhs)</span></label>
+              <input type="range" id="downSlider" min="10" max="60" step="5" value="20" />
+              <div class="range-bounds"><span>10%</span><span>35%</span><span>60%</span></div>
+            </div>
+
+            <div class="range-group">
+              <label for="rateSlider"><span>Interest Rate (p.a.)</span><span class="range-val" id="valRate">8.5%</span></label>
+              <input type="range" id="rateSlider" min="7.0" max="12.0" step="0.1" value="8.5" />
+              <div class="range-bounds"><span>7.0%</span><span>9.5%</span><span>12.0%</span></div>
+            </div>
+
+            <div class="range-group">
+              <label for="tenureSlider"><span>Loan Tenure</span><span class="range-val" id="valTenure">20 Years</span></label>
+              <input type="range" id="tenureSlider" min="5" max="30" step="1" value="20" />
+              <div class="range-bounds"><span>5 yrs</span><span>15 yrs</span><span>30 yrs</span></div>
+            </div>
+          </div>
+
+          <aside class="calc-output" aria-live="polite">
+            <div>
+              <span class="eyebrow">Estimated Monthly EMI</span>
+              <div class="emi-big" id="emiOutput">₹2,43,000</div>
+              <div style="font-size:0.82rem; color:var(--ink-muted); margin-top:0.35rem;">per month · indicative bank schedule</div>
+
+              <div class="split-bar">
+                <div class="split-principal" id="barPrincipal" style="width: 50%;"></div>
+                <div class="split-interest"></div>
+              </div>
+              <div class="legend">
+                <span>● Principal (<strong id="pctPrincipal">48%</strong>)</span>
+                <span>● Interest (<strong id="pctInterest">52%</strong>)</span>
+              </div>
+
+              <div class="summary-rows">
+                <div class="summary-row"><span>Loan Amount</span><strong id="outLoan">₹2.80 Cr</strong></div>
+                <div class="summary-row"><span>Total Interest Payable</span><strong id="outInterest">₹3.03 Cr</strong></div>
+                <div class="summary-row"><span>Total Amount Payable</span><strong id="outTotal">₹5.83 Cr</strong></div>
+              </div>
+            </div>
+
+            <button class="btn btn-gold" id="calcBookBtn" type="button" style="width:100%;">
+              Request Pre-Approved Bank Quotes
+            </button>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reviews-section" id="clients">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Client Perspectives</span>
+            <h2>Trusted by Founders &amp; NRI Families</h2>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="quote-card">
+            <div>
+              <div class="stars">★★★★★</div>
+              <p>“Aurelia handled our entire NRI purchase remotely—from RERA title checks to bank sanction—without a single hidden brokerage surprise.”</p>
+            </div>
+            <div class="author">
+              <div class="avatar">VM</div>
+              <div><strong>Vikram Menon</strong><span>Dubai / Kochi · Villa Owner</span></div>
+            </div>
+          </article>
+
+          <article class="quote-card">
+            <div>
+              <div class="stars">★★★★★</div>
+              <p>“Instead of pushing generic high-rises, they showed us three off-market penthouses in Indiranagar that matched our exact brief.”</p>
+            </div>
+            <div class="author">
+              <div class="avatar">SR</div>
+              <div><strong>Shruti &amp; Arjun Rao</strong><span>Bengaluru · Penthouse Buyers</span></div>
+            </div>
+          </article>
+
+          <article class="quote-card">
+            <div>
+              <div class="stars">★★★★★</div>
+              <p>“Our Assagao villa now generates steady holiday rental income. Their architectural vetting saved us months of renovation headaches.”</p>
+            </div>
+            <div class="author">
+              <div class="avatar">DK</div>
+              <div><strong>Devika Kapoor</strong><span>Mumbai · Holiday Home Investor</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span class="brand" style="font-size:1.2rem;">AURELIA ESTATES</span>
+      <span>Bengaluru · Kochi · North Goa · RERA Reg. #PRM/KA/RERA/1251</span>
+      <span>© 2026 Aurelia Estates Advisory</span>
+    </div>
+  </footer>
+
+  <div class="backdrop" id="specModal" role="dialog" aria-modal="true" aria-labelledby="specTitle">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <span class="eyebrow" id="specTag" style="margin-bottom:0.25rem;">Residence</span>
+          <h3 id="specTitle">Property Name</h3>
+          <div id="specLoc" style="font-size:0.85rem; color:var(--ink-muted);"></div>
+        </div>
+        <button class="close-btn" type="button" data-close>✕</button>
+      </div>
+      <p id="specDesc" style="font-size:0.93rem; color:#d2d5dc;"></p>
+      <div class="spec-strip" id="specGrid" style="margin-top:1.15rem;"></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; padding-top:1rem; border-top:1px solid var(--border);">
+        <div class="preview-price" id="specPrice">₹4.85 Cr</div>
+        <div style="display:flex; gap:0.6rem;">
+          <button class="btn btn-outline btn-sm" id="loadIntoEmiBtn" type="button">Calculate EMI</button>
+          <button class="btn btn-gold btn-sm" id="specBookBtn" type="button">Book Site Visit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="backdrop" id="bookModal" role="dialog" aria-modal="true" aria-labelledby="bookTitle">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <span class="eyebrow" style="margin-bottom:0.25rem;">Private Advisory</span>
+          <h3 id="bookTitle">Schedule a Viewing or Consultation</h3>
+        </div>
+        <button class="close-btn" type="button" data-close>✕</button>
+      </div>
+
+      <form id="bookingForm" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label for="bName">Full Name *</label>
+            <input id="bName" type="text" placeholder="Karthik Varma" required />
+          </div>
+          <div class="field">
+            <label for="bPhone">Phone / WhatsApp *</label>
+            <input id="bPhone" type="tel" placeholder="+91 98450 12345" required />
+          </div>
+          <div class="field full">
+            <label for="bEmail">Email Address *</label>
+            <input id="bEmail" type="email" placeholder="karthik@example.com" required />
+          </div>
+          <div class="field full">
+            <label for="bProperty">Interested Residence / Topic</label>
+            <input id="bProperty" type="text" value="Private Portfolio Walkthrough" />
+          </div>
+          <div class="field">
+            <label for="bMode">Viewing Mode</label>
+            <select id="bMode">
+              <option>In-Person Site Visit</option>
+              <option>Live 4K Video Walkthrough (NRI)</option>
+              <option>Loan &amp; Legal Consultation</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="bDate">Preferred Date</label>
+            <input id="bDate" type="date" />
+          </div>
+          <div class="field full">
+            <button class="btn btn-gold" type="submit" style="width:100%;">Confirm Appointment</button>
+          </div>
+        </div>
+      </form>
+
+      <div id="bookingSuccess" style="display:none; text-align:center; padding-block:1rem;">
+        <div style="font-size:2rem; color:var(--success); margin-bottom:0.5rem;">✓</div>
+        <h3>Viewing Confirmed</h3>
+        <p id="bookingSuccessText" style="font-size:0.9rem; color:var(--ink-muted); margin:0.6rem auto 1.3rem; max-width:44ch;"></p>
+        <button class="btn btn-outline btn-sm" type="button" data-close>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const PROPERTIES = [
+      {
+        id: 'kochi-villa',
+        name: 'The Backwater Pavilion',
+        loc: 'Panampilly Nagar, Kochi',
+        cat: 'villa',
+        catLabel: 'Private Villa',
+        badge: 'Ready To Move',
+        priceLakhs: 485,
+        area: '4,650 sq.ft',
+        config: '4 BHK Villa',
+        yield: '6.4% Est.',
+        elevation: 'ELEVATION 01 · WATERFRONT VILLA',
+        desc: 'Tropical modernist courtyard residence with a private lap pool, double-height teak living room, and EV-ready 3-car garage.'
+      },
+      {
+        id: 'blr-penthouse',
+        name: 'Skyline Residence 18',
+        loc: 'Indiranagar, Bengaluru',
+        cat: 'penthouse',
+        catLabel: 'Penthouse',
+        badge: 'Only 2 Left',
+        priceLakhs: 640,
+        area: '5,200 sq.ft',
+        config: '4 BHK Duplex',
+        yield: '5.8% Est.',
+        elevation: 'ELEVATION 02 · SKY DUPLEX',
+        desc: 'Full-floor corner duplex featuring 270-degree tree-canopy views, private elevator lobby, Italian marble flooring, and landscaped deck.'
+      },
+      {
+        id: 'goa-estate',
+        name: 'Casa Solara Assagao',
+        loc: 'Assagao, North Goa',
+        cat: 'holiday',
+        catLabel: 'Holiday Estate',
+        badge: 'High Yield',
+        priceLakhs: 390,
+        area: '3,800 sq.ft',
+        config: '4 BHK Pool Villa',
+        yield: '9.2% Est.',
+        elevation: 'ELEVATION 03 · GOA POOL ESTATE',
+        desc: 'Portuguese-inspired contemporary stone villa set amidst coconut palms. Comes with turnkey hospitality management for short-stay yields.'
+      },
+      {
+        id: 'blr-villa',
+        name: 'Cedar Courtyard Homes',
+        loc: 'Whitefield, Bengaluru',
+        cat: 'villa',
+        catLabel: 'Private Villa',
+        badge: 'New Release',
+        priceLakhs: 325,
+        area: '3,450 sq.ft',
+        config: '4 BHK Villa',
+        yield: '5.5% Est.',
+        elevation: 'ELEVATION 04 · COURTYARD VILLA',
+        desc: 'Gated enclave of 24 low-density villas with central rainwater harvesting park, private home office wing, and solar rooftop readiness.'
+      },
+      {
+        id: 'kochi-penthouse',
+        name: 'Marine Crest Penthouse',
+        loc: 'Marine Drive, Kochi',
+        cat: 'penthouse',
+        catLabel: 'Penthouse',
+        badge: 'Sea View',
+        priceLakhs: 410,
+        area: '3,950 sq.ft',
+        config: '3.5 BHK Sky Home',
+        yield: '6.0% Est.',
+        elevation: 'ELEVATION 05 · HARBOUR PENTHOUSE',
+        desc: 'Uninterrupted sunset views over Vembanad Lake with wrap-around glass balconies, acoustic glazing, and resident concierge.'
+      },
+      {
+        id: 'coorg-estate',
+        name: 'Mist Ridge Sanctuary',
+        loc: 'Madikeri, Coorg',
+        cat: 'holiday',
+        catLabel: 'Holiday Estate',
+        badge: '1.2 Acre Plot',
+        priceLakhs: 265,
+        area: '2,900 sq.ft',
+        config: '3 BHK Coffee Villa',
+        yield: '7.8% Est.',
+        elevation: 'ELEVATION 06 · ESTATE SANCTUARY',
+        desc: 'Architect-designed timber-and-stone retreat tucked inside a working shade-grown coffee estate with panoramic valley views.'
+      }
+    ];
+
+    const formatCroreOrLakh = (lakhs) => {
+      if (lakhs >= 100) return `₹${(lakhs / 100).toFixed(2)} Cr`;
+      return `₹${Math.round(lakhs)} Lakhs`;
+    };
+    const formatINR = (num) => '₹' + Math.round(num).toLocaleString('en-IN');
+
+    let toastTimer;
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+    }
+
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    function toggleMenu(closeOnly = false) {
+      const open = closeOnly ? false : !mobileDrawer.classList.contains('open');
+      mobileDrawer.classList.toggle('open', open);
+      document.getElementById('menuSvg').innerHTML = open
+        ? '<path d="M6 6l12 12M18 6L6 18"/>'
+        : '<path d="M4 7h16M4 12h16M4 17h16"/>';
+    }
+    menuToggle.addEventListener('click', () => toggleMenu());
+    document.querySelectorAll('.m-link').forEach((l) => l.addEventListener('click', () => toggleMenu(true)));
+
+    const heroTabs = document.querySelectorAll('.preview-tab');
+    function setHeroProp(idx) {
+      const p = PROPERTIES[idx];
+      document.getElementById('heroBadge').textContent = p.badge;
+      document.getElementById('heroTitle').textContent = p.name;
+      document.getElementById('heroLoc').textContent = p.loc;
+      document.getElementById('heroPrice').textContent = formatCroreOrLakh(p.priceLakhs);
+      document.getElementById('heroArea').textContent = p.area;
+      document.getElementById('heroConfig').textContent = p.config;
+      document.getElementById('heroYield').textContent = p.yield;
+      document.getElementById('svgBlueprintLabel').textContent = p.elevation;
+      heroTabs.forEach((t, i) => t.classList.toggle('active', i === idx));
+    }
+    heroTabs.forEach((tab) => tab.addEventListener('click', () => setHeroProp(Number(tab.dataset.heroIdx))));
+
+    let activeFilter = 'all';
+    let currentSpecProp = null;
+    const grid = document.getElementById('propertyGrid');
+
+    function renderProperties() {
+      const list = activeFilter === 'all' ? PROPERTIES : PROPERTIES.filter((p) => p.cat === activeFilter);
+      grid.innerHTML = list.map((p) => `
+        <article class="prop-card">
+          <div class="prop-art">
+            <span class="prop-tag">${p.catLabel}</span>
+            <svg width="210" height="105" viewBox="0 0 240 120" fill="none" aria-hidden="true">
+              <rect x="20" y="96" width="200" height="1.5" fill="#D4AF7A" fill-opacity="0.4"/>
+              <rect x="42" y="34" width="102" height="62" fill="#232936" stroke="#D4AF7A" stroke-width="1.2"/>
+              <rect x="144" y="54" width="56" height="42" fill="#171B24" stroke="#D4AF7A" stroke-opacity="0.6"/>
+              <rect x="58" y="48" width="32" height="26" fill="#D4AF7A" fill-opacity="0.22" stroke="#D4AF7A" stroke-width="0.9"/>
+              <rect x="98" y="48" width="34" height="26" fill="#D4AF7A" fill-opacity="0.16" stroke="#D4AF7A" stroke-width="0.9"/>
+              <rect x="158" y="66" width="28" height="30" fill="#D4AF7A" fill-opacity="0.2" stroke="#D4AF7A" stroke-width="0.9"/>
+            </svg>
+          </div>
+          <div class="prop-body">
+            <h3>${p.name}</h3>
+            <div class="prop-loc">${p.loc}</div>
+            <div class="prop-price">${formatCroreOrLakh(p.priceLakhs)}</div>
+            <div class="prop-meta">
+              <span>${p.area}</span>
+              <span>•</span>
+              <span>${p.config}</span>
+            </div>
+            <div class="prop-actions">
+              <button class="btn btn-ghost btn-sm" type="button" data-spec="${p.id}">View Specs</button>
+              <button class="btn btn-gold btn-sm" type="button" data-book="${p.name}">Book Tour</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    document.querySelectorAll('.filter-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        activeFilter = btn.dataset.filter;
+        document.querySelectorAll('.filter-btn').forEach((b) => b.classList.toggle('active', b === btn));
+        renderProperties();
+      });
+    });
+
+    grid.addEventListener('click', (e) => {
+      const specBtn = e.target.closest('[data-spec]');
+      const bookBtn = e.target.closest('[data-book]');
+      if (specBtn) openSpecModal(specBtn.dataset.spec);
+      if (bookBtn) openBookModal(bookBtn.dataset.book);
+    });
+
+    const priceSlider = document.getElementById('priceSlider');
+    const downSlider = document.getElementById('downSlider');
+    const rateSlider = document.getElementById('rateSlider');
+    const tenureSlider = document.getElementById('tenureSlider');
+
+    function updateEMI() {
+      const priceLakhs = Number(priceSlider.value);
+      const downPct = Number(downSlider.value);
+      const annualRate = Number(rateSlider.value);
+      const years = Number(tenureSlider.value);
+
+      const totalPrice = priceLakhs * 100000;
+      const downAmt = totalPrice * (downPct / 100);
+      const principal = totalPrice - downAmt;
+      const monthlyRate = annualRate / 12 / 100;
+      const months = years * 12;
+
+      const emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, months)) /
+                  (Math.pow(1 + monthlyRate, months) - 1);
+      const totalPayable = emi * months;
+      const totalInterest = totalPayable - principal;
+      const pPct = Math.round((principal / totalPayable) * 100);
+
+      document.getElementById('valPrice').textContent = formatCroreOrLakh(priceLakhs);
+      document.getElementById('valDown').textContent = `${downPct}% (${formatCroreOrLakh(downAmt / 100000)})`;
+      document.getElementById('valRate').textContent = `${annualRate.toFixed(1)}%`;
+      document.getElementById('valTenure').textContent = `${years} Years`;
+
+      document.getElementById('emiOutput').textContent = formatINR(emi);
+      document.getElementById('outLoan').textContent = formatCroreOrLakh(principal / 100000);
+      document.getElementById('outInterest').textContent = formatCroreOrLakh(totalInterest / 100000);
+      document.getElementById('outTotal').textContent = formatCroreOrLakh(totalPayable / 100000);
+      document.getElementById('barPrincipal').style.width = `${pPct}%`;
+      document.getElementById('pctPrincipal').textContent = `${pPct}%`;
+      document.getElementById('pctInterest').textContent = `${100 - pPct}%`;
+    }
+
+    [priceSlider, downSlider, rateSlider, tenureSlider].forEach((s) => s.addEventListener('input', updateEMI));
+
+    const specModal = document.getElementById('specModal');
+    const bookModal = document.getElementById('bookModal');
+
+    function openSpecModal(id) {
+      const p = PROPERTIES.find((x) => x.id === id);
+      if (!p) return;
+      currentSpecProp = p;
+      document.getElementById('specTag').textContent = `${p.catLabel} · ${p.badge}`;
+      document.getElementById('specTitle').textContent = p.name;
+      document.getElementById('specLoc').textContent = p.loc;
+      document.getElementById('specDesc').textContent = p.desc;
+      document.getElementById('specPrice').textContent = formatCroreOrLakh(p.priceLakhs);
+      document.getElementById('specGrid').innerHTML = `
+        <div><strong>${p.area}</strong><span>Built-Up</span></div>
+        <div><strong>${p.config}</strong><span>Layout</span></div>
+        <div><strong>${p.yield}</strong><span>Est. Yield</span></div>
+      `;
+      specModal.classList.add('open');
+    }
+
+    function openBookModal(topic = 'Private Portfolio Walkthrough') {
+      closeModals();
+      document.getElementById('bookingForm').style.display = 'block';
+      document.getElementById('bookingSuccess').style.display = 'none';
+      document.getElementById('bProperty').value = topic;
+      bookModal.classList.add('open');
+    }
+
+    function closeModals() {
+      specModal.classList.remove('open');
+      bookModal.classList.remove('open');
+    }
+
+    document.getElementById('loadIntoEmiBtn').addEventListener('click', () => {
+      if (!currentSpecProp) return;
+      priceSlider.value = currentSpecProp.priceLakhs;
+      updateEMI();
+      closeModals();
+      document.getElementById('calculator').scrollIntoView({ behavior: 'smooth' });
+      showToast(`Loaded ${currentSpecProp.name} into EMI Calculator`);
+    });
+
+    document.getElementById('specBookBtn').addEventListener('click', () => {
+      if (currentSpecProp) openBookModal(currentSpecProp.name);
+    });
+    document.getElementById('navBookBtn').addEventListener('click', () => openBookModal());
+    document.getElementById('mobileBookBtn').addEventListener('click', () => { toggleMenu(true); openBookModal(); });
+    document.getElementById('calcBookBtn').addEventListener('click', () => {
+      openBookModal(`Bank Loan Quotes (${formatCroreOrLakh(Number(priceSlider.value))} Property)`);
+    });
+
+    document.querySelectorAll('[data-close]').forEach((b) => b.addEventListener('click', closeModals));
+    [specModal, bookModal].forEach((m) => m.addEventListener('click', (e) => { if (e.target === m) closeModals(); }));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeModals(); toggleMenu(true); } });
+
+    document.getElementById('bookingForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('bName').value.trim();
+      const phone = document.getElementById('bPhone').value.trim();
+      const email = document.getElementById('bEmail').value.trim();
+      const prop = document.getElementById('bProperty').value.trim();
+      const mode = document.getElementById('bMode').value;
+
+      if (!name || !phone || !email.includes('@')) {
+        showToast('Please enter your name, phone, and valid email.');
+        return;
+      }
+
+      const ref = 'AUR-' + Math.floor(10000 + Math.random() * 90000);
+      document.getElementById('bookingSuccessText').innerHTML =
+        `Thank you, <strong>${name}</strong>. Your <strong>${mode}</strong> for <em>${prop}</em> is logged under reference <strong>${ref}</strong>. Our senior advisor will reach out on <strong>${phone}</strong> shortly.`;
+      document.getElementById('bookingForm').style.display = 'none';
+      document.getElementById('bookingSuccess').style.display = 'block';
+      e.target.reset();
+    });
+
+    renderProperties();
+    setHeroProp(0);
+    updateEMI();
+  </script>
+</body>
+</html>
