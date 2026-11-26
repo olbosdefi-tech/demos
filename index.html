@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Web Design Portfolio — Interactive Business Websites</title>
+  <title>Leonardo Remo — Modern Business Websites & Live Demos</title>
 
-  <!-- WhatsApp & Social Link Preview Tags (Edit your name here) -->
-  <meta property="og:title" content="Leonado Remo — Modern Business Websites & Live Demos" />
-  <meta property="og:description" content="Explore live interactive website demos built for coffee brands, real estate, clinics, and local businesses. Tap to preview or chat on WhatsApp." />
+  <!-- WhatsApp & Social Link Preview Tags -->
+  <meta property="og:title" content="Leonardo Remo — Modern Business Websites & Live Demos" />
+  <meta property="og:description" content="Explore 6 live interactive website demos built for coffee brands, real estate, crypto gaming, interiors, gyms, and D2C stores. Tap to preview or chat on WhatsApp." />
   <meta property="og:type" content="website" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,13 +20,11 @@
       --surface: #ffffff;
       --surface-soft: #f1f3f5;
       --dark: #0f1419;
-      --dark-card: #171e26;
       --ink: #111827;
       --ink-secondary: #4b5563;
       --ink-muted: #6b7280;
       --border: #e5e7eb;
       --border-strong: #d1d5db;
-      --accent: #111827;
       --wa: #16a34a;
       --wa-hover: #15803d;
       --wa-soft: #dcfce7;
@@ -182,11 +180,13 @@
     .chip { font-size: 0.75rem; font-weight: 500; padding: 0.22rem 0.58rem; border-radius: 6px; background: var(--surface); border: 1px solid var(--border); color: var(--ink-secondary); }
     .demo-actions { display: grid; grid-template-columns: 1fr auto; gap: 0.55rem; margin-top: auto; }
 
-    .custom-card { background: linear-gradient(155deg, var(--dark) 0%, #1d2630 100%); color: #f9fafb; border-color: #273240; justify-content: space-between; padding: 1.6rem; }
-    .custom-card .niche-tag { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.15); color: #86efac; }
-    .custom-card p { color: #cbd5e1; font-size: 0.91rem; margin-top: 0.65rem; }
-    .custom-list { list-style: none; display: grid; gap: 0.55rem; margin-block: 1.25rem 1.5rem; font-size: 0.86rem; color: #e2e8f0; }
-    .custom-list li::before { content: "✓ "; color: #4ade80; font-weight: 700; }
+    .custom-banner {
+      margin-top: 2rem;
+      background: linear-gradient(155deg, var(--dark) 0%, #1d2630 100%);
+      color: #f9fafb; border-radius: var(--radius-lg); padding: clamp(1.5rem, 3vw, 2.2rem);
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem;
+    }
+    .custom-banner p { color: #cbd5e1; font-size: 0.94rem; max-width: 56ch; margin-top: 0.4rem; }
 
     .pkg-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
     .pkg-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.6rem; display: flex; flex-direction: column; gap: 1rem; }
@@ -250,8 +250,8 @@
   <header class="navbar">
     <div class="container nav-inner">
       <a href="#top" class="brand">
-        <span class="brand-dot" id="brandInitials">YN</span>
-        <span id="brandNameNav">Your Name Studio</span>
+        <span class="brand-dot" id="brandInitials">LR</span>
+        <span id="brandNameNav">Leonardo Remo</span>
       </a>
 
       <nav aria-label="Main navigation">
@@ -291,7 +291,7 @@
             Fast, mobile-first websites with interactive calculators, live booking forms, and instant WhatsApp integration—tailored for local businesses, brands, and founders.
           </p>
           <div class="hero-cta">
-            <a href="#demos" class="btn btn-dark">Explore Live Demos</a>
+            <a href="#demos" class="btn btn-dark">Explore 6 Live Demos</a>
             <a id="heroWaBtn" href="#" target="_blank" rel="noopener" class="btn btn-wa">Chat on WhatsApp</a>
             <button id="copyLinkBtn" type="button" class="btn btn-outline">Copy Portfolio Link</button>
           </div>
@@ -331,13 +331,26 @@
             <h2>Live Demo Websites</h2>
           </div>
           <div class="filter-bar" role="group" aria-label="Filter demos by industry">
-            <button class="filter-btn active" type="button" data-filter="all">All Demos</button>
-            <button class="filter-btn" type="button" data-filter="d2c">D2C &amp; Food</button>
-            <button class="filter-btn" type="button" data-filter="real-estate">Real Estate</button>
+            <button class="filter-btn active" type="button" data-filter="all">All 6 Demos</button>
+            <button class="filter-btn" type="button" data-filter="d2c">D2C &amp; Store</button>
+            <button class="filter-btn" type="button" data-filter="real-estate">Real Estate &amp; Interiors</button>
+            <button class="filter-btn" type="button" data-filter="web3">Crypto &amp; Gaming</button>
+            <button class="filter-btn" type="button" data-filter="fitness">Fitness &amp; Gym</button>
           </div>
         </div>
 
         <div class="demo-grid" id="demoGrid"></div>
+
+        <div class="custom-banner">
+          <div>
+            <span class="eyebrow" style="color:#86efac; margin-bottom:0.35rem;">Your Brand Next</span>
+            <h3 style="font-size:1.45rem;">Want a website tailored to your exact business?</h3>
+            <p>Send your business name and services on WhatsApp—I will customize the colors, sections, and interactive calculators for your niche.</p>
+          </div>
+          <a id="bannerWaBtn" href="#" target="_blank" rel="noopener" class="btn btn-wa">
+            Request Your Site on WhatsApp →
+          </a>
+        </div>
       </div>
     </section>
 
@@ -436,9 +449,10 @@
                 <select id="cType">
                   <option>Café / Restaurant / D2C Brand</option>
                   <option>Real Estate / Builders</option>
-                  <option>Clinic / Doctor / Salon</option>
+                  <option>Interior Design Studio</option>
+                  <option>Crypto / Web3 / Gaming</option>
                   <option>Gym / Fitness Studio</option>
-                  <option>Local Service / Agency</option>
+                  <option>Dropshipping / E-Commerce Store</option>
                   <option>Other Business</option>
                 </select>
               </div>
@@ -477,8 +491,8 @@
 
   <footer>
     <div class="container footer-inner">
-      <strong id="footerBrand">Your Name Studio</strong>
-      <span id="footerEmail">hello@yourdomain.com</span>
+      <strong id="footerBrand">Leonardo Remo</strong>
+      <span id="footerEmail">olbosdefi@gmail.com</span>
       <span>Built for fast mobile &amp; WhatsApp sharing</span>
     </div>
   </footer>
@@ -491,15 +505,12 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
-    /* =========================================================
-       EDIT ONLY THIS SECTION WITH YOUR DETAILS
-    ========================================================= */
     const STUDIO_CONFIG = {
-      name: 'Leonado Remo',          // Your name or freelance brand
-      initials: 'LR',                    // 2 letters for the logo badge
-      whatsappNumber: '919567042307',    // 91 + your 10-digit WhatsApp number (no + or spaces)
+      name: 'Leonardo Remo',
+      initials: 'LR',
+      whatsappNumber: '919567042307',
       email: 'olbosdefi@gmail.com',
-      defaultGreeting: 'Hi! I checked your portfolio demos and would like to discuss a website for my business.'
+      defaultGreeting: 'Hi Leonardo! I checked your portfolio demos and would like to discuss a website for my business.'
     };
 
     const DEMOS = [
@@ -526,6 +537,54 @@
         darkPreview: true,
         desc: 'Dark-mode architectural showcase for luxury villas and penthouses featuring an interactive EMI calculator in ₹ Lakhs & Cr.',
         features: ['Property Filters', 'Live EMI Calculator', 'Site-Visit Booking']
+      },
+      {
+        title: 'VortexPlay',
+        category: 'web3',
+        niche: 'Crypto Gaming & Casino',
+        url: './gaming/',
+        displayUrl: 'demos/gaming',
+        themeBg: '#07090F',
+        accent: '#00E599',
+        darkPreview: true,
+        desc: 'Non-custodial Web3 gaming arcade with a playable Crash multiplier demo, VIP rakeback calculator, and TON/Solana wallet connect.',
+        features: ['Playable Crash Demo', 'VIP Rakeback Calc', 'Multi-Chain Wallet']
+      },
+      {
+        title: 'Studio Kaaya',
+        category: 'real-estate',
+        niche: 'Turnkey Home Interiors',
+        url: './interiors/',
+        displayUrl: 'demos/interiors',
+        themeBg: '#F8F6F2',
+        accent: '#A16207',
+        darkPreview: false,
+        desc: 'Warm architectural interior design studio with an interactive material moodboard switcher and 2BHK/3BHK budget estimator.',
+        features: ['Material Moodboards', 'Interior Cost Calc', '3D Call Booking']
+      },
+      {
+        title: 'IronPulse Club',
+        category: 'fitness',
+        niche: 'Gym & Fitness Studio',
+        url: './gym/',
+        displayUrl: 'demos/gym',
+        themeBg: '#0B0D10',
+        accent: '#C6F135',
+        darkPreview: true,
+        desc: 'High-energy strength & conditioning club with live batch schedule, BMI & protein calculator, and free 3-day trial pass.',
+        features: ['Live Batch Timetable', 'BMI & Macro Tool', 'Free Trial Pass']
+      },
+      {
+        title: 'Kova Everyday',
+        category: 'd2c',
+        niche: 'Dropshipping & D2C Store',
+        url: './store/',
+        displayUrl: 'demos/store',
+        themeBg: '#FAFAFA',
+        accent: '#EA580C',
+        darkPreview: false,
+        desc: 'High-converting D2C gadget & desk store with color variant switcher, custom bundle builder, and free-shipping cart bar.',
+        features: ['Color Variant Switcher', 'Bundle Builder (-15%)', 'COD & UPI Cart']
       }
     ];
 
@@ -548,7 +607,7 @@
     document.getElementById('footerEmail').textContent = STUDIO_CONFIG.email;
 
     const directWaUrl = buildWaLink(STUDIO_CONFIG.defaultGreeting);
-    ['navWaBtn', 'mobileWaBtn', 'heroWaBtn', 'floatWaBtn'].forEach((id) => {
+    ['navWaBtn', 'mobileWaBtn', 'heroWaBtn', 'floatWaBtn', 'bannerWaBtn'].forEach((id) => {
       document.getElementById(id).href = directWaUrl;
     });
 
@@ -588,9 +647,7 @@
 
     function renderDemos() {
       const items = activeFilter === 'all' ? DEMOS : DEMOS.filter((d) => d.category === activeFilter);
-      const customWa = buildWaLink('Hi! I would like a custom website concept for my business.');
-
-      const cardsHtml = items.map((d) => `
+      demoGrid.innerHTML = items.map((d) => `
         <article class="demo-card">
           <div class="demo-preview" style="background:${d.themeBg}; color:${d.darkPreview ? '#fff' : '#111'};">
             <div class="browser-bar" style="border-bottom-color:${d.darkPreview ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)'};">
@@ -621,26 +678,6 @@
           </div>
         </article>
       `).join('');
-
-      const ctaCardHtml = `
-        <article class="demo-card custom-card">
-          <div>
-            <span class="niche-tag">Your Brand Next</span>
-            <h3 style="margin-top:0.85rem; font-size:1.35rem;">Want a website tailored to your business?</h3>
-            <p>Send your business name and services on WhatsApp—I will customize the design, colors, and interactive tools for your exact niche.</p>
-            <ul class="custom-list">
-              <li>Works for clinics, gyms, cafés, builders &amp; shops</li>
-              <li>Live preview shared before final payment</li>
-              <li>Direct WhatsApp inquiry integration</li>
-            </ul>
-          </div>
-          <a href="${customWa}" target="_blank" rel="noopener" class="btn btn-wa" style="width:100%;">
-            Request Your Site on WhatsApp →
-          </a>
-        </article>
-      `;
-
-      demoGrid.innerHTML = cardsHtml + ctaCardHtml;
     }
 
     document.querySelectorAll('.filter-btn').forEach((btn) => {
@@ -667,7 +704,7 @@
 
     document.querySelectorAll('.pkg-wa-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
-        const msg = `Hi! I'm interested in the ${btn.dataset.pkg} website package. Could you share the next steps?`;
+        const msg = `Hi Leonardo! I'm interested in the ${btn.dataset.pkg} website package. Could you share the next steps?`;
         window.open(buildWaLink(msg), '_blank', 'noopener');
       });
     });
@@ -683,7 +720,7 @@
       const biz = cBiz.value.trim() || 'my business';
       const notes = cNotes.value.trim();
 
-      let msg = `Hi! I'm ${name === 'there' ? 'reaching out' : name} regarding a website for ${biz}.\n\n`;
+      let msg = `Hi Leonardo! I'm ${name === 'there' ? 'reaching out' : name} regarding a website for ${biz}.\n\n`;
       msg += `• Category: ${cType.value}\n`;
       msg += `• Package: ${cPlan.value}`;
       if (notes) msg += `\n• Notes: ${notes}`;
