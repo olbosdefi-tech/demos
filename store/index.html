@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kova Everyday — Smart Desk Gear & Everyday Carry</title>
+
+  <meta property="og:title" content="Kova Everyday — D2C & Dropshipping Store Demo" />
+  <meta property="og:description" content="High-converting D2C storefront with color variant switcher, custom bundle builder, free-shipping progress bar, and COD/UPI checkout." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --surface-soft: #f3f4f6;
+      --dark: #111827;
+      --ink: #111827;
+      --ink-secondary: #4b5563;
+      --ink-muted: #6b7280;
+      --accent: #ea580c;
+      --accent-hover: #c2410c;
+      --accent-soft: #fff7ed;
+      --green: #15803d;
+      --green-soft: #dcfce7;
+      --border: #e5e7eb;
+      --border-strong: #d1d5db;
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 22px;
+      --radius-pill: 999px;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --shadow-sm: 0 2px 10px rgba(17, 24, 39, 0.04);
+      --shadow-md: 0 14px 36px rgba(17, 24, 39, 0.08);
+      --nav-h: 72px;
+      --ease: 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 16px); }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; color: inherit; }
+    svg { display: block; max-width: 100%; }
+
+    .container { width: min(1160px, 100% - 2.25rem); margin-inline: auto; }
+    .section { padding-block: clamp(3.5rem, 6vw, 5.75rem); }
+
+    .promo-strip {
+      background: var(--dark); color: #fff; text-align: center;
+      font-size: 0.78rem; font-weight: 600; padding: 0.45rem 1rem; letter-spacing: 0.02em;
+    }
+    .promo-strip span { color: #fdba74; }
+
+    h1 { font-size: clamp(2.25rem, 4.8vw, 3.75rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.035em; }
+    h2 { font-size: clamp(1.75rem, 3.2vw, 2.5rem); font-weight: 800; line-height: 1.12; letter-spacing: -0.025em; }
+    h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.015em; }
+    .lead { color: var(--ink-secondary); font-size: clamp(0.98rem, 1.3vw, 1.1rem); max-width: 56ch; }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.8rem 1.35rem; border-radius: var(--radius-pill);
+      border: 1px solid transparent; font-weight: 700; font-size: 0.9rem;
+      cursor: pointer; transition: all var(--ease); white-space: nowrap;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-accent { background: var(--accent); color: #fff; }
+    .btn-accent:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(234, 88, 12, 0.25); }
+    .btn-dark { background: var(--dark); color: #fff; }
+    .btn-dark:hover { background: #273244; }
+    .btn-outline { background: var(--surface); border-color: var(--border-strong); color: var(--ink); }
+    .btn-outline:hover { border-color: var(--ink); }
+    .btn-sm { padding: 0.54rem 1rem; font-size: 0.83rem; }
+
+    .navbar {
+      position: sticky; top: 0; z-index: 900; height: var(--nav-h);
+      background: rgba(250, 250, 250, 0.88);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .brand { display: inline-flex; align-items: center; gap: 0.55rem; font-size: 1.3rem; font-weight: 800; letter-spacing: -0.03em; }
+    .brand-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 1.85rem; list-style: none; }
+    .nav-links a { font-size: 0.9rem; font-weight: 600; color: var(--ink-secondary); transition: color var(--ease); }
+    .nav-links a:hover { color: var(--accent); }
+
+    .cart-btn {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.55rem 0.95rem; border-radius: var(--radius-pill);
+      background: var(--dark); color: #fff; border: none; font-size: 0.86rem; font-weight: 700; cursor: pointer;
+    }
+    .cart-badge {
+      min-width: 20px; height: 20px; padding-inline: 5px; border-radius: 99px;
+      background: var(--accent); color: #fff; font-size: 0.74rem; display: grid; place-items: center;
+    }
+
+    .menu-toggle {
+      display: none; width: 40px; height: 40px; border-radius: 10px;
+      border: 1px solid var(--border); background: var(--surface); place-items: center; cursor: pointer;
+    }
+    .mobile-drawer {
+      display: none; position: fixed; inset: var(--nav-h) 0 auto 0; z-index: 850;
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 1.25rem 1.5rem 1.65rem; flex-direction: column; gap: 0.9rem; box-shadow: var(--shadow-md);
+    }
+    .mobile-drawer.open { display: flex; }
+    .mobile-drawer a { padding: 0.45rem 0; border-bottom: 1px solid var(--surface-soft); font-weight: 600; }
+
+    .hero { padding-block: clamp(2.5rem, 5vw, 4.5rem) clamp(3.25rem, 5.5vw, 5rem); }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: clamp(2rem, 4.5vw, 3.75rem); align-items: center; }
+    .hero .lead { margin-top: 1.05rem; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.85rem; }
+    .trust-strip {
+      display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 2rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--border); font-size: 0.82rem; font-weight: 600; color: var(--ink-secondary);
+    }
+
+    .spotlight-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1.45rem; box-shadow: var(--shadow-md);
+    }
+    .spotlight-visual {
+      background: var(--surface-soft); border-radius: var(--radius-md);
+      height: 205px; display: grid; place-items: center; position: relative; padding: 1rem;
+    }
+    .bestseller-tag {
+      position: absolute; top: 0.85rem; left: 0.85rem;
+      font-size: 0.72rem; font-weight: 700; padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-pill); background: var(--accent-soft); color: var(--accent);
+    }
+    .variant-row { display: flex; justify-content: space-between; align-items: center; margin-top: 1.1rem; gap: 0.75rem; }
+    .color-dots { display: flex; gap: 0.5rem; }
+    .color-dot {
+      width: 26px; height: 26px; border-radius: 50%; border: 2px solid #fff;
+      box-shadow: 0 0 0 1.5px var(--border-strong); cursor: pointer;
+    }
+    .color-dot.active { box-shadow: 0 0 0 2px var(--dark); transform: scale(1.08); }
+
+    .catalog-section { background: var(--surface); border-block: 1px solid var(--border); }
+    .section-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1.25rem; margin-bottom: 2rem; }
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .filter-btn {
+      padding: 0.5rem 1rem; border-radius: var(--radius-pill);
+      border: 1px solid var(--border); background: var(--bg);
+      color: var(--ink-secondary); font-size: 0.84rem; font-weight: 600; cursor: pointer;
+    }
+    .filter-btn.active { background: var(--dark); border-color: var(--dark); color: #fff; }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.45rem; }
+    .prod-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md);
+      overflow: hidden; display: flex; flex-direction: column;
+      transition: transform var(--ease), box-shadow var(--ease);
+    }
+    .prod-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .prod-art { height: 170px; display: grid; place-items: center; padding: 1rem; position: relative; }
+    .save-pill {
+      position: absolute; top: 0.8rem; right: 0.8rem; font-size: 0.7rem; font-weight: 700;
+      padding: 0.22rem 0.55rem; border-radius: 6px; background: var(--green-soft); color: var(--green);
+    }
+    .prod-body { padding: 1.3rem; display: flex; flex-direction: column; flex: 1; }
+    .price-line { display: flex; align-items: baseline; gap: 0.5rem; margin-top: 0.35rem; }
+    .price-now { font-weight: 800; font-size: 1.12rem; }
+    .price-mrp { font-size: 0.82rem; color: var(--ink-muted); text-decoration: line-through; }
+    .prod-desc { font-size: 0.87rem; color: var(--ink-secondary); margin-block: 0.65rem 1.15rem; flex: 1; }
+
+    .bundle-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 2rem; align-items: stretch; }
+    .bundle-list { display: grid; gap: 0.75rem; }
+    .bundle-item {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 1rem 1.15rem; border-radius: var(--radius-md);
+      background: var(--surface); border: 1px solid var(--border); cursor: pointer;
+    }
+    .bundle-item.selected { border-color: var(--accent); background: var(--accent-soft); }
+    .bundle-summary {
+      background: var(--dark); color: #fff; border-radius: var(--radius-lg);
+      padding: clamp(1.65rem, 3vw, 2.2rem); display: flex; flex-direction: column; justify-content: space-between; gap: 1.4rem;
+    }
+
+    footer { padding-block: 2.5rem; border-top: 1px solid var(--border); font-size: 0.84rem; color: var(--ink-muted); }
+    .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
+
+    .backdrop {
+      position: fixed; inset: 0; z-index: 1000; background: rgba(17, 24, 39, 0.58);
+      backdrop-filter: blur(4px); display: none; place-items: center; padding: 1.25rem;
+    }
+    .backdrop.open { display: grid; }
+    .modal {
+      width: min(520px, 100%); max-height: 90vh; overflow-y: auto;
+      background: var(--surface); border-radius: var(--radius-lg); padding: 1.65rem;
+    }
+    .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .close-btn { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg); cursor: pointer; display: grid; place-items: center; }
+    .ship-bar-wrap { background: var(--surface-soft); padding: 0.75rem 0.9rem; border-radius: var(--radius-sm); margin-bottom: 1rem; font-size: 0.82rem; font-weight: 600; }
+    .ship-track { height: 6px; border-radius: 99px; background: #e5e7eb; overflow: hidden; margin-top: 0.45rem; }
+    .ship-fill { height: 100%; background: var(--green); transition: width 250ms ease; }
+    .cart-row { display: flex; justify-content: space-between; align-items: center; padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; margin-top: 1rem; }
+    .field { display: flex; flex-direction: column; gap: 0.3rem; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { font-size: 0.78rem; font-weight: 600; }
+    .field input, .field select { padding: 0.65rem 0.8rem; border-radius: var(--radius-sm); border: 1px solid var(--border-strong); background: var(--bg); }
+
+    .toast {
+      position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 1100;
+      background: var(--dark); color: #fff; padding: 0.78rem 1.15rem;
+      border-radius: var(--radius-pill); font-size: 0.86rem; font-weight: 600;
+      transform: translateY(14px); opacity: 0; pointer-events: none; transition: all 220ms ease;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    @media (max-width: 960px) {
+      .hero-grid, .bundle-grid { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .menu-toggle { display: grid; }
+      .grid-3, .form-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="promo-strip">Free Express Shipping above <span>₹999</span> · Cash on Delivery Available Across India</div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#top" class="brand"><span class="brand-dot"></span> KOVA</a>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="#catalog">Best Sellers</a></li>
+          <li><a href="#bundle">Bundle &amp; Save</a></li>
+        </ul>
+      </nav>
+
+      <div style="display:flex; gap:0.65rem; align-items:center;">
+        <button class="cart-btn" id="openCartBtn" type="button">
+          <span>Cart</span>
+          <span class="cart-badge" id="cartCount">0</span>
+        </button>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle menu">
+          <svg id="menuIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="#catalog" class="m-link">Best Sellers</a>
+    <a href="#bundle" class="m-link">Bundle &amp; Save</a>
+  </div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Minimal Desk &amp; Everyday Carry</span>
+          <h1>Upgrade your daily desk &amp; travel setup.</h1>
+          <p class="lead">
+            Thoughtfully engineered magnetic chargers, aluminium laptop stands, and modular desk organisers shipped directly to your door in 3–5 days.
+          </p>
+          <div class="hero-cta">
+            <a href="#catalog" class="btn btn-accent">Shop Best Sellers</a>
+            <a href="#bundle" class="btn btn-outline">Build a Bundle (Save 15%)</a>
+          </div>
+          <div class="trust-strip">
+            <span>✓ Cash on Delivery</span>
+            <span>✓ 7-Day Easy Replacement</span>
+            <span>✓ 4.8★ (2,100+ Orders)</span>
+          </div>
+        </div>
+
+        <div class="spotlight-card" aria-label="Featured product variant preview">
+          <div class="spotlight-visual">
+            <span class="bestseller-tag">#1 Viral Desk Essential</span>
+            <svg width="210" height="140" viewBox="0 0 220 150" fill="none" aria-hidden="true">
+              <rect x="45" y="116" width="130" height="12" rx="6" fill="#9CA3AF"/>
+              <path d="M98 62h24l6 54H92l6-54Z" fill="#6B7280"/>
+              <circle id="heroPadOuter" cx="110" cy="54" r="36" fill="#1F2937"/>
+              <circle cx="110" cy="54" r="24" stroke="#EA580C" stroke-width="2.5" stroke-dasharray="4 3"/>
+              <path d="M108 44l-5 11h7l-2 9 7-11h-7l2-9Z" fill="#EA580C"/>
+            </svg>
+          </div>
+
+          <div class="variant-row">
+            <div>
+              <h3>Kova MagDock 3-in-1 Stand</h3>
+              <div style="font-size:0.82rem; color:var(--ink-muted);">Finish: <strong id="variantName">Space Charcoal</strong></div>
+            </div>
+            <div class="color-dots" id="variantDots">
+              <button class="color-dot active" type="button" style="background:#1F2937;" data-vname="Space Charcoal" data-vfill="#1F2937" aria-label="Space Charcoal"></button>
+              <button class="color-dot" type="button" style="background:#D6D3D1;" data-vname="Anodized Silver" data-vfill="#9CA3AF" aria-label="Anodized Silver"></button>
+              <button class="color-dot" type="button" style="background:#B45309;" data-vname="Desert Terracotta" data-vfill="#B45309" aria-label="Desert Terracotta"></button>
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1.1rem; padding-top:1rem; border-top:1px solid var(--border);">
+            <div class="price-line" style="margin-top:0;">
+              <span class="price-now">₹1,499</span>
+              <span class="price-mrp">₹2,499</span>
+            </div>
+            <button class="btn btn-dark btn-sm" id="heroAddBtn" type="button">+ Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section catalog-section" id="catalog">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Curated Drop</span>
+            <h2>Trending Everyday Gear</h2>
+          </div>
+          <div class="filter-bar" role="group" aria-label="Filter products">
+            <button class="filter-btn active" type="button" data-filter="all">All Products</button>
+            <button class="filter-btn" type="button" data-filter="desk">Desk Setup</button>
+            <button class="filter-btn" type="button" data-filter="edc">Everyday Carry</button>
+            <button class="filter-btn" type="button" data-filter="light">Ambient Lighting</button>
+          </div>
+        </div>
+
+        <div class="grid-3" id="productGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="bundle">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Save More</span>
+            <h2>Build-Your-Own Desk Bundle</h2>
+          </div>
+          <p class="lead">Pick any 2 or more items below to unlock an automatic 15% bundle discount + free express delivery.</p>
+        </div>
+
+        <div class="bundle-grid">
+          <div class="bundle-list" id="bundleList"></div>
+
+          <aside class="bundle-summary" aria-live="polite">
+            <div>
+              <span class="eyebrow" style="color:#fdba74;">Your Custom Bundle</span>
+              <div style="font-size:2.4rem; font-weight:800; line-height:1.1; margin-top:0.35rem;" id="bundleTotal">₹2,293</div>
+              <div style="font-size:0.84rem; color:#9ca3af; margin-top:0.35rem;" id="bundleStatus">2 items selected · 15% Bundle Discount Applied!</div>
+            </div>
+            <button class="btn btn-accent" id="addBundleBtn" type="button" style="width:100%;">
+              Add Bundle to Cart
+            </button>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <strong>KOVA EVERYDAY</strong>
+      <span>Free Shipping Over ₹999 · UPI &amp; Cash on Delivery</span>
+      <span>© 2026 Kova Direct Commerce</span>
+    </div>
+  </footer>
+
+  <div class="backdrop" id="cartModal" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="cartTitle">Your Shopping Cart</h3>
+        <button class="close-btn" type="button" id="closeCartBtn">✕</button>
+      </div>
+
+      <div id="cartMainView">
+        <div class="ship-bar-wrap">
+          <div id="shipText">Add ₹999 more for FREE Express Shipping</div>
+          <div class="ship-track"><div class="ship-fill" id="shipFill" style="width:0%;"></div></div>
+        </div>
+
+        <div id="cartItemsWrap"></div>
+
+        <div style="display:flex; justify-content:space-between; font-weight:800; font-size:1.05rem; margin-top:1rem;">
+          <span>Total Payable</span>
+          <span id="cartTotal">₹0</span>
+        </div>
+
+        <form id="checkoutForm" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="sName">Full Name *</label>
+              <input id="sName" type="text" placeholder="Anand Krishnan" required />
+            </div>
+            <div class="field">
+              <label for="sPhone">Mobile Number *</label>
+              <input id="sPhone" type="tel" placeholder="+91 98470 55443" required />
+            </div>
+            <div class="field">
+              <label for="sCity">City &amp; Pincode *</label>
+              <input id="sCity" type="text" placeholder="Kochi 682020" required />
+            </div>
+            <div class="field">
+              <label for="sPay">Payment Mode</label>
+              <select id="sPay">
+                <option>Cash on Delivery (COD)</option>
+                <option>UPI / GPay / PhonePe (5% Extra Off)</option>
+              </select>
+            </div>
+            <div class="field full">
+              <button class="btn btn-accent" type="submit" style="width:100%;">Place Order Now</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div id="cartSuccessView" style="display:none; text-align:center; padding-block:1rem;">
+        <div style="font-size:2rem; color:var(--green); margin-bottom:0.4rem;">✓</div>
+        <h3>Order Confirmed!</h3>
+        <p id="orderConfirmText" style="font-size:0.9rem; color:var(--ink-secondary); margin:0.6rem auto 1.3rem;"></p>
+        <button class="btn btn-outline btn-sm" type="button" id="doneOrderBtn">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const PRODUCTS = [
+      { id: 'magdock', name: 'MagDock 3-in-1 Charger', cat: 'desk', price: 1499, mrp: 2499, off: '40% OFF', tint: '#FFF7ED', desc: 'Simultaneous magnetic fast charging for phone, earbuds, and smartwatch in weighted aluminium.' },
+      { id: 'riser', name: 'Walnut & Steel Desk Shelf', cat: 'desk', price: 1899, mrp: 2999, off: '37% OFF', tint: '#F3F4F6', desc: 'Ergonomic monitor riser with concealed under-tray storage for keyboards and notebooks.' },
+      { id: 'sling', name: 'AeroX Weatherproof Sling', cat: 'edc', price: 1199, mrp: 1999, off: '40% OFF', tint: '#EFF6FF', desc: 'Compact 4L crossbody bag with Fidlock magnetic buckle, RFID pocket, and YKK aqua zippers.' },
+      { id: 'lightbar', name: 'Halo Asymmetric Monitor Bar', cat: 'light', price: 1299, mrp: 2199, off: '41% OFF', tint: '#FEFCE8', desc: 'Zero-glare screen light bar with stepless warm-to-cool dimming and touch dimmer.' },
+      { id: 'wallet', name: 'Titan Carbon Cardholder', cat: 'edc', price: 799, mrp: 1499, off: '47% OFF', tint: '#F3F4F6', desc: 'Pop-up aluminium card ejector holding up to 8 cards plus cash strap in a slim profile.' },
+      { id: 'lamp', name: 'Aura Touch Mushroom Lamp', cat: 'light', price: 949, mrp: 1699, off: '44% OFF', tint: '#FFF1F2', desc: 'Cordless USB-C rechargeable bedside and desk lamp with 3 warm ambient brightness modes.' }
+    ];
+
+    let cart = [];
+    let activeFilter = 'all';
+    let selectedVariant = 'Space Charcoal';
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    function toggleMenu(closeOnly = false) {
+      const open = closeOnly ? false : !mobileDrawer.classList.contains('open');
+      mobileDrawer.classList.toggle('open', open);
+      document.getElementById('menuIcon').innerHTML = open ? '<path d="M6 6l12 12M18 6L6 18"/>' : '<path d="M4 7h16M4 12h16M4 17h16"/>';
+    }
+    menuToggle.addEventListener('click', () => toggleMenu());
+    document.querySelectorAll('.m-link').forEach((a) => a.addEventListener('click', () => toggleMenu(true)));
+
+    document.querySelectorAll('.color-dot').forEach((dot) => {
+      dot.addEventListener('click', () => {
+        document.querySelectorAll('.color-dot').forEach((d) => d.classList.remove('active'));
+        dot.classList.add('active');
+        selectedVariant = dot.dataset.vname;
+        document.getElementById('variantName').textContent = selectedVariant;
+        document.getElementById('heroPadOuter').setAttribute('fill', dot.dataset.vfill);
+      });
+    });
+
+    document.getElementById('heroAddBtn').addEventListener('click', () => {
+      addToCart(`MagDock 3-in-1 (${selectedVariant})`, 1499);
+    });
+
+    const productGrid = document.getElementById('productGrid');
+    function renderProducts() {
+      const list = activeFilter === 'all' ? PRODUCTS : PRODUCTS.filter((p) => p.cat === activeFilter);
+      productGrid.innerHTML = list.map((p) => `
+        <article class="prod-card">
+          <div class="prod-art" style="background:${p.tint};">
+            <span class="save-pill">${p.off}</span>
+            <svg width="96" height="96" viewBox="0 0 96 96" fill="none" aria-hidden="true">
+              <rect x="18" y="20" width="60" height="56" rx="14" fill="#111827"/>
+              <circle cx="48" cy="48" r="16" stroke="#EA580C" stroke-width="3"/>
+              <circle cx="48" cy="48" r="5" fill="#EA580C"/>
+            </svg>
+          </div>
+          <div class="prod-body">
+            <h3>${p.name}</h3>
+            <div class="price-line">
+              <span class="price-now">₹${p.price.toLocaleString('en-IN')}</span>
+              <span class="price-mrp">₹${p.mrp.toLocaleString('en-IN')}</span>
+            </div>
+            <p class="prod-desc">${p.desc}</p>
+            <button class="btn btn-dark btn-sm" type="button" data-add="${p.id}" style="width:100%;">+ Add to Cart</button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    document.querySelectorAll('.filter-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        activeFilter = btn.dataset.filter;
+        document.querySelectorAll('.filter-btn').forEach((b) => b.classList.toggle('active', b === btn));
+        renderProducts();
+      });
+    });
+
+    productGrid.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-add]');
+      if (!btn) return;
+      const p = PRODUCTS.find((x) => x.id === btn.dataset.add);
+      if (p) addToCart(p.name, p.price);
+    });
+
+    const bundleList = document.getElementById('bundleList');
+    function renderBundleOptions() {
+      bundleList.innerHTML = PRODUCTS.slice(0, 4).map((p, i) => `
+        <label class="bundle-item ${i < 2 ? 'selected' : ''}">
+          <div style="display:flex; align-items:center; gap:0.75rem;">
+            <input type="checkbox" value="${p.price}" data-bname="${p.name}" ${i < 2 ? 'checked' : ''} style="width:18px; height:18px; accent-color:var(--accent);" />
+            <div>
+              <strong>${p.name}</strong>
+              <div style="font-size:0.78rem; color:var(--ink-muted);">MRP ₹${p.mrp.toLocaleString('en-IN')}</div>
+            </div>
+          </div>
+          <strong>₹${p.price.toLocaleString('en-IN')}</strong>
+        </label>
+      `).join('');
+    }
+
+    function updateBundle() {
+      let raw = 0;
+      let count = 0;
+      document.querySelectorAll('#bundleList input').forEach((cb) => {
+        cb.closest('.bundle-item').classList.toggle('selected', cb.checked);
+        if (cb.checked) {
+          raw += Number(cb.value);
+          count++;
+        }
+      });
+      const discount = count >= 2 ? 0.15 : 0;
+      const final = Math.round(raw * (1 - discount));
+      document.getElementById('bundleTotal').textContent = `₹${final.toLocaleString('en-IN')}`;
+      document.getElementById('bundleStatus').textContent = count >= 2
+        ? `${count} items selected · 15% Bundle Discount Applied!`
+        : `${count} item selected · Pick 2+ items to unlock 15% off`;
+      return { count, final };
+    }
+
+    bundleList.addEventListener('change', updateBundle);
+    document.getElementById('addBundleBtn').addEventListener('click', () => {
+      const { count, final } = updateBundle();
+      if (count === 0) {
+        showToast('Select at least 1 item for your bundle');
+        return;
+      }
+      addToCart(`Custom Desk Bundle (${count} items)`, final);
+      openCart();
+    });
+
+    function addToCart(name, price) {
+      cart.push({ uid: Date.now() + Math.random(), name, price });
+      document.getElementById('cartCount').textContent = cart.length;
+      showToast(`Added ${name} to cart`);
+    }
+
+    function renderCart() {
+      const wrap = document.getElementById('cartItemsWrap');
+      const total = cart.reduce((s, i) => s + i.price, 0);
+      const pct = Math.min(100, Math.round((total / 999) * 100));
+      document.getElementById('shipFill').style.width = `${pct}%`;
+      document.getElementById('shipText').textContent = total >= 999
+        ? '✓ Unlocked FREE Express Shipping!'
+        : `Add ₹${(999 - total).toLocaleString('en-IN')} more for FREE Express Shipping`;
+
+      if (cart.length === 0) {
+        wrap.innerHTML = `<div style="padding:1rem 0; color:var(--ink-muted); font-size:0.9rem;">Your cart is empty. Add any item above to test checkout!</div>`;
+      } else {
+        wrap.innerHTML = cart.map((item) => `
+          <div class="cart-row">
+            <span>${item.name}</span>
+            <div>
+              <strong>₹${item.price.toLocaleString('en-IN')}</strong>
+              <button type="button" data-rm="${item.uid}" style="margin-left:0.6rem; border:none; background:none; color:var(--accent); font-weight:700; cursor:pointer;">✕</button>
+            </div>
+          </div>
+        `).join('');
+      }
+      document.getElementById('cartTotal').textContent = `₹${total.toLocaleString('en-IN')}`;
+    }
+
+    document.getElementById('cartItemsWrap').addEventListener('click', (e) => {
+      const rm = e.target.closest('[data-rm]');
+      if (!rm) return;
+      cart = cart.filter((i) => i.uid !== Number(rm.dataset.rm));
+      document.getElementById('cartCount').textContent = cart.length;
+      renderCart();
+    });
+
+    const cartModal = document.getElementById('cartModal');
+    function openCart() {
+      document.getElementById('cartMainView').style.display = 'block';
+      document.getElementById('cartSuccessView').style.display = 'none';
+      renderCart();
+      cartModal.classList.add('open');
+    }
+    const closeCart = () => cartModal.classList.remove('open');
+
+    document.getElementById('openCartBtn').addEventListener('click', openCart);
+    document.getElementById('closeCartBtn').addEventListener('click', closeCart);
+    document.getElementById('doneOrderBtn').addEventListener('click', closeCart);
+    cartModal.addEventListener('click', (e) => { if (e.target === cartModal) closeCart(); });
+
+    document.getElementById('checkoutForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (cart.length === 0) {
+        showToast('Add at least 1 product to your cart first');
+        return;
+      }
+      const name = document.getElementById('sName').value.trim();
+      const phone = document.getElementById('sPhone').value.trim();
+      const city = document.getElementById('sCity').value.trim();
+      if (!name || !phone || !city) {
+        showToast('Please enter your name, mobile, and city.');
+        return;
+      }
+      const orderId = 'KV-' + Math.floor(10000 + Math.random() * 90000);
+      document.getElementById('orderConfirmText').innerHTML =
+        `Thank you, <strong>${name}</strong>! Order <strong>${orderId}</strong> for <strong>${city}</strong> is confirmed. Tracking updates will be sent to <strong>${phone}</strong>.`;
+      cart = [];
+      document.getElementById('cartCount').textContent = '0';
+      document.getElementById('cartMainView').style.display = 'none';
+      document.getElementById('cartSuccessView').style.display = 'block';
+      e.target.reset();
+    });
+
+    renderProducts();
+    renderBundleOptions();
+    updateBundle();
+  </script>
+</body>
+</html>
