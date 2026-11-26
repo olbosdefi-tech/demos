@@ -3,40 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kova Everyday — Smart Desk Gear & Everyday Carry</title>
+  <title>Studio Kaaya — Turnkey Home Interiors & Architectural Spaces</title>
 
-  <meta property="og:title" content="Kova Everyday — D2C & Dropshipping Store Demo" />
-  <meta property="og:description" content="High-converting D2C storefront with color variant switcher, custom bundle builder, free-shipping progress bar, and COD/UPI checkout." />
+  <!-- WhatsApp Link Preview Tags -->
+  <meta property="og:title" content="Studio Kaaya — Turnkey Home Interiors Demo" />
+  <meta property="og:description" content="45-day turnkey home interiors with interactive material moodboards, 2BHK/3BHK budget estimator in ₹ Lakhs, and 3D consultation booking." />
   <meta property="og:type" content="website" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --bg: #fafafa;
+      --bg: #f8f6f2;
       --surface: #ffffff;
-      --surface-soft: #f3f4f6;
-      --dark: #111827;
-      --ink: #111827;
-      --ink-secondary: #4b5563;
-      --ink-muted: #6b7280;
-      --accent: #ea580c;
-      --accent-hover: #c2410c;
-      --accent-soft: #fff7ed;
-      --green: #15803d;
-      --green-soft: #dcfce7;
-      --border: #e5e7eb;
-      --border-strong: #d1d5db;
+      --surface-warm: #f0ece4;
+      --dark: #1c1917;
+      --ink: #1c1917;
+      --ink-secondary: #57534e;
+      --ink-muted: #78716c;
+      --brass: #a16207;
+      --brass-hover: #854d0e;
+      --brass-soft: #fef3c7;
+      --sage: #365347;
+      --sage-soft: #e7efe9;
+      --border: #e7e2d8;
+      --border-strong: #d6cfc2;
       --radius-sm: 10px;
       --radius-md: 16px;
       --radius-lg: 22px;
       --radius-pill: 999px;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      --shadow-sm: 0 2px 10px rgba(17, 24, 39, 0.04);
-      --shadow-md: 0 14px 36px rgba(17, 24, 39, 0.08);
-      --nav-h: 72px;
+      --shadow-sm: 0 2px 10px rgba(28, 25, 23, 0.05);
+      --shadow-md: 0 14px 36px rgba(28, 25, 23, 0.08);
+      --nav-h: 74px;
       --ease: 220ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
@@ -46,71 +48,60 @@
       font-family: var(--font-sans);
       background: var(--bg);
       color: var(--ink);
-      line-height: 1.55;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
     a { color: inherit; text-decoration: none; }
-    button, input, select { font: inherit; color: inherit; }
+    button, input, select, textarea { font: inherit; color: inherit; }
     svg { display: block; max-width: 100%; }
 
     .container { width: min(1160px, 100% - 2.25rem); margin-inline: auto; }
-    .section { padding-block: clamp(3.5rem, 6vw, 5.75rem); }
-
-    .promo-strip {
-      background: var(--dark); color: #fff; text-align: center;
-      font-size: 0.78rem; font-weight: 600; padding: 0.45rem 1rem; letter-spacing: 0.02em;
-    }
-    .promo-strip span { color: #fdba74; }
-
-    h1 { font-size: clamp(2.25rem, 4.8vw, 3.75rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.035em; }
-    h2 { font-size: clamp(1.75rem, 3.2vw, 2.5rem); font-weight: 800; line-height: 1.12; letter-spacing: -0.025em; }
-    h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.015em; }
-    .lead { color: var(--ink-secondary); font-size: clamp(0.98rem, 1.3vw, 1.1rem); max-width: 56ch; }
+    .section { padding-block: clamp(3.75rem, 6.5vw, 6rem); }
 
     .eyebrow {
-      display: inline-flex; align-items: center; gap: 0.45rem;
-      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--brass); margin-bottom: 0.75rem;
     }
+    .eyebrow::before { content: ""; width: 20px; height: 1.5px; background: currentColor; }
+
+    h1, h2, h3 { font-family: var(--font-serif); font-weight: 500; line-height: 1.12; letter-spacing: -0.015em; }
+    h1 { font-size: clamp(2.5rem, 5vw, 4.1rem); }
+    h1 em { font-style: italic; color: var(--brass); }
+    h2 { font-size: clamp(1.95rem, 3.5vw, 2.95rem); }
+    h3 { font-size: 1.4rem; }
+    .lead { color: var(--ink-secondary); font-size: clamp(0.98rem, 1.3vw, 1.1rem); max-width: 56ch; }
 
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-      padding: 0.8rem 1.35rem; border-radius: var(--radius-pill);
-      border: 1px solid transparent; font-weight: 700; font-size: 0.9rem;
+      padding: 0.82rem 1.45rem; border-radius: var(--radius-pill);
+      border: 1px solid transparent; font-weight: 600; font-size: 0.9rem;
       cursor: pointer; transition: all var(--ease); white-space: nowrap;
     }
-    .btn:active { transform: translateY(1px); }
-    .btn-accent { background: var(--accent); color: #fff; }
-    .btn-accent:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(234, 88, 12, 0.25); }
     .btn-dark { background: var(--dark); color: #fff; }
-    .btn-dark:hover { background: #273244; }
-    .btn-outline { background: var(--surface); border-color: var(--border-strong); color: var(--ink); }
-    .btn-outline:hover { border-color: var(--ink); }
-    .btn-sm { padding: 0.54rem 1rem; font-size: 0.83rem; }
+    .btn-dark:hover { background: var(--brass); transform: translateY(-1px); }
+    .btn-brass { background: var(--brass); color: #fff; }
+    .btn-brass:hover { background: var(--brass-hover); }
+    .btn-outline { background: transparent; border-color: var(--border-strong); color: var(--ink); }
+    .btn-outline:hover { border-color: var(--ink); background: var(--surface); }
+    .btn-sm { padding: 0.55rem 1.05rem; font-size: 0.84rem; }
 
     .navbar {
       position: sticky; top: 0; z-index: 900; height: var(--nav-h);
-      background: rgba(250, 250, 250, 0.88);
+      background: rgba(248, 246, 242, 0.88);
       backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
     }
-    .nav-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-    .brand { display: inline-flex; align-items: center; gap: 0.55rem; font-size: 1.3rem; font-weight: 800; letter-spacing: -0.03em; }
-    .brand-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
-    .nav-links { display: flex; align-items: center; gap: 1.85rem; list-style: none; }
-    .nav-links a { font-size: 0.9rem; font-weight: 600; color: var(--ink-secondary); transition: color var(--ease); }
-    .nav-links a:hover { color: var(--accent); }
-
-    .cart-btn {
-      display: inline-flex; align-items: center; gap: 0.45rem;
-      padding: 0.55rem 0.95rem; border-radius: var(--radius-pill);
-      background: var(--dark); color: #fff; border: none; font-size: 0.86rem; font-weight: 700; cursor: pointer;
+    .nav-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; }
+    .brand { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-serif); font-size: 1.45rem; font-weight: 600; }
+    .brand-mark {
+      width: 34px; height: 34px; border-radius: 8px; background: var(--dark); color: #f8f6f2;
+      display: grid; place-items: center;
     }
-    .cart-badge {
-      min-width: 20px; height: 20px; padding-inline: 5px; border-radius: 99px;
-      background: var(--accent); color: #fff; font-size: 0.74rem; display: grid; place-items: center;
-    }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--ink-secondary); transition: color var(--ease); }
+    .nav-links a:hover { color: var(--brass); }
 
     .menu-toggle {
       display: none; width: 40px; height: 40px; border-radius: 10px;
@@ -122,142 +113,170 @@
       padding: 1.25rem 1.5rem 1.65rem; flex-direction: column; gap: 0.9rem; box-shadow: var(--shadow-md);
     }
     .mobile-drawer.open { display: flex; }
-    .mobile-drawer a { padding: 0.45rem 0; border-bottom: 1px solid var(--surface-soft); font-weight: 600; }
+    .mobile-drawer a { padding: 0.45rem 0; border-bottom: 1px solid var(--surface-warm); font-weight: 600; }
 
-    .hero { padding-block: clamp(2.5rem, 5vw, 4.5rem) clamp(3.25rem, 5.5vw, 5rem); }
-    .hero-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: clamp(2rem, 4.5vw, 3.75rem); align-items: center; }
-    .hero .lead { margin-top: 1.05rem; }
-    .hero-cta { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.85rem; }
-    .trust-strip {
-      display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 2rem; padding-top: 1.5rem;
-      border-top: 1px solid var(--border); font-size: 0.82rem; font-weight: 600; color: var(--ink-secondary);
+    .hero { padding-block: clamp(2.6rem, 5vw, 4.75rem) clamp(3.5rem, 6vw, 5.25rem); }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+    .hero .lead { margin-top: 1.1rem; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 1.9rem; }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.6rem; border-top: 1px solid var(--border);
     }
+    .hero-stats strong { display: block; font-family: var(--font-serif); font-size: 1.8rem; color: var(--ink); font-weight: 600; }
+    .hero-stats span { font-size: 0.8rem; color: var(--ink-muted); }
 
-    .spotlight-card {
+    .mood-card {
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius-lg); padding: 1.45rem; box-shadow: var(--shadow-md);
+      border-radius: var(--radius-lg); padding: 1.4rem; box-shadow: var(--shadow-md);
     }
-    .spotlight-visual {
-      background: var(--surface-soft); border-radius: var(--radius-md);
-      height: 205px; display: grid; place-items: center; position: relative; padding: 1rem;
+    .mood-canvas {
+      border-radius: var(--radius-md); padding: 1.25rem; background: #EFECE6;
+      transition: background 300ms ease;
     }
-    .bestseller-tag {
-      position: absolute; top: 0.85rem; left: 0.85rem;
-      font-size: 0.72rem; font-weight: 700; padding: 0.25rem 0.65rem;
-      border-radius: var(--radius-pill); background: var(--accent-soft); color: var(--accent);
+    .swatch-row { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-top: 1rem; }
+    .swatches { display: flex; gap: 0.45rem; }
+    .swatch { width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.12); }
+    .mood-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 1rem; }
+    .mood-tab {
+      padding: 0.6rem 0.5rem; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: transparent; cursor: pointer; text-align: left;
+      transition: all var(--ease);
     }
-    .variant-row { display: flex; justify-content: space-between; align-items: center; margin-top: 1.1rem; gap: 0.75rem; }
-    .color-dots { display: flex; gap: 0.5rem; }
-    .color-dot {
-      width: 26px; height: 26px; border-radius: 50%; border: 2px solid #fff;
-      box-shadow: 0 0 0 1.5px var(--border-strong); cursor: pointer;
-    }
-    .color-dot.active { box-shadow: 0 0 0 2px var(--dark); transform: scale(1.08); }
+    .mood-tab strong { display: block; font-size: 0.8rem; }
+    .mood-tab span { font-size: 0.72rem; color: var(--ink-muted); }
+    .mood-tab.active { background: var(--dark); border-color: var(--dark); color: #fff; }
+    .mood-tab.active span { color: #d6d3d1; }
 
-    .catalog-section { background: var(--surface); border-block: 1px solid var(--border); }
-    .section-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1.25rem; margin-bottom: 2rem; }
-    .filter-bar { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .projects-section { background: var(--surface); border-block: 1px solid var(--border); }
+    .section-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1.5rem; margin-bottom: 2.1rem; }
+    .filters { display: flex; flex-wrap: wrap; gap: 0.45rem; }
     .filter-btn {
-      padding: 0.5rem 1rem; border-radius: var(--radius-pill);
+      padding: 0.52rem 1.05rem; border-radius: var(--radius-pill);
       border: 1px solid var(--border); background: var(--bg);
-      color: var(--ink-secondary); font-size: 0.84rem; font-weight: 600; cursor: pointer;
+      color: var(--ink-secondary); font-size: 0.85rem; font-weight: 600; cursor: pointer;
     }
     .filter-btn.active { background: var(--dark); border-color: var(--dark); color: #fff; }
 
-    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.45rem; }
-    .prod-card {
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+    .proj-card {
       background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md);
       overflow: hidden; display: flex; flex-direction: column;
       transition: transform var(--ease), box-shadow var(--ease);
     }
-    .prod-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-    .prod-art { height: 170px; display: grid; place-items: center; padding: 1rem; position: relative; }
-    .save-pill {
-      position: absolute; top: 0.8rem; right: 0.8rem; font-size: 0.7rem; font-weight: 700;
-      padding: 0.22rem 0.55rem; border-radius: 6px; background: var(--green-soft); color: var(--green);
+    .proj-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .proj-art { height: 175px; display: grid; place-items: center; padding: 1rem; position: relative; }
+    .proj-tag {
+      position: absolute; top: 0.85rem; left: 0.85rem; font-size: 0.71rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em; padding: 0.24rem 0.62rem;
+      border-radius: var(--radius-pill); background: rgba(255,255,255,0.92); border: 1px solid var(--border);
     }
-    .prod-body { padding: 1.3rem; display: flex; flex-direction: column; flex: 1; }
-    .price-line { display: flex; align-items: baseline; gap: 0.5rem; margin-top: 0.35rem; }
-    .price-now { font-weight: 800; font-size: 1.12rem; }
-    .price-mrp { font-size: 0.82rem; color: var(--ink-muted); text-decoration: line-through; }
-    .prod-desc { font-size: 0.87rem; color: var(--ink-secondary); margin-block: 0.65rem 1.15rem; flex: 1; }
+    .proj-body { padding: 1.35rem; display: flex; flex-direction: column; flex: 1; }
+    .proj-meta { display: flex; justify-content: space-between; font-size: 0.82rem; color: var(--ink-muted); margin-top: 0.25rem; }
+    .proj-desc { font-size: 0.89rem; color: var(--ink-secondary); margin-block: 0.75rem 1.15rem; flex: 1; }
+    .proj-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-top: auto; }
 
-    .bundle-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 2rem; align-items: stretch; }
-    .bundle-list { display: grid; gap: 0.75rem; }
-    .bundle-item {
-      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-      padding: 1rem 1.15rem; border-radius: var(--radius-md);
-      background: var(--surface); border: 1px solid var(--border); cursor: pointer;
+    .est-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 2rem; align-items: stretch; }
+    .est-panel {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: clamp(1.5rem, 3vw, 2.2rem); display: flex; flex-direction: column; gap: 1.5rem;
     }
-    .bundle-item.selected { border-color: var(--accent); background: var(--accent-soft); }
-    .bundle-summary {
-      background: var(--dark); color: #fff; border-radius: var(--radius-lg);
-      padding: clamp(1.65rem, 3vw, 2.2rem); display: flex; flex-direction: column; justify-content: space-between; gap: 1.4rem;
+    .opt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-top: 0.6rem; }
+    .opt-btn {
+      padding: 0.78rem 0.65rem; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--bg); text-align: left; cursor: pointer;
     }
+    .opt-btn strong { display: block; font-size: 0.88rem; }
+    .opt-btn span { font-size: 0.75rem; color: var(--ink-muted); }
+    .opt-btn.active { border-color: var(--brass); background: var(--brass-soft); }
 
-    footer { padding-block: 2.5rem; border-top: 1px solid var(--border); font-size: 0.84rem; color: var(--ink-muted); }
+    .scope-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem; margin-top: 0.6rem; }
+    .check-pill {
+      display: flex; align-items: center; gap: 0.55rem; padding: 0.7rem 0.85rem;
+      border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--bg);
+      font-size: 0.85rem; font-weight: 500; cursor: pointer;
+    }
+    .check-pill input { accent-color: var(--brass); width: 16px; height: 16px; }
+
+    .est-output {
+      background: var(--dark); color: #fafaf9; border-radius: var(--radius-lg);
+      padding: clamp(1.75rem, 3vw, 2.25rem); display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem;
+    }
+    .est-price { font-family: var(--font-serif); font-size: clamp(2.3rem, 4.2vw, 3.1rem); color: #fcd34d; line-height: 1.05; margin-top: 0.35rem; }
+    .est-rows { display: grid; gap: 0.75rem; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.12); font-size: 0.88rem; }
+    .est-row { display: flex; justify-content: space-between; }
+    .est-row span { color: #a8a29e; }
+
+    .reviews-section { background: var(--surface); border-top: 1px solid var(--border); }
+    .quote-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md);
+      padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1.2rem;
+    }
+    .stars { color: var(--brass); margin-bottom: 0.65rem; }
+    .author { display: flex; align-items: center; gap: 0.75rem; padding-top: 0.95rem; border-top: 1px solid var(--border); }
+    .avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--sage-soft); color: var(--sage); font-weight: 700; font-size: 0.82rem; display: grid; place-items: center; }
+    .author span { display: block; font-size: 0.78rem; color: var(--ink-muted); }
+
+    footer { padding-block: 2.5rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--ink-muted); }
     .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
 
     .backdrop {
-      position: fixed; inset: 0; z-index: 1000; background: rgba(17, 24, 39, 0.58);
+      position: fixed; inset: 0; z-index: 1000; background: rgba(20, 17, 15, 0.6);
       backdrop-filter: blur(4px); display: none; place-items: center; padding: 1.25rem;
     }
     .backdrop.open { display: grid; }
     .modal {
-      width: min(520px, 100%); max-height: 90vh; overflow-y: auto;
-      background: var(--surface); border-radius: var(--radius-lg); padding: 1.65rem;
+      width: min(520px, 100%); background: var(--surface); border-radius: var(--radius-lg);
+      padding: 1.7rem; box-shadow: 0 24px 60px rgba(0,0,0,0.2);
     }
-    .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .modal-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.15rem; }
     .close-btn { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg); cursor: pointer; display: grid; place-items: center; }
-    .ship-bar-wrap { background: var(--surface-soft); padding: 0.75rem 0.9rem; border-radius: var(--radius-sm); margin-bottom: 1rem; font-size: 0.82rem; font-weight: 600; }
-    .ship-track { height: 6px; border-radius: 99px; background: #e5e7eb; overflow: hidden; margin-top: 0.45rem; }
-    .ship-fill { height: 100%; background: var(--green); transition: width 250ms ease; }
-    .cart-row { display: flex; justify-content: space-between; align-items: center; padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
-    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; margin-top: 1rem; }
-    .field { display: flex; flex-direction: column; gap: 0.3rem; }
+    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; }
+    .field { display: flex; flex-direction: column; gap: 0.35rem; }
     .field.full { grid-column: 1 / -1; }
-    .field label { font-size: 0.78rem; font-weight: 600; }
-    .field input, .field select { padding: 0.65rem 0.8rem; border-radius: var(--radius-sm); border: 1px solid var(--border-strong); background: var(--bg); }
+    .field label { font-size: 0.8rem; font-weight: 600; }
+    .field input, .field select { padding: 0.68rem 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-strong); background: var(--bg); }
 
     .toast {
       position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 1100;
       background: var(--dark); color: #fff; padding: 0.78rem 1.15rem;
-      border-radius: var(--radius-pill); font-size: 0.86rem; font-weight: 600;
+      border-radius: var(--radius-sm); font-size: 0.86rem;
       transform: translateY(14px); opacity: 0; pointer-events: none; transition: all 220ms ease;
     }
     .toast.show { transform: translateY(0); opacity: 1; }
 
     @media (max-width: 960px) {
-      .hero-grid, .bundle-grid { grid-template-columns: 1fr; }
+      .hero-grid, .est-grid { grid-template-columns: 1fr; }
       .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 680px) {
-      .nav-links { display: none; }
+      .nav-links, .nav-cta-desktop { display: none; }
       .menu-toggle { display: grid; }
-      .grid-3, .form-grid { grid-template-columns: 1fr; }
+      .grid-3, .opt-grid, .scope-list, .form-grid, .mood-tabs { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <div class="promo-strip">Free Express Shipping above <span>₹999</span> · Cash on Delivery Available Across India</div>
-
   <header class="navbar">
     <div class="container nav-inner">
-      <a href="#top" class="brand"><span class="brand-dot"></span> KOVA</a>
+      <a href="#top" class="brand">
+        <span class="brand-mark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 3v18M3 12h6"/></svg>
+        </span>
+        Studio Kaaya
+      </a>
 
       <nav aria-label="Main navigation">
         <ul class="nav-links">
-          <li><a href="#catalog">Best Sellers</a></li>
-          <li><a href="#bundle">Bundle &amp; Save</a></li>
+          <li><a href="#projects">Executed Homes</a></li>
+          <li><a href="#estimator">Budget Estimator</a></li>
+          <li><a href="#reviews">Homeowners</a></li>
         </ul>
       </nav>
 
       <div style="display:flex; gap:0.65rem; align-items:center;">
-        <button class="cart-btn" id="openCartBtn" type="button">
-          <span>Cart</span>
-          <span class="cart-badge" id="cartCount">0</span>
-        </button>
+        <button class="btn btn-dark btn-sm nav-cta-desktop" id="navConsultBtn" type="button">Book 3D Consultation</button>
         <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle menu">
           <svg id="menuIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
         </button>
@@ -266,107 +285,208 @@
   </header>
 
   <div class="mobile-drawer" id="mobileDrawer">
-    <a href="#catalog" class="m-link">Best Sellers</a>
-    <a href="#bundle" class="m-link">Bundle &amp; Save</a>
+    <a href="#projects" class="m-link">Executed Homes</a>
+    <a href="#estimator" class="m-link">Budget Estimator</a>
+    <a href="#reviews" class="m-link">Homeowners</a>
+    <button class="btn btn-dark" id="mobileConsultBtn" type="button">Book 3D Consultation</button>
   </div>
 
   <main id="top">
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <span class="eyebrow">Minimal Desk &amp; Everyday Carry</span>
-          <h1>Upgrade your daily desk &amp; travel setup.</h1>
+          <span class="eyebrow">Turnkey Residential Interiors</span>
+          <h1>Warm, livable homes delivered in <em>45 days</em>.</h1>
           <p class="lead">
-            Thoughtfully engineered magnetic chargers, aluminium laptop stands, and modular desk organisers shipped directly to your door in 3–5 days.
+            End-to-end modular kitchens, custom wardrobes, lighting, and bespoke furniture across Bengaluru, Kochi, and Hyderabad—backed by factory-finish precision and a 10-year warranty.
           </p>
           <div class="hero-cta">
-            <a href="#catalog" class="btn btn-accent">Shop Best Sellers</a>
-            <a href="#bundle" class="btn btn-outline">Build a Bundle (Save 15%)</a>
+            <a href="#estimator" class="btn btn-dark">Estimate Home Budget</a>
+            <a href="#projects" class="btn btn-outline">View Executed Homes</a>
           </div>
-          <div class="trust-strip">
-            <span>✓ Cash on Delivery</span>
-            <span>✓ 7-Day Easy Replacement</span>
-            <span>✓ 4.8★ (2,100+ Orders)</span>
+          <div class="hero-stats">
+            <div><strong>320+</strong><span>Homes Handed Over</span></div>
+            <div><strong>45 Days</strong><span>Guaranteed Move-In</span></div>
+            <div><strong>10 Yrs</strong><span>Hardware &amp; Ply Warranty</span></div>
           </div>
         </div>
 
-        <div class="spotlight-card" aria-label="Featured product variant preview">
-          <div class="spotlight-visual">
-            <span class="bestseller-tag">#1 Viral Desk Essential</span>
-            <svg width="210" height="140" viewBox="0 0 220 150" fill="none" aria-hidden="true">
-              <rect x="45" y="116" width="130" height="12" rx="6" fill="#9CA3AF"/>
-              <path d="M98 62h24l6 54H92l6-54Z" fill="#6B7280"/>
-              <circle id="heroPadOuter" cx="110" cy="54" r="36" fill="#1F2937"/>
-              <circle cx="110" cy="54" r="24" stroke="#EA580C" stroke-width="2.5" stroke-dasharray="4 3"/>
-              <path d="M108 44l-5 11h7l-2 9 7-11h-7l2-9Z" fill="#EA580C"/>
+        <div class="mood-card" aria-label="Interactive Room Palette Switcher">
+          <div style="display:flex; justify-content:space-between; font-size:0.78rem; color:var(--ink-muted); margin-bottom:0.75rem;">
+            <span>Interactive Material Board</span>
+            <strong id="moodTag" style="color:var(--brass);">Warm Japandi</strong>
+          </div>
+
+          <div class="mood-canvas" id="moodCanvas">
+            <svg viewBox="0 0 380 180" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Living space architectural elevation">
+              <rect x="18" y="148" width="344" height="3" fill="#78716C" fill-opacity="0.35"/>
+              <rect id="svgWallPanel" x="38" y="26" width="120" height="122" rx="4" fill="#D6C7B2"/>
+              <rect id="svgSofa" x="62" y="98" width="145" height="50" rx="10" fill="#57534E"/>
+              <rect id="svgCushion" x="74" y="86" width="54" height="18" rx="6" fill="#A16207"/>
+              <rect id="136" y="86" width="56" height="18" rx="6" fill="#78716C"/>
+              <rect id="svgConsole" x="230" y="114" width="110" height="34" rx="4" fill="#3F3A36"/>
+              <circle cx="285" cy="64" r="24" stroke="#A16207" stroke-width="2" fill="#FFFDF9"/>
+              <path d="M110 10v28" stroke="#1C1917" stroke-width="1.5"/>
+              <path d="M98 38h24l-4 10h-16l-4-10Z" fill="#A16207"/>
             </svg>
           </div>
 
-          <div class="variant-row">
+          <div class="swatch-row">
             <div>
-              <h3>Kova MagDock 3-in-1 Stand</h3>
-              <div style="font-size:0.82rem; color:var(--ink-muted);">Finish: <strong id="variantName">Space Charcoal</strong></div>
+              <strong id="moodTitle" style="font-size:0.95rem;">Ash Oak + Linen + Brushed Brass</strong>
+              <div id="moodDesc" style="font-size:0.8rem; color:var(--ink-muted);">Ideal for sunlit 3BHK living &amp; dining spaces</div>
             </div>
-            <div class="color-dots" id="variantDots">
-              <button class="color-dot active" type="button" style="background:#1F2937;" data-vname="Space Charcoal" data-vfill="#1F2937" aria-label="Space Charcoal"></button>
-              <button class="color-dot" type="button" style="background:#D6D3D1;" data-vname="Anodized Silver" data-vfill="#9CA3AF" aria-label="Anodized Silver"></button>
-              <button class="color-dot" type="button" style="background:#B45309;" data-vname="Desert Terracotta" data-vfill="#B45309" aria-label="Desert Terracotta"></button>
+            <div class="swatches" id="moodSwatches">
+              <span class="swatch" style="background:#D6C7B2;"></span>
+              <span class="swatch" style="background:#57534E;"></span>
+              <span class="swatch" style="background:#A16207;"></span>
             </div>
           </div>
 
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1.1rem; padding-top:1rem; border-top:1px solid var(--border);">
-            <div class="price-line" style="margin-top:0;">
-              <span class="price-now">₹1,499</span>
-              <span class="price-mrp">₹2,499</span>
-            </div>
-            <button class="btn btn-dark btn-sm" id="heroAddBtn" type="button">+ Add to Cart</button>
+          <div class="mood-tabs" role="tablist">
+            <button class="mood-tab active" type="button" data-mood="0"><strong>Warm Japandi</strong><span>Oak &amp; Linen</span></button>
+            <button class="mood-tab" type="button" data-mood="1"><strong>Sage Courtyard</strong><span>Teak &amp; Olive</span></button>
+            <button class="mood-tab" type="button" data-mood="2"><strong>Urban Noir</strong><span>Walnut &amp; Stone</span></button>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section catalog-section" id="catalog">
+    <section class="section projects-section" id="projects">
       <div class="container">
         <div class="section-head">
           <div>
-            <span class="eyebrow">Curated Drop</span>
-            <h2>Trending Everyday Gear</h2>
+            <span class="eyebrow">Real Client Handovers</span>
+            <h2>Executed Interior Projects</h2>
           </div>
-          <div class="filter-bar" role="group" aria-label="Filter products">
-            <button class="filter-btn active" type="button" data-filter="all">All Products</button>
-            <button class="filter-btn" type="button" data-filter="desk">Desk Setup</button>
-            <button class="filter-btn" type="button" data-filter="edc">Everyday Carry</button>
-            <button class="filter-btn" type="button" data-filter="light">Ambient Lighting</button>
+          <div class="filters" role="group" aria-label="Filter interior projects">
+            <button class="filter-btn active" type="button" data-filter="all">All Projects</button>
+            <button class="filter-btn" type="button" data-filter="3bhk">Full 3BHK Homes</button>
+            <button class="filter-btn" type="button" data-filter="kitchen">Modular Kitchens</button>
+            <button class="filter-btn" type="button" data-filter="villa">Villas</button>
           </div>
         </div>
 
-        <div class="grid-3" id="productGrid"></div>
+        <div class="grid-3" id="projectGrid"></div>
       </div>
     </section>
 
-    <section class="section" id="bundle">
+    <section class="section" id="estimator">
       <div class="container">
         <div class="section-head">
           <div>
-            <span class="eyebrow">Save More</span>
-            <h2>Build-Your-Own Desk Bundle</h2>
+            <span class="eyebrow">Transparent Pricing</span>
+            <h2>Turnkey Home Interior Cost Estimator</h2>
           </div>
-          <p class="lead">Pick any 2 or more items below to unlock an automatic 15% bundle discount + free express delivery.</p>
+          <p class="lead">Select your apartment size, finish grade, and rooms required to get an instant ballpark estimate in ₹ Lakhs.</p>
         </div>
 
-        <div class="bundle-grid">
-          <div class="bundle-list" id="bundleList"></div>
-
-          <aside class="bundle-summary" aria-live="polite">
+        <div class="est-grid">
+          <div class="est-panel">
             <div>
-              <span class="eyebrow" style="color:#fdba74;">Your Custom Bundle</span>
-              <div style="font-size:2.4rem; font-weight:800; line-height:1.1; margin-top:0.35rem;" id="bundleTotal">₹2,293</div>
-              <div style="font-size:0.84rem; color:#9ca3af; margin-top:0.35rem;" id="bundleStatus">2 items selected · 15% Bundle Discount Applied!</div>
+              <strong style="font-size:0.92rem;">1. Home Configuration</strong>
+              <div class="opt-grid" id="bhkGroup">
+                <button class="opt-btn" type="button" data-base="5.2" data-label="2BHK (~1,100 sq.ft)">
+                  <strong>2BHK Home</strong><span>~1,100 sq.ft</span>
+                </button>
+                <button class="opt-btn active" type="button" data-base="7.8" data-label="3BHK (~1,650 sq.ft)">
+                  <strong>3BHK Home</strong><span>~1,650 sq.ft</span>
+                </button>
+                <button class="opt-btn" type="button" data-base="13.5" data-label="4BHK / Villa (~2,800 sq.ft)">
+                  <strong>4BHK / Villa</strong><span>~2,800 sq.ft</span>
+                </button>
+              </div>
             </div>
-            <button class="btn btn-accent" id="addBundleBtn" type="button" style="width:100%;">
-              Add Bundle to Cart
+
+            <div>
+              <strong style="font-size:0.92rem;">2. Material &amp; Finish Tier</strong>
+              <div class="opt-grid" id="finishGroup">
+                <button class="opt-btn active" type="button" data-mult="1.0" data-finish="Essential Matte Laminate">
+                  <strong>Essential</strong><span>BWP Ply + Matte Laminate</span>
+                </button>
+                <button class="opt-btn" type="button" data-mult="1.28" data-finish="Premium Acrylic & Fluted">
+                  <strong>Premium</strong><span>High-Gloss Acrylic + Fluted</span>
+                </button>
+                <button class="opt-btn" type="button" data-mult="1.6" data-finish="Luxe Veneer & PU Brass">
+                  <strong>Luxe Bespoke</strong><span>Natural Veneer, PU &amp; Brass</span>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <strong style="font-size:0.92rem;">3. Scope of Work</strong>
+              <div class="scope-list" id="scopeChecks">
+                <label class="check-pill"><input type="checkbox" value="1.8" checked /> Modular Kitchen &amp; Tandem</label>
+                <label class="check-pill"><input type="checkbox" value="2.1" checked /> Master &amp; Guest Wardrobes</label>
+                <label class="check-pill"><input type="checkbox" value="1.1" checked /> False Ceiling &amp; Cove Lights</label>
+                <label class="check-pill"><input type="checkbox" value="0.9" /> TV Unit, Foyer &amp; Painting</label>
+              </div>
+            </div>
+          </div>
+
+          <aside class="est-output" aria-live="polite">
+            <div>
+              <span class="eyebrow" style="color:#fcd34d;">Estimated Turnkey Budget</span>
+              <div class="est-price" id="estRange">₹12.8 – 14.1 Lakhs</div>
+              <div style="font-size:0.82rem; color:#a8a29e; margin-top:0.35rem;">Includes factory fabrication, installation &amp; GST</div>
+
+              <div class="est-rows">
+                <div class="est-row"><span>Configuration</span><strong id="outBhk">3BHK (~1,650 sq.ft)</strong></div>
+                <div class="est-row"><span>Finish Specification</span><strong id="outFinish">Essential Matte Laminate</strong></div>
+                <div class="est-row"><span>Delivery Timeline</span><strong style="color:#86efac;">45 Working Days</strong></div>
+              </div>
+            </div>
+
+            <button class="btn btn-brass" id="lockEstBtn" type="button" style="width:100%;">
+              Get Free 3D Floorplan &amp; Quote
             </button>
           </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reviews-section" id="reviews">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Homeowner Stories</span>
+            <h2>Designed Around Everyday Indian Living</h2>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="quote-card">
+            <div>
+              <div class="stars">★★★★★</div>
+              <p>“Studio Kaaya handed over our 3BHK in Sarjapur on day 44 with zero cost overruns. The tandem kitchen drawers and hidden utility storage are super practical.”</p>
+            </div>
+            <div class="author">
+              <div class="avatar">NM</div>
+              <div><strong>Nikhil &amp; Kavya Menon</strong><span>Bengaluru · 3BHK Full Home</span></div>
+            </div>
+          </article>
+
+          <article class="quote-card">
+            <div>
+              <div class="stars">★★★★★</div>
+              <p>“Their 3D renders matched the final room down to the exact cane shutter shade and warm profile lighting. Worth every rupee.”</p>
+            </div>
+            <div class="author">
+              <div class="avatar">SP</div>
+              <div><strong>Sneha Pillai</strong><span>Kochi · Waterfront Apartment</span></div>
+            </div>
+          </article>
+
+          <article class="quote-card">
+            <div>
+              <div class="stars">★★★★★</div>
+              <p>“We renovated our 12-year-old kitchen and master bedroom without moving out. Dust-free modular installation finished in three weeks.”</p>
+            </div>
+            <div class="author">
+              <div class="avatar">AR</div>
+              <div><strong>Aditya Reddy</strong><span>Hyderabad · Renovation</span></div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -374,65 +494,51 @@
 
   <footer>
     <div class="container footer-inner">
-      <strong>KOVA EVERYDAY</strong>
-      <span>Free Shipping Over ₹999 · UPI &amp; Cash on Delivery</span>
-      <span>© 2026 Kova Direct Commerce</span>
+      <span class="brand" style="font-size:1.2rem;">Studio Kaaya</span>
+      <span>Bengaluru · Kochi · Hyderabad · Experience Centres</span>
+      <span>© 2026 Studio Kaaya Interiors</span>
     </div>
   </footer>
 
-  <div class="backdrop" id="cartModal" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+  <div class="backdrop" id="consultModal" role="dialog" aria-modal="true" aria-labelledby="consultTitle">
     <div class="modal">
       <div class="modal-head">
-        <h3 id="cartTitle">Your Shopping Cart</h3>
-        <button class="close-btn" type="button" id="closeCartBtn">✕</button>
+        <div>
+          <span class="eyebrow" style="margin-bottom:0.2rem;">Complimentary Session</span>
+          <h3 id="consultTitle">Book a Senior Designer Call</h3>
+        </div>
+        <button class="close-btn" type="button" id="closeConsultBtn">✕</button>
       </div>
 
-      <div id="cartMainView">
-        <div class="ship-bar-wrap">
-          <div id="shipText">Add ₹999 more for FREE Express Shipping</div>
-          <div class="ship-track"><div class="ship-fill" id="shipFill" style="width:0%;"></div></div>
-        </div>
-
-        <div id="cartItemsWrap"></div>
-
-        <div style="display:flex; justify-content:space-between; font-weight:800; font-size:1.05rem; margin-top:1rem;">
-          <span>Total Payable</span>
-          <span id="cartTotal">₹0</span>
-        </div>
-
-        <form id="checkoutForm" novalidate>
-          <div class="form-grid">
-            <div class="field">
-              <label for="sName">Full Name *</label>
-              <input id="sName" type="text" placeholder="Anand Krishnan" required />
-            </div>
-            <div class="field">
-              <label for="sPhone">Mobile Number *</label>
-              <input id="sPhone" type="tel" placeholder="+91 98470 55443" required />
-            </div>
-            <div class="field">
-              <label for="sCity">City &amp; Pincode *</label>
-              <input id="sCity" type="text" placeholder="Kochi 682020" required />
-            </div>
-            <div class="field">
-              <label for="sPay">Payment Mode</label>
-              <select id="sPay">
-                <option>Cash on Delivery (COD)</option>
-                <option>UPI / GPay / PhonePe (5% Extra Off)</option>
-              </select>
-            </div>
-            <div class="field full">
-              <button class="btn btn-accent" type="submit" style="width:100%;">Place Order Now</button>
-            </div>
+      <form id="consultForm" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label for="iName">Your Name *</label>
+            <input id="iName" type="text" placeholder="Rhea Nair" required />
           </div>
-        </form>
-      </div>
+          <div class="field">
+            <label for="iPhone">Phone / WhatsApp *</label>
+            <input id="iPhone" type="tel" placeholder="+91 98450 67890" required />
+          </div>
+          <div class="field full">
+            <label for="iCity">City &amp; Apartment / Project Name *</label>
+            <input id="iCity" type="text" placeholder="e.g., Kochi · Prestige Hillside 3BHK" required />
+          </div>
+          <div class="field full">
+            <label for="iSummary">Selected Estimate Summary</label>
+            <input id="iSummary" type="text" value="3BHK Turnkey Interiors" />
+          </div>
+          <div class="field full">
+            <button class="btn btn-dark" type="submit" style="width:100%;">Request Free 3D Design Call</button>
+          </div>
+        </div>
+      </form>
 
-      <div id="cartSuccessView" style="display:none; text-align:center; padding-block:1rem;">
-        <div style="font-size:2rem; color:var(--green); margin-bottom:0.4rem;">✓</div>
-        <h3>Order Confirmed!</h3>
-        <p id="orderConfirmText" style="font-size:0.9rem; color:var(--ink-secondary); margin:0.6rem auto 1.3rem;"></p>
-        <button class="btn btn-outline btn-sm" type="button" id="doneOrderBtn">Continue Shopping</button>
+      <div id="consultSuccess" style="display:none; text-align:center; padding-block:1rem;">
+        <div style="font-size:2rem; color:var(--sage); margin-bottom:0.4rem;">✓</div>
+        <h3>Consultation Scheduled</h3>
+        <p id="consultSuccessText" style="font-size:0.9rem; color:var(--ink-secondary); margin:0.6rem auto 1.3rem;"></p>
+        <button class="btn btn-outline btn-sm" type="button" id="doneConsultBtn">Close</button>
       </div>
     </div>
   </div>
@@ -440,24 +546,26 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
-    const PRODUCTS = [
-      { id: 'magdock', name: 'MagDock 3-in-1 Charger', cat: 'desk', price: 1499, mrp: 2499, off: '40% OFF', tint: '#FFF7ED', desc: 'Simultaneous magnetic fast charging for phone, earbuds, and smartwatch in weighted aluminium.' },
-      { id: 'riser', name: 'Walnut & Steel Desk Shelf', cat: 'desk', price: 1899, mrp: 2999, off: '37% OFF', tint: '#F3F4F6', desc: 'Ergonomic monitor riser with concealed under-tray storage for keyboards and notebooks.' },
-      { id: 'sling', name: 'AeroX Weatherproof Sling', cat: 'edc', price: 1199, mrp: 1999, off: '40% OFF', tint: '#EFF6FF', desc: 'Compact 4L crossbody bag with Fidlock magnetic buckle, RFID pocket, and YKK aqua zippers.' },
-      { id: 'lightbar', name: 'Halo Asymmetric Monitor Bar', cat: 'light', price: 1299, mrp: 2199, off: '41% OFF', tint: '#FEFCE8', desc: 'Zero-glare screen light bar with stepless warm-to-cool dimming and touch dimmer.' },
-      { id: 'wallet', name: 'Titan Carbon Cardholder', cat: 'edc', price: 799, mrp: 1499, off: '47% OFF', tint: '#F3F4F6', desc: 'Pop-up aluminium card ejector holding up to 8 cards plus cash strap in a slim profile.' },
-      { id: 'lamp', name: 'Aura Touch Mushroom Lamp', cat: 'light', price: 949, mrp: 1699, off: '44% OFF', tint: '#FFF1F2', desc: 'Cordless USB-C rechargeable bedside and desk lamp with 3 warm ambient brightness modes.' }
+    const MOODS = [
+      { tag: 'Warm Japandi', title: 'Ash Oak + Linen + Brushed Brass', desc: 'Ideal for sunlit 3BHK living & dining spaces', bg: '#EFECE6', wall: '#D6C7B2', sofa: '#57534E', accent: '#A16207', swatches: ['#D6C7B2', '#57534E', '#A16207'] },
+      { tag: 'Sage Courtyard', title: 'Burma Teak + Sage + Terracotta', desc: 'Earthy tropical palette suited for villas & duplexes', bg: '#E7EFE9', wall: '#C7D6CC', sofa: '#365347', accent: '#B45309', swatches: ['#C7D6CC', '#365347', '#B45309'] },
+      { tag: 'Urban Noir', title: 'Smoked Walnut + Fluted Grey + Gold', desc: 'High-contrast modern aesthetic for city penthouses', bg: '#E5E5E5', wall: '#A8A29E', sofa: '#292524', accent: '#CA8A04', swatches: ['#A8A29E', '#292524', '#CA8A04'] }
     ];
 
-    let cart = [];
-    let activeFilter = 'all';
-    let selectedVariant = 'Space Charcoal';
+    const PROJECTS = [
+      { title: 'The Cane & Teak 3BHK', loc: 'Indiranagar, Bengaluru', cat: '3bhk', catLabel: '3BHK Full Home', budget: '₹14.5 Lakhs', days: '42 Days', tint: '#EFECE6', desc: 'Rattan-shutter wardrobes, island breakfast counter, and warm cove lighting across 1,720 sq.ft.' },
+      { title: 'Olive & Quartz Island Kitchen', loc: 'Panampilly Nagar, Kochi', cat: 'kitchen', catLabel: 'Modular Kitchen', budget: '₹4.2 Lakhs', days: '21 Days', tint: '#E7EFE9', desc: 'Anti-fingerprint sage acrylic cabinetry, Hettich soft-close tandems, and stain-proof quartz countertop.' },
+      { title: 'Courtyard Glass Villa', loc: 'Jubilee Hills, Hyderabad', cat: 'villa', catLabel: '4BHK Villa', budget: '₹26.0 Lakhs', days: '55 Days', tint: '#F3ECE1', desc: 'Double-height fluted teak paneling, walk-in wardrobe suite, and automated sheer curtains.' },
+      { title: 'Compact Pastel 3BHK', loc: 'Whitefield, Bengaluru', cat: '3bhk', catLabel: '3BHK Full Home', budget: '₹11.8 Lakhs', days: '40 Days', tint: '#ECEFF3', desc: 'Space-saving hydraulic beds, concealed study nook, and seamless floor-to-ceiling loft storage.' },
+      { title: 'Parallel Walnut Kitchen', loc: 'Kakkanad, Kochi', cat: 'kitchen', catLabel: 'Modular Kitchen', budget: '₹3.6 Lakhs', days: '18 Days', tint: '#EFEAE4', desc: 'Ergonomic wet-and-dry parallel kitchen layout with built-in appliance tower and pantry pull-outs.' },
+      { title: 'Palm Grove Duplex Villa', loc: 'Aluva, Kerala', cat: 'villa', catLabel: 'Duplex Villa', budget: '₹22.5 Lakhs', days: '50 Days', tint: '#EAEFE7', desc: 'Natural lime-plaster feature walls, custom teak dining table, and brass pendant fixtures.' }
+    ];
 
     function showToast(msg) {
       const t = document.getElementById('toast');
       t.textContent = msg;
       t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2500);
+      setTimeout(() => t.classList.remove('show'), 2600);
     }
 
     const menuToggle = document.getElementById('menuToggle');
@@ -470,41 +578,45 @@
     menuToggle.addEventListener('click', () => toggleMenu());
     document.querySelectorAll('.m-link').forEach((a) => a.addEventListener('click', () => toggleMenu(true)));
 
-    document.querySelectorAll('.color-dot').forEach((dot) => {
-      dot.addEventListener('click', () => {
-        document.querySelectorAll('.color-dot').forEach((d) => d.classList.remove('active'));
-        dot.classList.add('active');
-        selectedVariant = dot.dataset.vname;
-        document.getElementById('variantName').textContent = selectedVariant;
-        document.getElementById('heroPadOuter').setAttribute('fill', dot.dataset.vfill);
+    document.querySelectorAll('.mood-tab').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const m = MOODS[Number(tab.dataset.mood)];
+        document.getElementById('moodTag').textContent = m.tag;
+        document.getElementById('moodTitle').textContent = m.title;
+        document.getElementById('moodDesc').textContent = m.desc;
+        document.getElementById('moodCanvas').style.background = m.bg;
+        document.getElementById('svgWallPanel').setAttribute('fill', m.wall);
+        document.getElementById('svgSofa').setAttribute('fill', m.sofa);
+        document.getElementById('svgCushion').setAttribute('fill', m.accent);
+        document.getElementById('moodSwatches').innerHTML = m.swatches.map((c) => `<span class="swatch" style="background:${c};"></span>`).join('');
+        document.querySelectorAll('.mood-tab').forEach((t) => t.classList.toggle('active', t === tab));
       });
     });
 
-    document.getElementById('heroAddBtn').addEventListener('click', () => {
-      addToCart(`MagDock 3-in-1 (${selectedVariant})`, 1499);
-    });
-
-    const productGrid = document.getElementById('productGrid');
-    function renderProducts() {
-      const list = activeFilter === 'all' ? PRODUCTS : PRODUCTS.filter((p) => p.cat === activeFilter);
-      productGrid.innerHTML = list.map((p) => `
-        <article class="prod-card">
-          <div class="prod-art" style="background:${p.tint};">
-            <span class="save-pill">${p.off}</span>
-            <svg width="96" height="96" viewBox="0 0 96 96" fill="none" aria-hidden="true">
-              <rect x="18" y="20" width="60" height="56" rx="14" fill="#111827"/>
-              <circle cx="48" cy="48" r="16" stroke="#EA580C" stroke-width="3"/>
-              <circle cx="48" cy="48" r="5" fill="#EA580C"/>
+    let activeFilter = 'all';
+    const projectGrid = document.getElementById('projectGrid');
+    function renderProjects() {
+      const list = activeFilter === 'all' ? PROJECTS : PROJECTS.filter((p) => p.cat === activeFilter);
+      projectGrid.innerHTML = list.map((p) => `
+        <article class="proj-card">
+          <div class="proj-art" style="background:${p.tint};">
+            <span class="proj-tag">${p.catLabel}</span>
+            <svg width="210" height="105" viewBox="0 0 220 110" fill="none" aria-hidden="true">
+              <rect x="20" y="92" width="180" height="2" fill="#78716C" fill-opacity="0.4"/>
+              <rect x="34" y="24" width="66" height="68" rx="3" fill="#D6C7B2"/>
+              <rect x="46" y="58" width="84" height="34" rx="6" fill="#44403C"/>
+              <rect x="142" y="66" width="48" height="26" rx="3" fill="#A16207" fill-opacity="0.85"/>
+              <circle cx="166" cy="40" r="12" stroke="#78716C" stroke-width="1.5" fill="#FFF"/>
             </svg>
           </div>
-          <div class="prod-body">
-            <h3>${p.name}</h3>
-            <div class="price-line">
-              <span class="price-now">₹${p.price.toLocaleString('en-IN')}</span>
-              <span class="price-mrp">₹${p.mrp.toLocaleString('en-IN')}</span>
+          <div class="proj-body">
+            <h3>${p.title}</h3>
+            <div class="proj-meta"><span>${p.loc}</span><strong style="color:var(--brass);">${p.budget} · ${p.days}</strong></div>
+            <p class="proj-desc">${p.desc}</p>
+            <div class="proj-actions">
+              <button class="btn btn-outline btn-sm" type="button" data-quote="${p.title} (${p.budget})">Similar Quote</button>
+              <button class="btn btn-dark btn-sm" type="button" data-quote="3D Walkthrough: ${p.title}">Book Visit</button>
             </div>
-            <p class="prod-desc">${p.desc}</p>
-            <button class="btn btn-dark btn-sm" type="button" data-add="${p.id}" style="width:100%;">+ Add to Cart</button>
           </div>
         </article>
       `).join('');
@@ -514,142 +626,89 @@
       btn.addEventListener('click', () => {
         activeFilter = btn.dataset.filter;
         document.querySelectorAll('.filter-btn').forEach((b) => b.classList.toggle('active', b === btn));
-        renderProducts();
+        renderProjects();
       });
     });
 
-    productGrid.addEventListener('click', (e) => {
-      const btn = e.target.closest('[data-add]');
-      if (!btn) return;
-      const p = PRODUCTS.find((x) => x.id === btn.dataset.add);
-      if (p) addToCart(p.name, p.price);
+    projectGrid.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-quote]');
+      if (btn) openConsult(btn.dataset.quote);
     });
 
-    const bundleList = document.getElementById('bundleList');
-    function renderBundleOptions() {
-      bundleList.innerHTML = PRODUCTS.slice(0, 4).map((p, i) => `
-        <label class="bundle-item ${i < 2 ? 'selected' : ''}">
-          <div style="display:flex; align-items:center; gap:0.75rem;">
-            <input type="checkbox" value="${p.price}" data-bname="${p.name}" ${i < 2 ? 'checked' : ''} style="width:18px; height:18px; accent-color:var(--accent);" />
-            <div>
-              <strong>${p.name}</strong>
-              <div style="font-size:0.78rem; color:var(--ink-muted);">MRP ₹${p.mrp.toLocaleString('en-IN')}</div>
-            </div>
-          </div>
-          <strong>₹${p.price.toLocaleString('en-IN')}</strong>
-        </label>
-      `).join('');
-    }
+    let baseLakhs = 7.8;
+    let bhkLabel = '3BHK (~1,650 sq.ft)';
+    let finishMult = 1.0;
+    let finishLabel = 'Essential Matte Laminate';
 
-    function updateBundle() {
-      let raw = 0;
-      let count = 0;
-      document.querySelectorAll('#bundleList input').forEach((cb) => {
-        cb.closest('.bundle-item').classList.toggle('selected', cb.checked);
-        if (cb.checked) {
-          raw += Number(cb.value);
-          count++;
-        }
+    function updateEstimate() {
+      let scopeAdd = 0;
+      document.querySelectorAll('#scopeChecks input:checked').forEach((cb) => {
+        scopeAdd += Number(cb.value);
       });
-      const discount = count >= 2 ? 0.15 : 0;
-      const final = Math.round(raw * (1 - discount));
-      document.getElementById('bundleTotal').textContent = `₹${final.toLocaleString('en-IN')}`;
-      document.getElementById('bundleStatus').textContent = count >= 2
-        ? `${count} items selected · 15% Bundle Discount Applied!`
-        : `${count} item selected · Pick 2+ items to unlock 15% off`;
-      return { count, final };
+      const low = ((baseLakhs + scopeAdd) * finishMult).toFixed(1);
+      const high = (Number(low) * 1.1).toFixed(1);
+      document.getElementById('estRange').textContent = `₹${low} – ${high} Lakhs`;
+      document.getElementById('outBhk').textContent = bhkLabel;
+      document.getElementById('outFinish').textContent = finishLabel;
+      return `₹${low}–${high}L · ${bhkLabel} (${finishLabel})`;
     }
 
-    bundleList.addEventListener('change', updateBundle);
-    document.getElementById('addBundleBtn').addEventListener('click', () => {
-      const { count, final } = updateBundle();
-      if (count === 0) {
-        showToast('Select at least 1 item for your bundle');
-        return;
-      }
-      addToCart(`Custom Desk Bundle (${count} items)`, final);
-      openCart();
+    document.querySelectorAll('#bhkGroup .opt-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#bhkGroup .opt-btn').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        baseLakhs = Number(btn.dataset.base);
+        bhkLabel = btn.dataset.label;
+        updateEstimate();
+      });
     });
 
-    function addToCart(name, price) {
-      cart.push({ uid: Date.now() + Math.random(), name, price });
-      document.getElementById('cartCount').textContent = cart.length;
-      showToast(`Added ${name} to cart`);
-    }
-
-    function renderCart() {
-      const wrap = document.getElementById('cartItemsWrap');
-      const total = cart.reduce((s, i) => s + i.price, 0);
-      const pct = Math.min(100, Math.round((total / 999) * 100));
-      document.getElementById('shipFill').style.width = `${pct}%`;
-      document.getElementById('shipText').textContent = total >= 999
-        ? '✓ Unlocked FREE Express Shipping!'
-        : `Add ₹${(999 - total).toLocaleString('en-IN')} more for FREE Express Shipping`;
-
-      if (cart.length === 0) {
-        wrap.innerHTML = `<div style="padding:1rem 0; color:var(--ink-muted); font-size:0.9rem;">Your cart is empty. Add any item above to test checkout!</div>`;
-      } else {
-        wrap.innerHTML = cart.map((item) => `
-          <div class="cart-row">
-            <span>${item.name}</span>
-            <div>
-              <strong>₹${item.price.toLocaleString('en-IN')}</strong>
-              <button type="button" data-rm="${item.uid}" style="margin-left:0.6rem; border:none; background:none; color:var(--accent); font-weight:700; cursor:pointer;">✕</button>
-            </div>
-          </div>
-        `).join('');
-      }
-      document.getElementById('cartTotal').textContent = `₹${total.toLocaleString('en-IN')}`;
-    }
-
-    document.getElementById('cartItemsWrap').addEventListener('click', (e) => {
-      const rm = e.target.closest('[data-rm]');
-      if (!rm) return;
-      cart = cart.filter((i) => i.uid !== Number(rm.dataset.rm));
-      document.getElementById('cartCount').textContent = cart.length;
-      renderCart();
+    document.querySelectorAll('#finishGroup .opt-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#finishGroup .opt-btn').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        finishMult = Number(btn.dataset.mult);
+        finishLabel = btn.dataset.finish;
+        updateEstimate();
+      });
     });
 
-    const cartModal = document.getElementById('cartModal');
-    function openCart() {
-      document.getElementById('cartMainView').style.display = 'block';
-      document.getElementById('cartSuccessView').style.display = 'none';
-      renderCart();
-      cartModal.classList.add('open');
+    document.querySelectorAll('#scopeChecks input').forEach((cb) => cb.addEventListener('change', updateEstimate));
+
+    const consultModal = document.getElementById('consultModal');
+    function openConsult(summaryText = '3BHK Turnkey Interiors') {
+      document.getElementById('consultForm').style.display = 'block';
+      document.getElementById('consultSuccess').style.display = 'none';
+      document.getElementById('iSummary').value = summaryText;
+      consultModal.classList.add('open');
     }
-    const closeCart = () => cartModal.classList.remove('open');
+    const closeConsult = () => consultModal.classList.remove('open');
 
-    document.getElementById('openCartBtn').addEventListener('click', openCart);
-    document.getElementById('closeCartBtn').addEventListener('click', closeCart);
-    document.getElementById('doneOrderBtn').addEventListener('click', closeCart);
-    cartModal.addEventListener('click', (e) => { if (e.target === cartModal) closeCart(); });
+    document.getElementById('navConsultBtn').addEventListener('click', () => openConsult(updateEstimate()));
+    document.getElementById('mobileConsultBtn').addEventListener('click', () => { toggleMenu(true); openConsult(updateEstimate()); });
+    document.getElementById('lockEstBtn').addEventListener('click', () => openConsult(updateEstimate()));
+    document.getElementById('closeConsultBtn').addEventListener('click', closeConsult);
+    document.getElementById('doneConsultBtn').addEventListener('click', closeConsult);
+    consultModal.addEventListener('click', (e) => { if (e.target === consultModal) closeConsult(); });
 
-    document.getElementById('checkoutForm').addEventListener('submit', (e) => {
+    document.getElementById('consultForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      if (cart.length === 0) {
-        showToast('Add at least 1 product to your cart first');
-        return;
-      }
-      const name = document.getElementById('sName').value.trim();
-      const phone = document.getElementById('sPhone').value.trim();
-      const city = document.getElementById('sCity').value.trim();
+      const name = document.getElementById('iName').value.trim();
+      const phone = document.getElementById('iPhone').value.trim();
+      const city = document.getElementById('iCity').value.trim();
       if (!name || !phone || !city) {
-        showToast('Please enter your name, mobile, and city.');
+        showToast('Please enter your name, phone, and city/project.');
         return;
       }
-      const orderId = 'KV-' + Math.floor(10000 + Math.random() * 90000);
-      document.getElementById('orderConfirmText').innerHTML =
-        `Thank you, <strong>${name}</strong>! Order <strong>${orderId}</strong> for <strong>${city}</strong> is confirmed. Tracking updates will be sent to <strong>${phone}</strong>.`;
-      cart = [];
-      document.getElementById('cartCount').textContent = '0';
-      document.getElementById('cartMainView').style.display = 'none';
-      document.getElementById('cartSuccessView').style.display = 'block';
+      document.getElementById('consultSuccessText').innerHTML =
+        `Thank you, <strong>${name}</strong>! Our senior interior architect for <strong>${city}</strong> will call you on <strong>${phone}</strong> with your 3D floorplan slot.`;
+      document.getElementById('consultForm').style.display = 'none';
+      document.getElementById('consultSuccess').style.display = 'block';
       e.target.reset();
     });
 
-    renderProducts();
-    renderBundleOptions();
-    updateBundle();
+    renderProjects();
+    updateEstimate();
   </script>
 </body>
 </html>
