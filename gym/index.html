@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IronPulse Club — Strength, Conditioning & Transformation Studio</title>
+
+  <!-- WhatsApp Link Preview Tags -->
+  <meta property="og:title" content="IronPulse Club — Modern Gym & Fitness Studio Demo" />
+  <meta property="og:description" content="Strength & conditioning club with live class schedule, interactive BMI & protein calculator, membership toggle, and free 3-day trial pass." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,600;0,700;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0b0d10;
+      --surface: #13171d;
+      --surface-2: #1b212a;
+      --ink: #f4f6f8;
+      --ink-secondary: #9ca6b5;
+      --ink-muted: #687385;
+      --volt: #c6f135;
+      --volt-hover: #b4df22;
+      --volt-soft: rgba(198, 241, 53, 0.12);
+      --border: rgba(255, 255, 255, 0.09);
+      --border-volt: rgba(198, 241, 53, 0.38);
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 22px;
+      --radius-pill: 999px;
+      --font-display: 'Chakra Petch', sans-serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --nav-h: 74px;
+      --ease: 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 16px); }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; color: inherit; }
+    svg { display: block; max-width: 100%; }
+
+    .container { width: min(1160px, 100% - 2.25rem); margin-inline: auto; }
+    .section { padding-block: clamp(3.75rem, 6.5vw, 6rem); }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--volt); margin-bottom: 0.75rem;
+    }
+    .eyebrow::before { content: ""; width: 18px; height: 2px; background: var(--volt); }
+
+    h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.08; letter-spacing: -0.01em; text-transform: uppercase; }
+    h1 { font-size: clamp(2.4rem, 5.2vw, 4.1rem); }
+    h1 span { color: var(--volt); font-style: italic; }
+    h2 { font-size: clamp(1.85rem, 3.4vw, 2.75rem); }
+    h3 { font-size: 1.25rem; }
+    .lead { color: var(--ink-secondary); font-size: clamp(0.98rem, 1.3vw, 1.08rem); max-width: 56ch; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.82rem 1.4rem; border-radius: var(--radius-sm);
+      border: 1px solid transparent; font-weight: 700; font-size: 0.9rem;
+      cursor: pointer; transition: all var(--ease); white-space: nowrap;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-volt { background: var(--volt); color: #0c0f06; }
+    .btn-volt:hover { background: var(--volt-hover); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(198, 241, 53, 0.22); }
+    .btn-outline { background: var(--surface-2); border-color: var(--border); color: var(--ink); }
+    .btn-outline:hover { border-color: var(--volt); color: var(--volt); }
+    .btn-sm { padding: 0.55rem 1rem; font-size: 0.84rem; }
+
+    /* Sticky Navbar */
+    .navbar {
+      position: sticky; top: 0; z-index: 900; height: var(--nav-h);
+      background: rgba(11, 13, 16, 0.86);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .brand { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; letter-spacing: 0.03em; }
+    .brand-badge {
+      width: 34px; height: 34px; border-radius: 8px; background: var(--volt); color: #0b0d10;
+      display: grid; place-items: center;
+    }
+    .nav-links { display: flex; align-items: center; gap: 1.85rem; list-style: none; }
+    .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--ink-secondary); transition: color var(--ease); }
+    .nav-links a:hover { color: var(--volt); }
+
+    .menu-toggle {
+      display: none; width: 40px; height: 40px; border-radius: 10px;
+      border: 1px solid var(--border); background: var(--surface); place-items: center; cursor: pointer;
+    }
+    .mobile-drawer {
+      display: none; position: fixed; inset: var(--nav-h) 0 auto 0; z-index: 850;
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 1.25rem 1.5rem 1.65rem; flex-direction: column; gap: 0.9rem;
+    }
+    .mobile-drawer.open { display: flex; }
+    .mobile-drawer a { padding: 0.45rem 0; border-bottom: 1px solid var(--border); font-weight: 600; }
+
+    /* Hero + Interactive Class Schedule Card */
+    .hero {
+      padding-block: clamp(2.6rem, 5vw, 4.75rem) clamp(3.5rem, 6vw, 5.25rem);
+      background: radial-gradient(circle at 82% 22%, rgba(198, 241, 53, 0.11), transparent 46%);
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.06fr 0.94fr; gap: clamp(2rem, 4.5vw, 3.75rem); align-items: center; }
+    .hero .lead { margin-top: 1.1rem; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 1.9rem; }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+      margin-top: 2.5rem; padding-top: 1.6rem; border-top: 1px solid var(--border);
+    }
+    .hero-stats strong { display: block; font-family: var(--font-display); font-size: 1.8rem; color: var(--volt); }
+    .hero-stats span { font-size: 0.8rem; color: var(--ink-muted); }
+
+    .schedule-card {
+      background: var(--surface); border: 1px solid var(--border-volt);
+      border-radius: var(--radius-lg); padding: 1.45rem;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    }
+    .day-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.45rem; margin-bottom: 1rem; }
+    .day-tab {
+      padding: 0.55rem 0.5rem; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--bg);
+      font-weight: 700; font-size: 0.8rem; cursor: pointer; text-align: center;
+    }
+    .day-tab.active { background: var(--volt); border-color: var(--volt); color: #0b0d10; }
+    .slot-list { display: grid; gap: 0.65rem; }
+    .slot-item {
+      display: flex; justify-content: space-between; align-items: center; gap: 0.75rem;
+      padding: 0.85rem 1rem; border-radius: var(--radius-sm);
+      background: var(--surface-2); border: 1px solid var(--border);
+    }
+    .slot-time { font-family: var(--font-display); font-size: 0.92rem; color: var(--volt); }
+    .slot-spots { font-size: 0.74rem; padding: 0.2rem 0.55rem; border-radius: 99px; background: var(--volt-soft); color: var(--volt); font-weight: 600; }
+
+    /* Programs Section */
+    .programs-section { background: var(--surface); border-block: 1px solid var(--border); }
+    .section-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1.25rem; margin-bottom: 2rem; }
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .filter-btn {
+      padding: 0.5rem 1rem; border-radius: var(--radius-pill);
+      border: 1px solid var(--border); background: var(--bg);
+      color: var(--ink-secondary); font-size: 0.84rem; font-weight: 600; cursor: pointer;
+    }
+    .filter-btn.active { background: var(--volt); border-color: var(--volt); color: #0b0d10; }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.45rem; }
+    .prog-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md);
+      padding: 1.45rem; display: flex; flex-direction: column;
+      transition: transform var(--ease), border-color var(--ease);
+    }
+    .prog-card:hover { transform: translateY(-4px); border-color: var(--border-volt); }
+    .prog-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .prog-tag { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.24rem 0.62rem; border-radius: 6px; background: var(--volt-soft); color: var(--volt); }
+    .prog-desc { font-size: 0.88rem; color: var(--ink-secondary); margin-block: 0.65rem 1.2rem; flex: 1; }
+    .prog-meta { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--ink-muted); padding-top: 0.85rem; border-top: 1px solid var(--border); margin-bottom: 1rem; }
+
+    /* Interactive Macro & BMI Calculator */
+    .calc-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 2rem; align-items: stretch; }
+    .calc-panel {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: clamp(1.5rem, 3vw, 2.2rem); display: flex; flex-direction: column; gap: 1.5rem;
+    }
+    .range-head { display: flex; justify-content: space-between; font-weight: 600; font-size: 0.92rem; margin-bottom: 0.6rem; }
+    .range-val { font-family: var(--font-display); color: var(--volt); font-size: 1.05rem; }
+    input[type="range"] { width: 100%; accent-color: var(--volt); cursor: pointer; }
+    .goal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-top: 0.6rem; }
+    .goal-btn {
+      padding: 0.72rem 0.5rem; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--bg);
+      text-align: center; cursor: pointer;
+    }
+    .goal-btn strong { display: block; font-size: 0.86rem; }
+    .goal-btn span { font-size: 0.74rem; color: var(--ink-muted); }
+    .goal-btn.active { border-color: var(--volt); background: var(--volt-soft); }
+    .goal-btn.active strong { color: var(--volt); }
+
+    .calc-output {
+      background: linear-gradient(155deg, #171d24, #0d1015);
+      border: 1px solid var(--border-volt); border-radius: var(--radius-lg);
+      padding: clamp(1.65rem, 3vw, 2.2rem); display: flex; flex-direction: column; justify-content: space-between; gap: 1.4rem;
+    }
+    .macro-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; margin-top: 1rem; }
+    .macro-box { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.85rem 0.65rem; text-align: center; }
+    .macro-box strong { display: block; font-family: var(--font-display); font-size: 1.35rem; color: var(--volt); }
+    .macro-box span { font-size: 0.74rem; color: var(--ink-secondary); }
+
+    /* Membership Plans */
+    .plans-section { background: var(--surface); border-top: 1px solid var(--border); }
+    .billing-switch { display: inline-flex; background: var(--bg); padding: 0.3rem; border-radius: var(--radius-pill); border: 1px solid var(--border); }
+    .bill-btn { padding: 0.45rem 1rem; border-radius: var(--radius-pill); border: none; background: transparent; font-size: 0.84rem; font-weight: 600; cursor: pointer; color: var(--ink-secondary); }
+    .bill-btn.active { background: var(--volt); color: #0b0d10; }
+    .plan-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md);
+      padding: 1.65rem; display: flex; flex-direction: column; gap: 1rem;
+    }
+    .plan-card.popular { border: 2px solid var(--volt); }
+    .plan-price { font-family: var(--font-display); font-size: 2.2rem; color: var(--ink); }
+    .plan-price small { font-family: var(--font-sans); font-size: 0.84rem; color: var(--ink-muted); font-weight: 500; }
+    .plan-list { list-style: none; display: grid; gap: 0.55rem; font-size: 0.88rem; color: var(--ink-secondary); flex: 1; }
+    .plan-list li::before { content: "✓ "; color: var(--volt); font-weight: 700; }
+
+    footer { padding-block: 2.5rem; border-top: 1px solid var(--border); font-size: 0.84rem; color: var(--ink-muted); }
+    .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
+
+    /* Modal & Toast */
+    .backdrop {
+      position: fixed; inset: 0; z-index: 1000; background: rgba(5, 7, 10, 0.78);
+      backdrop-filter: blur(5px); display: none; place-items: center; padding: 1.25rem;
+    }
+    .backdrop.open { display: grid; }
+    .modal {
+      width: min(490px, 100%); background: var(--surface);
+      border: 1px solid var(--border-volt); border-radius: var(--radius-lg); padding: 1.7rem;
+    }
+    .modal-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.15rem; }
+    .close-btn { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg); cursor: pointer; display: grid; place-items: center; }
+    .form-grid { display: grid; gap: 0.85rem; }
+    .field { display: flex; flex-direction: column; gap: 0.35rem; }
+    .field label { font-size: 0.8rem; color: var(--ink-secondary); font-weight: 600; }
+    .field input, .field select { padding: 0.7rem 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--bg); }
+
+    .toast {
+      position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 1100;
+      background: var(--surface-2); border: 1px solid var(--volt); color: var(--ink);
+      padding: 0.78rem 1.15rem; border-radius: var(--radius-sm); font-size: 0.86rem;
+      transform: translateY(14px); opacity: 0; pointer-events: none; transition: all 220ms ease;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    @media (max-width: 960px) {
+      .hero-grid, .calc-grid { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 680px) {
+      .nav-links, .nav-cta-desktop { display: none; }
+      .menu-toggle { display: grid; }
+      .grid-3, .goal-grid, .macro-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#top" class="brand">
+        <span class="brand-badge">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6.5 6.5h11M6.5 17.5h11M4 9v6M20 9v6M9 12h6"/></svg>
+        </span>
+        IRONPULSE
+      </a>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#calculator">Macro &amp; BMI Tool</a></li>
+          <li><a href="#memberships">Memberships</a></li>
+        </ul>
+      </nav>
+
+      <div style="display:flex; gap:0.65rem; align-items:center;">
+        <button class="btn btn-volt btn-sm nav-cta-desktop" id="navTrialBtn" type="button">Claim 3-Day Free Pass</button>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle menu">
+          <svg id="menuIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="#programs" class="m-link">Programs</a>
+    <a href="#calculator" class="m-link">Macro &amp; BMI Tool</a>
+    <a href="#memberships" class="m-link">Memberships</a>
+    <button class="btn btn-volt" id="mobileTrialBtn" type="button">Claim 3-Day Free Pass</button>
+  </div>
+
+  <main id="top">
+    <!-- Hero + Live Batch Schedule -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Strength &amp; Performance Club</span>
+          <h1>Built for strength. Engineered for <span>real results</span>.</h1>
+          <p class="lead">
+            Olympic lifting platforms, calibrated Eleiko plates, turf conditioning zones, and certified strength coaches—open 5:30 AM to 10:30 PM daily.
+          </p>
+          <div class="hero-cta">
+            <button class="btn btn-volt" id="heroTrialBtn" type="button">Start 3-Day Free Trial</button>
+            <a href="#calculator" class="btn btn-outline">Calculate Calories &amp; Protein</a>
+          </div>
+          <div class="hero-stats">
+            <div><strong>14,000</strong><span>Sq.Ft Training Floor</span></div>
+            <div><strong>18+</strong><span>Certified Coaches</span></div>
+            <div><strong>4.9 ★</strong><span>940+ Member Reviews</span></div>
+          </div>
+        </div>
+
+        <div class="schedule-card" aria-label="Interactive Daily Batch Timetable">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
+            <span style="font-size:0.78rem; font-weight:700; color:var(--ink-secondary); text-transform:uppercase;">Live Batch Schedule</span>
+            <span style="font-size:0.76rem; color:var(--volt);">● Spots Open Today</span>
+          </div>
+
+          <div class="day-tabs" id="dayTabs">
+            <button class="day-tab active" type="button" data-day="morning">Morning</button>
+            <button class="day-tab" type="button" data-day="evening">Evening</button>
+            <button class="day-tab" type="button" data-day="weekend">Weekend</button>
+          </div>
+
+          <div class="slot-list" id="slotList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Training Programs -->
+    <section class="section programs-section" id="programs">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Coaching Tracks</span>
+            <h2>Training Programs</h2>
+          </div>
+          <div class="filter-bar" role="group" aria-label="Filter training programs">
+            <button class="filter-btn active" type="button" data-filter="all">All Tracks</button>
+            <button class="filter-btn" type="button" data-filter="strength">Strength &amp; Hypertrophy</button>
+            <button class="filter-btn" type="button" data-filter="hiit">HIIT &amp; Athletic</button>
+            <button class="filter-btn" type="button" data-filter="pt">1-on-1 Coaching</button>
+          </div>
+        </div>
+
+        <div class="grid-3" id="programGrid"></div>
+      </div>
+    </section>
+
+    <!-- Interactive BMI, Calorie & Protein Calculator -->
+    <section class="section" id="calculator">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Nutrition &amp; Body Metrics</span>
+            <h2>BMI, Calorie &amp; Protein Estimator</h2>
+          </div>
+          <p class="lead">Dial in your height, weight, and training goal to get daily calorie and protein targets.</p>
+        </div>
+
+        <div class="calc-grid">
+          <div class="calc-panel">
+            <div>
+              <div class="range-head"><span>Current Weight</span><span class="range-val" id="valWeight">72 kg</span></div>
+              <input type="range" id="weightRange" min="42" max="140" step="1" value="72" />
+            </div>
+
+            <div>
+              <div class="range-head"><span>Height</span><span class="range-val" id="valHeight">174 cm</span></div>
+              <input type="range" id="heightRange" min="145" max="205" step="1" value="174" />
+            </div>
+
+            <div>
+              <div class="range-head"><span>Primary Fitness Goal</span><span class="range-val" id="goalLabel">Muscle Gain</span></div>
+              <div class="goal-grid" id="goalGroup">
+                <button class="goal-btn" type="button" data-cal-mult="26" data-prot="2.0" data-name="Fat Loss" data-track="Metcon Sweat 45">
+                  <strong>Fat Loss</strong><span>Calorie Deficit</span>
+                </button>
+                <button class="goal-btn active" type="button" data-cal-mult="34" data-prot="2.1" data-name="Muscle Gain" data-track="Hypertrophy Club">
+                  <strong>Muscle Gain</strong><span>Lean Surplus</span>
+                </button>
+                <button class="goal-btn" type="button" data-cal-mult="30" data-prot="1.8" data-name="Recomp & Tone" data-track="Athletic Hybrid">
+                  <strong>Recomp</strong><span>Strength + Stamina</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <aside class="calc-output" aria-live="polite">
+            <div>
+              <span class="eyebrow">Your Daily Targets</span>
+              <div style="font-size:0.86rem; color:var(--ink-secondary);">Recommended Track: <strong id="recTrack" style="color:var(--volt);">Hypertrophy Club</strong></div>
+
+              <div class="macro-row">
+                <div class="macro-box"><strong id="outBmi">23.8</strong><span>BMI (Normal)</span></div>
+                <div class="macro-box"><strong id="outCal">2,448</strong><span>Daily kcal</span></div>
+                <div class="macro-box"><strong id="outProt">151g</strong><span>Daily Protein</span></div>
+              </div>
+
+              <p id="macroAdvice" style="font-size:0.85rem; color:var(--ink-secondary); margin-top:1.1rem; padding:0.85rem; border-radius:8px; background:rgba(255,255,255,0.03); border-left:2px solid var(--volt);">
+                Aim for 4 strength sessions/week with progressive overload and 151g daily protein split across 4 meals.
+              </p>
+            </div>
+
+            <button class="btn btn-volt" id="calcTrialBtn" type="button" style="width:100%;">
+              Book Free InBody Scan &amp; Trial Session
+            </button>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Membership Plans with Billing Toggle -->
+    <section class="section plans-section" id="memberships">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Flexible Access</span>
+            <h2>Club Memberships</h2>
+          </div>
+
+          <div class="billing-switch" role="group" aria-label="Toggle billing frequency">
+            <button class="bill-btn active" type="button" data-bill="monthly">Monthly</button>
+            <button class="bill-btn" type="button" data-bill="annual">Annual (Save 30%)</button>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="plan-card">
+            <div>
+              <span class="eyebrow" style="margin-bottom:0.25rem;">Open Gym</span>
+              <h3>Club Access</h3>
+            </div>
+            <div class="plan-price" data-m="2499" data-a="1749">₹2,499 <small>/ month</small></div>
+            <ul class="plan-list">
+              <li>Unlimited strength &amp; cardio floor access</li>
+              <li>1 complimentary InBody body-composition scan</li>
+              <li>Locker room, shower &amp; towel service</li>
+              <li>Free parking &amp; hydration bar</li>
+            </ul>
+            <button class="btn btn-outline join-plan-btn" type="button" data-plan="Club Access">Start Free Trial First</button>
+          </article>
+
+          <article class="plan-card popular">
+            <div>
+              <span class="eyebrow" style="margin-bottom:0.25rem;">Most Popular</span>
+              <h3>All-Access + Group Classes</h3>
+            </div>
+            <div class="plan-price" data-m="3999" data-a="2799">₹3,999 <small>/ month</small></div>
+            <ul class="plan-list">
+              <li>Everything in Club Access</li>
+              <li>Unlimited Hypertrophy, HIIT &amp; Boxing batches</li>
+              <li>Monthly InBody tracking &amp; macro check-in</li>
+              <li>2 guest passes every month</li>
+            </ul>
+            <button class="btn btn-volt join-plan-btn" type="button" data-plan="All-Access + Classes">Claim 3-Day Free Pass</button>
+          </article>
+
+          <article class="plan-card">
+            <div>
+              <span class="eyebrow" style="margin-bottom:0.25rem;">12-Week Transformation</span>
+              <h3>Personal Coaching</h3>
+            </div>
+            <div class="plan-price" data-m="9500" data-a="6999">₹9,500 <small>/ month</small></div>
+            <ul class="plan-list">
+              <li>12 dedicated 1-on-1 personal training sessions/mo</li>
+              <li>Custom weekly nutrition &amp; supplement plan</li>
+              <li>Bi-weekly progress &amp; posture assessment</li>
+              <li>Full All-Access club membership included</li>
+            </ul>
+            <button class="btn btn-outline join-plan-btn" type="button" data-plan="12-Week Personal Coaching">Book Coach Assessment</button>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <strong style="font-family:var(--font-display); letter-spacing:0.04em;">IRONPULSE CLUB</strong>
+      <span>Koramangala · Indiranagar · Edappally · Open 5:30 AM – 10:30 PM</span>
+      <span>© 2026 IronPulse Fitness Pvt. Ltd.</span>
+    </div>
+  </footer>
+
+  <!-- Free Trial Pass Modal -->
+  <div class="backdrop" id="trialModal" role="dialog" aria-modal="true" aria-labelledby="trialTitle">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <span class="eyebrow" style="margin-bottom:0.2rem;">Zero Commitment</span>
+          <h3 id="trialTitle">Activate Your 3-Day Free Pass</h3>
+        </div>
+        <button class="close-btn" type="button" id="closeTrialBtn">✕</button>
+      </div>
+
+      <form id="trialForm" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label for="gName">Full Name *</label>
+            <input id="gName" type="text" placeholder="Rohan Nair" required />
+          </div>
+          <div class="field">
+            <label for="gPhone">WhatsApp Number *</label>
+            <input id="gPhone" type="tel" placeholder="+91 98765 11223" required />
+          </div>
+          <div class="field">
+            <label for="gPlan">Interested Plan / Batch</label>
+            <input id="gPlan" type="text" value="All-Access + Classes" />
+          </div>
+          <div class="field">
+            <label for="gSlot">Preferred Visit Time</label>
+            <select id="gSlot">
+              <option>Morning (6:00 AM – 10:00 AM)</option>
+              <option>Afternoon (12:00 PM – 4:00 PM)</option>
+              <option>Evening (5:30 PM – 9:30 PM)</option>
+            </select>
+          </div>
+          <button class="btn btn-volt" type="submit" style="width:100%; margin-top:0.35rem;">Generate Digital Pass</button>
+        </div>
+      </form>
+
+      <div id="trialSuccess" style="display:none; text-align:center; padding-block:1rem;">
+        <div style="font-size:2rem; color:var(--volt); margin-bottom:0.4rem;">✓</div>
+        <h3>3-Day Pass Issued!</h3>
+        <p id="trialSuccessText" style="font-size:0.9rem; color:var(--ink-secondary); margin:0.6rem auto 1.3rem;"></p>
+        <button class="btn btn-outline btn-sm" type="button" id="doneTrialBtn">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const SCHEDULES = {
+      morning: [
+        { time: '06:30 AM', title: 'Barbell Strength & Squats', coach: 'Coach Vikram', spots: '4 spots left' },
+        { time: '07:45 AM', title: 'Metcon Turf Conditioning', coach: 'Coach Nisha', spots: '6 spots left' },
+        { time: '09:00 AM', title: 'Mobility & Core Flow', coach: 'Coach Aarav', spots: '8 spots left' }
+      ],
+      evening: [
+        { time: '05:30 PM', title: 'Upper Body Hypertrophy', coach: 'Coach Vikram', spots: '3 spots left' },
+        { time: '06:45 PM', title: 'High-Intensity Boxing & Bag', coach: 'Coach Kabir', spots: '5 spots left' },
+        { time: '08:00 PM', title: 'Kettlebell & Sled Burn', coach: 'Coach Nisha', spots: '7 spots left' }
+      ],
+      weekend: [
+        { time: '08:00 AM', title: 'Saturday Team Turf Throwdown', coach: 'All Coaches', spots: '5 spots left' },
+        { time: '10:00 AM', title: 'Olympic Lifting Clinic', coach: 'Coach Vikram', spots: '4 spots left' },
+        { time: '05:00 PM', title: 'Sunday Recovery & Stretch', coach: 'Coach Aarav', spots: '10 spots left' }
+      ]
+    };
+
+    const PROGRAMS = [
+      { title: 'Hypertrophy Club', cat: 'strength', tag: 'Strength', duration: '60 Mins', level: 'All Levels', desc: 'Structured 4-day push/pull/legs split focused on progressive barbell and dumbbell overload.' },
+      { title: 'Metcon Sweat 45', cat: 'hiit', tag: 'HIIT & Turf', duration: '45 Mins', level: 'High Energy', desc: 'Heart-rate-driven sled pushes, rowers, ski-ergs, and kettlebell complexes for rapid fat loss.' },
+      { title: '12-Week Body Recomp', cat: 'pt', tag: '1-on-1 PT', duration: 'Custom', level: 'Personalised', desc: 'Dedicated coach, bi-weekly InBody body-fat tracking, and custom Indian macro meal templates.' },
+      { title: 'Powerlifting Foundations', cat: 'strength', tag: 'Strength', duration: '75 Mins', level: 'Intermediate', desc: 'Master deadlift, bench press, and back squat mechanics with competition-grade calibrated plates.' },
+      { title: 'Combat Conditioning', cat: 'hiit', tag: 'Boxing & Core', duration: '50 Mins', level: 'All Levels', desc: 'Heavy-bag combinations paired with rotational core work and footwork agility drills.' },
+      { title: 'Post-Injury Return', cat: 'pt', tag: '1-on-1 Rehab', duration: '45 Mins', level: 'Guided', desc: 'Joint-friendly mobility and unilateral strength rebuilding supervised by certified rehab specialists.' }
+    ];
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2600);
+    }
+
+    // Mobile Menu
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    function toggleMenu(closeOnly = false) {
+      const open = closeOnly ? false : !mobileDrawer.classList.contains('open');
+      mobileDrawer.classList.toggle('open', open);
+      document.getElementById('menuIcon').innerHTML = open ? '<path d="M6 6l12 12M18 6L6 18"/>' : '<path d="M4 7h16M4 12h16M4 17h16"/>';
+    }
+    menuToggle.addEventListener('click', () => toggleMenu());
+    document.querySelectorAll('.m-link').forEach((a) => a.addEventListener('click', () => toggleMenu(true)));
+
+    // Schedule Tabs
+    function renderSchedule(dayKey) {
+      document.getElementById('slotList').innerHTML = SCHEDULES[dayKey].map((s) => `
+        <div class="slot-item">
+          <div>
+            <div class="slot-time">${s.time}</div>
+            <strong style="font-size:0.93rem;">${s.title}</strong>
+            <div style="font-size:0.78rem; color:var(--ink-muted);">${s.coach}</div>
+          </div>
+          <div style="text-align:right;">
+            <span class="slot-spots">${s.spots}</span><br/>
+            <button class="btn btn-outline btn-sm" type="button" style="margin-top:0.4rem; padding:0.32rem 0.7rem; font-size:0.76rem;" data-book-slot="${s.title} (${s.time})">Reserve</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    document.querySelectorAll('.day-tab').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.day-tab').forEach((t) => t.classList.remove('active'));
+        tab.classList.add('active');
+        renderSchedule(tab.dataset.day);
+      });
+    });
+
+    document.getElementById('slotList').addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-book-slot]');
+      if (btn) openTrial(btn.dataset.bookSlot);
+    });
+
+    // Programs Filter
+    let activeFilter = 'all';
+    const programGrid = document.getElementById('programGrid');
+    function renderPrograms() {
+      const list = activeFilter === 'all' ? PROGRAMS : PROGRAMS.filter((p) => p.cat === activeFilter);
+      programGrid.innerHTML = list.map((p) => `
+        <article class="prog-card">
+          <div class="prog-top">
+            <span class="prog-tag">${p.tag}</span>
+            <span style="font-size:0.78rem; color:var(--ink-muted);">${p.duration}</span>
+          </div>
+          <h3>${p.title}</h3>
+          <p class="prog-desc">${p.desc}</p>
+          <div class="prog-meta"><span>Level: ${p.level}</span><span>Included in All-Access</span></div>
+          <button class="btn btn-outline btn-sm" type="button" data-prog="${p.title}" style="width:100%;">Try Free Class</button>
+        </article>
+      `).join('');
+    }
+
+    document.querySelectorAll('.filter-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        activeFilter = btn.dataset.filter;
+        document.querySelectorAll('.filter-btn').forEach((b) => b.classList.toggle('active', b === btn));
+        renderPrograms();
+      });
+    });
+
+    programGrid.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-prog]');
+      if (btn) openTrial(btn.dataset.prog);
+    });
+
+    // BMI & Macro Calculator
+    const weightRange = document.getElementById('weightRange');
+    const heightRange = document.getElementById('heightRange');
+    let calMult = 34;
+    let protMult = 2.1;
+    let goalName = 'Muscle Gain';
+    let trackName = 'Hypertrophy Club';
+
+    function updateMacros() {
+      const w = Number(weightRange.value);
+      const h = Number(heightRange.value);
+      const bmi = (w / Math.pow(h / 100, 2)).toFixed(1);
+      const calories = Math.round(w * calMult);
+      const protein = Math.round(w * protMult);
+
+      document.getElementById('valWeight').textContent = `${w} kg`;
+      document.getElementById('valHeight').textContent = `${h} cm`;
+      document.getElementById('goalLabel').textContent = goalName;
+      document.getElementById('recTrack').textContent = trackName;
+      document.getElementById('outBmi').textContent = bmi;
+      document.getElementById('outCal').textContent = calories.toLocaleString('en-IN');
+      document.getElementById('outProt').textContent = `${protein}g`;
+      document.getElementById('macroAdvice').textContent =
+        `Target ${calories.toLocaleString('en-IN')} kcal and ${protein}g protein daily alongside 4 weekly sessions in ${trackName}.`;
+    }
+
+    [weightRange, heightRange].forEach((r) => r.addEventListener('input', updateMacros));
+    document.querySelectorAll('#goalGroup .goal-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#goalGroup .goal-btn').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        calMult = Number(btn.dataset.calMult);
+        protMult = Number(btn.dataset.prot);
+        goalName = btn.dataset.name;
+        trackName = btn.dataset.track;
+        updateMacros();
+      });
+    });
+
+    // Membership Billing Toggle
+    document.querySelectorAll('.bill-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const mode = btn.dataset.bill;
+        document.querySelectorAll('.bill-btn').forEach((b) => b.classList.toggle('active', b === btn));
+        document.querySelectorAll('.plan-price').forEach((el) => {
+          const val = Number(mode === 'annual' ? el.dataset.a : el.dataset.m);
+          el.innerHTML = `₹${val.toLocaleString('en-IN')} <small>/ month${mode === 'annual' ? ' (billed annually)' : ''}</small>`;
+        });
+      });
+    });
+
+    // Trial Pass Modal
+    const trialModal = document.getElementById('trialModal');
+    function openTrial(planText = 'All-Access + Classes') {
+      document.getElementById('trialForm').style.display = 'block';
+      document.getElementById('trialSuccess').style.display = 'none';
+      document.getElementById('gPlan').value = planText;
+      trialModal.classList.add('open');
+    }
+    const closeTrial = () => trialModal.classList.remove('open');
+
+    ['navTrialBtn', 'heroTrialBtn', 'calcTrialBtn'].forEach((id) => {
+      document.getElementById(id).addEventListener('click', () => openTrial());
+    });
+    document.getElementById('mobileTrialBtn').addEventListener('click', () => { toggleMenu(true); openTrial(); });
+    document.querySelectorAll('.join-plan-btn').forEach((btn) => {
+      btn.addEventListener('click', () => openTrial(btn.dataset.plan));
+    });
+    document.getElementById('closeTrialBtn').addEventListener('click', closeTrial);
+    document.getElementById('doneTrialBtn').addEventListener('click', closeTrial);
+    trialModal.addEventListener('click', (e) => { if (e.target === trialModal) closeTrial(); });
+
+    document.getElementById('trialForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('gName').value.trim();
+      const phone = document.getElementById('gPhone').value.trim();
+      const plan = document.getElementById('gPlan').value.trim();
+      if (!name || !phone) {
+        showToast('Please enter your name and WhatsApp number.');
+        return;
+      }
+      const code = 'IP-' + Math.floor(1000 + Math.random() * 9000);
+      document.getElementById('trialSuccessText').innerHTML =
+        `Pass <strong>${code}</strong> is active for <strong>${name}</strong> (${plan}). Show this code at reception or via WhatsApp on <strong>${phone}</strong>.`;
+      document.getElementById('trialForm').style.display = 'none';
+      document.getElementById('trialSuccess').style.display = 'block';
+      e.target.reset();
+    });
+
+    renderSchedule('morning');
+    renderPrograms();
+    updateMacros();
+  </script>
+</body>
+</html>
